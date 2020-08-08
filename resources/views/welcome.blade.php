@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -6,10 +6,10 @@
 
         <title>Laravel</title>
 
-        <!-- Fonts -->
+        Fonts 
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <!-- Styles -->
+        Styles
         <style>
             html, body {
                 background-color: #fff;
@@ -97,4 +97,14 @@
             </div>
         </div>
     </body>
-</html>
+</html> -->
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+    <div class="row">
+            hEY THIS IS LIST OF STAFFS
+    </div>
+</div>
+@endsection
