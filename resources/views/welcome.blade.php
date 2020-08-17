@@ -101,10 +101,33 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
-            hEY THIS IS LIST OF STAFFS
+
+        <div class="container">
+
+            <div class="row">
+                @foreach($staffs as $staff)
+                                
+                            
+                    <!-- <div class="card-transparent mr-5" style="width:120px;">
+        
+                        <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>">
+                    
+                        <p><strong>{{ $staff->full_name }}</strong></p>
+                        
+                    </div> -->
+                    <div style="width:120px;" class="mr-5 mt-5">
+                        <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>">
+                        <p><strong>{{ $staff->full_name }}</strong></p>
+                    </div>
+                    
+                @endforeach
+            </div>
+            
+        </div>
+
     </div>
 </div>
 @endsection

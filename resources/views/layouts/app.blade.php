@@ -9,17 +9,84 @@
 
     <title>{{ config('app.name', 'Staffs') }}</title>
 
-    <!-- Scripts -->
+    <!-- Jquery -->
+    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+
+    <!--Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <!---fontawesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+
+    
+        $(document).ready(function() {
+        //show the alert
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 2000);
+       
+    });
+
+    function getEducationHistory(id){
+        
+        $.ajax({
+            type:'GET',
+            url: '/education/'+id,
+            data:'_token = <?php echo csrf_token() ?>',
+            success: function(data){
+
+                document.getElementById('editedcollege').setAttribute("value",data['university']);
+                document.getElementById('editedfaculty').setAttribute("value",data['course']);
+                document.getElementById('editedyear').setAttribute("value",data['year']);
+                document.getElementById('education_id').setAttribute("value",data['id']);
+                document.getElementById('ondelete_id').setAttribute("value",data['id']);
+            }
+        });
+    }
+
+    function getEmploymentHistory(id){
+
+        $.ajax({
+            type:'GET',
+            url: '/employment/'+id,
+            data:'_token = <?php echo csrf_token() ?>',
+            success: function(data){
+
+                console.log(data);
+                document.getElementById('editedposition').setAttribute("value",data['position']);
+                document.getElementById('editedplace').setAttribute("value",data['place']);
+                document.getElementById('editedstartyear').setAttribute("value",data['start_year']);
+                document.getElementById('editedendyear').setAttribute("value",data['end_year']);
+                document.getElementById('employment_id').setAttribute("value",data['id']);
+                document.getElementById('employment_ondelete_id').setAttribute("value",data['id']);
+            }
+        });
+    }
+
+    </script>
+
+   
+
 </head>
 <body>
+
+   
+
+    </script>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
