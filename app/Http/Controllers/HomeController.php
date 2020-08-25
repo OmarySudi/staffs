@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Staff;
 use App\EducationHistory;
 use App\EmploymentHistory;
+use App\StaffCategory;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,8 @@ class HomeController extends Controller
 
         $staff = Staff::where('email',$user->email)->first();
 
+        $categories = StaffCategory::all();
+
         if($staff !== null){
 
             $education_histories = Staff::find($staff->id)->educationHistories;
@@ -41,6 +44,7 @@ class HomeController extends Controller
                 'employment_histories' => $employment_histories,
                 'education_histories'=>$education_histories,
                 'staff' => $staff,
+                'categories' => $categories,
                 'education' => '',
                 'employment' => '',
                 ]);
@@ -56,6 +60,7 @@ class HomeController extends Controller
                 'employment_histories' => '',
                 'education_histories'=>'',
                 'staff' => '',
+                'categories' => '',
                 'education' => '',
                 'employment' => '',
                 ]);

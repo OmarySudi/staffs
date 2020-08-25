@@ -12,6 +12,7 @@
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#biography" role="tab">Biography</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#education"  role="tab" id="educationTab">Education History</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#emplyoment" role="tab">Employment History</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#userCategory" role="tab">Position</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#attachments" role="tab">Attachments</a>
             </div>
         </div>
@@ -659,6 +660,30 @@
                         </table>
                        
                     </div>
+                </div>
+
+                <div class="tab-pane" id="userCategory" role="tabpanel">
+                    <div class="card pt-5">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right" for="staff_position">Choose your position in organization</label>
+
+                            <div class="col-md-6">
+                                <select id="staff_position" name="staff_position" class="form-control @error('staff_position') is-invalid @enderror">
+                                    <!-- <option selected value="Bachelor of Science Degree">Bachelor of Science Degree</option>
+                                    <option value="Bachelor of Arts Degree">Bachelor of Arts Degree</option>
+                                    <option value="Masters of Science Degree">Masters of Science Degree</option>
+                                    <option value="Masters of Arts Degree">Masters of Arts Degree</option> -->
+                                    @if($categories != '')
+                                        @foreach($categories as $category)
+                                            
+                                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                    </div> 
+
                 </div>
 
                 <div class="tab-pane" id="attachments" role="tabpanel">
