@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Staff;
 use App\EducationHistory;
+use App\Department;
+use App\Role;
 use App\EmploymentHistory;
 
 class HomeController extends Controller
@@ -31,6 +33,10 @@ class HomeController extends Controller
 
         $staff = Staff::where('email',$user->email)->first();
 
+        $departments = Department::all();
+
+        $roles = Role::all();
+
         if($staff !== null){
 
             $education_histories = Staff::find($staff->id)->educationHistories;
@@ -40,6 +46,8 @@ class HomeController extends Controller
             return view('home',[
                 'employment_histories' => $employment_histories,
                 'education_histories'=>$education_histories,
+                'departments' => $departments,
+                'roles' => $roles,
                 'staff' => $staff,
                 'education' => '',
                 'employment' => '',
@@ -55,6 +63,8 @@ class HomeController extends Controller
             return view('home',[
                 'employment_histories' => '',
                 'education_histories'=>'',
+                'departments' => $departments,
+                'roles' => $roles,
                 'staff' => '',
                 'education' => '',
                 'employment' => '',

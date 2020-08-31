@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStaffCategories extends Migration
+class CreateCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateStaffCategories extends Migration
      */
     public function up()
     {
-        Schema::create('staff_categories', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('department_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateStaffCategories extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staff_categories');
+        Schema::dropIfExists('courses');
     }
 }

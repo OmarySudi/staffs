@@ -52,6 +52,12 @@ Route::group(['prefix'=>'employment'],function($router){
     
 });
 
+Route::group(['prefix'=>'courses'],function($router){
+  
+    $router->get('get-courses/{id}','CourseController@getCourses');
+
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

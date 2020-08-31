@@ -33,12 +33,54 @@
 
     
         $(document).ready(function() {
-        //show the alert
-        setTimeout(function() {
-            $(".alert").alert('close');
-        }, 2000);
-       
-    });
+
+            //show the alert
+
+            $('#currentCourse').hide();
+
+            $('select[name="role"]').on('change',function(){
+
+                if($('#role option:selected').text() == 'Lecturer')
+                    $('#currentCourse').show();
+                else 
+                    $('#currentCourse').hide();
+            });
+
+            $('select[name="department"]').on('change',function(){
+
+                var departmentId = $(this).val();
+
+                if(departmentId){
+                    $.ajax({
+
+                        url: '/courses/get-courses/'+departmentId,
+
+                        type: "GET",
+
+                        dataType: "json",
+
+                        success:function(data) {
+
+
+                            $('select[name="courses"]').empty();
+
+                            $.each(data, function(key, value) {
+
+                                $('select[name="courses"]').append('<option value="'+ value['id'] +'">'+ value['name'] +'</option>');
+
+                            });
+
+
+                        }
+
+                    });
+                }else {
+
+                    $('select[name="courses"]').empty();
+                }
+                
+            });
+        });
 
     function getEducationHistory(id){
         

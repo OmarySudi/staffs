@@ -25,4 +25,14 @@ class Staff extends Model
         return $this->hasMany('App\EmploymentHistory');
 
     }
+
+    public function courses(){
+
+        return $this->belongsToMany('App\Course');
+    }
+
+    public function roles(){
+
+        return $this->belongsToMany('App\Role');
+    }
 }

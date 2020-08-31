@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourseStaffsTable extends Migration
+class CreateRoleStaffTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCourseStaffsTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_staffs', function (Blueprint $table) {
-            $table->unsignedBigInteger('staff_id');
-            $table->unsignedBigInteger('course_id');
-
-            $table->primary(['staff_id','course_id']);
+        Schema::create('role_staff', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('role_id');
+            $table->foreignId('staff_id')->constrained('staffs')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateCourseStaffsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_staffs');
+        Schema::dropIfExists('role_staff');
     }
 }

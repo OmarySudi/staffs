@@ -21,7 +21,6 @@ class CreateStaffsTable extends Migration
             $table->string('address');
             $table->string('profile_picture_path');
             $table->string('cv_path')->default('');
-            $table->unsignedBigInteger('staff_category_id')->nullable();
             $table->text('biography')->nullable();
             $table->timestamps();
         });

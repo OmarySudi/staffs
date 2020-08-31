@@ -12,6 +12,7 @@
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#biography" role="tab">Biography</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#education"  role="tab" id="educationTab">Education History</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#emplyoment" role="tab">Employment History</a>
+                <a class="list-group-item list-group-item-action" data-toggle="list" href="#job" role="tab">Job Details</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#attachments" role="tab">Attachments</a>
             </div>
         </div>
@@ -704,6 +705,55 @@
                             </div> 
        
                         </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane" id="job" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">{{ __ ('Job Details')}}</div>
+                        <div class="card-body">
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right" for="award">Position</label>
+
+                                <div class="col-md-6">
+                                    <select id="role" name="role" class="form-control @error('role') is-invalid @enderror">
+                                        <option value="">--- Select Position ---</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{$role->id}}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right" for="award">Department</label>
+
+                                <div class="col-md-6">
+                                    <select id="department" name="department" class="form-control @error('department') is-invalid @enderror">
+                                    <option value="">--- Select Department ---</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{$department->id}}">{{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="currentCourse">
+                                <label class="col-md-4 col-form-label text-md-right" for="award">Current courses</label>
+
+                                <div class="col-md-6">
+                                    <select id="courses" name="courses">
+                                        <!-- <option selected value="Bachelor of Science Degree">Bachelor of Science Degree</option>
+                                        <option value="Bachelor of Arts Degree">Bachelor of Arts Degree</option>
+                                        <option value="Masters of Science Degree">Masters of Science Degree</option>
+                                        <option value="Masters of Arts Degree">Masters of Arts Degree</option> -->
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
