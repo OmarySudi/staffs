@@ -34,16 +34,18 @@
     
         $(document).ready(function() {
 
-            //show the alert
+                //show the alert
+                setTimeout(function() {
+                    $(".alert").alert('close');
+                }, 2000);
+            //$('#currentCourse').hide();
 
-            $('#currentCourse').hide();
+            $('select[name="role[]"]').on('change',function(){
 
-            $('select[name="role"]').on('change',function(){
-
-                if($('#role option:selected').text() == 'Lecturer')
-                    $('#currentCourse').show();
-                else 
-                    $('#currentCourse').hide();
+                // if($('#role option:selected').text() == 'Lecturer')
+                //     $('#currentCourse').show();
+                // else 
+                //     $('#currentCourse').hide();
             });
 
             $('select[name="department"]').on('change',function(){
@@ -62,11 +64,11 @@
                         success:function(data) {
 
 
-                            $('select[name="courses"]').empty();
+                            $('select[name="courses[]"]').empty();
 
                             $.each(data, function(key, value) {
 
-                                $('select[name="courses"]').append('<option value="'+ value['id'] +'">'+ value['name'] +'</option>');
+                                $('select[name="courses[]"]').append('<option value="'+ value['id'] +'">'+ value['name'] +'</option>');
 
                             });
 

@@ -33,11 +33,45 @@ class HomeController extends Controller
 
         $staff = Staff::where('email',$user->email)->first();
 
+        if($staff){
+
+            $staff_roles = $staff->roles;
+
+            $staff_courses = $staff->courses;
+
+            if($staff->department_id != null){
+
+                $department = Department::where('id',$staff->department_id)->value('name');
+    
+            } else 
+            {
+                $department = '';
+            }
+        }
+      
+
+       
+
+       
+
         $departments = Department::all();
 
         $roles = Role::all();
 
         if($staff !== null){
+
+            $staff_roles = $staff->roles;
+
+            $staff_courses = $staff->courses;
+
+            if($staff->department_id != null){
+
+                $department = Department::where('id',$staff->department_id)->value('name');
+    
+            } else 
+            {
+                $department = '';
+            }
 
             $education_histories = Staff::find($staff->id)->educationHistories;
 
@@ -48,6 +82,9 @@ class HomeController extends Controller
                 'education_histories'=>$education_histories,
                 'departments' => $departments,
                 'roles' => $roles,
+                'department' => $department,
+                'staff_roles' => $staff_roles,
+                'staff_courses' => $staff_courses,
                 'staff' => $staff,
                 'education' => '',
                 'employment' => '',
@@ -60,11 +97,20 @@ class HomeController extends Controller
             // $employment_histories = [];
             // $education_histories = [];
 
+            $staff_roles = [];
+
+            $staff_courses = [];
+
+            $department = '';
+
             return view('home',[
                 'employment_histories' => '',
                 'education_histories'=>'',
                 'departments' => $departments,
                 'roles' => $roles,
+                'department' => $department,
+                'staff_roles' => $staff_roles,
+                'staff_courses' => $staff_courses,
                 'staff' => '',
                 'education' => '',
                 'employment' => '',

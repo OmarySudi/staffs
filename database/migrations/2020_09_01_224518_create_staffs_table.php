@@ -19,6 +19,7 @@ class CreateStaffsTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile_number');
             $table->string('address');
+            $table->foreignId('department_id')->referrences('id')->on('departments')->nullable();
             $table->string('profile_picture_path');
             $table->string('cv_path')->default('');
             $table->text('biography')->nullable();

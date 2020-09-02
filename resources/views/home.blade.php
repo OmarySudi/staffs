@@ -711,15 +711,68 @@
                 </div>
 
                 <div class="tab-pane" id="job" role="tabpanel">
+
+
+                    @if(count($staff_roles) > 0)
+
                     <div class="card">
-                        <div class="card-header">{{ __ ('Job Details')}}</div>
+                            <div class="card-header"><center>{{ __ ('Job Details')}}</center></div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+
+                                    <table class="table table-sm table-bordered">
+                                        <tr>
+                                            <td>Position: </td>
+                                            <td>
+                                            @foreach($staff_roles as $staff_role)
+                                                <p>{{ $staff_role['name'] }}</p>
+                                            @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department: </td>
+                                            <td>
+                                                {{ $department}}
+                                            </td>
+                                        </tr>
+                                        @if(count($staff_courses) > 0)
+                                        
+                                            <tr>
+                                                <td>Current courses: </td>
+                                                <td>
+                                                @foreach($staff_courses as $staff_course)
+                                                    <p>{{ $staff_course['name'] }}</p>
+                                                @endforeach
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    </table>
+                                </div>
+                            </div>
+                    </div>
+                    @endif
+
+                   
+
+                    <div class="card mt-5">
+                        <div class="card-header">
+                        @if(count($staff_roles) > 0)
+                            <center>{{ __ ('Update job Details')}}</center>
+                        @else
+                            <center>{{ __ ('Add job Details')}}</center>
+                        @endif
+                        </div>
                         <div class="card-body">
 
+                        <form method="POST" action="{{ route('staffs.add-job-details') }}" enctype="multipart/form-data">
+                            @csrf
+
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right" for="award">Position</label>
+                                <label class="col-md-4 col-form-label text-md-right" for="award">Position<strong class="text-danger">*</strong></label>
 
                                 <div class="col-md-6">
-                                    <select id="role" name="role" class="form-control @error('role') is-invalid @enderror">
+                                    <select id="role" name="role[]" multiple class="form-control @error('role') is-invalid @enderror" required>
                                         <option value="">--- Select Position ---</option>
                                         @foreach($roles as $role)
                                             <option value="{{$role->id}}">{{ $role->name }}</option>
@@ -729,10 +782,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right" for="award">Department</label>
+                                <label class="col-md-4 col-form-label text-md-right" for="award">Department<strong class="text-danger">*</strong></label>
 
                                 <div class="col-md-6">
-                                    <select id="department" name="department" class="form-control @error('department') is-invalid @enderror">
+                                    <select id="department" name="department" class="form-control @error('department') is-invalid @enderror" required>
                                     <option value="">--- Select Department ---</option>
                                         @foreach($departments as $department)
                                             <option value="{{$department->id}}">{{ $department->name }}</option>
@@ -744,15 +797,28 @@
                             <div class="form-group row" id="currentCourse">
                                 <label class="col-md-4 col-form-label text-md-right" for="award">Current courses</label>
 
-                                <div class="col-md-6">
-                                    <select id="courses" name="courses">
+                                <div class="col-md-8">
+                                    <p class="text-danger">(This option is for lecturers)</p>
+                                    <select id="courses" name="courses[]" multiple>
+                                        <option value="">--- Select Courses ---</option>
                                         <!-- <option selected value="Bachelor of Science Degree">Bachelor of Science Degree</option>
                                         <option value="Bachelor of Arts Degree">Bachelor of Arts Degree</option>
                                         <option value="Masters of Science Degree">Masters of Science Degree</option>
                                         <option value="Masters of Arts Degree">Masters of Arts Degree</option> -->
                                     </select>
+
+                                   
                                 </div>
                             </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-5">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Save') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
 
                         </div>
                     </div>

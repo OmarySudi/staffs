@@ -11,7 +11,7 @@ class Department extends Model
 
     public function staffs(){
 
-        return $this->belongsToMany('App\Staff');
+        return $this->hasMany('App\Staff');
     }
 
     public function courses(){
