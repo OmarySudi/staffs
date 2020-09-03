@@ -25,6 +25,7 @@ Route::group(['prefix'=>'staffs'],function($router){
     $router->post('add-cv','StaffController@addCurriculum')->name('staffs.add-cv');
     $router->post('add-education-history','StaffController@addEducationHistory')->name('staffs.add-education-history');
     $router->post('add-job-details','StaffController@addJobDetails')->name('staffs.add-job-details');
+    $router->get('/{id}','StaffController@getStaff')->name('staffs.staff-info');
     
 });
 

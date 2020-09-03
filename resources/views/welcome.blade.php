@@ -108,22 +108,38 @@
         <div class="container">
 
             <div class="row">
-                @foreach($staffs as $staff)
-                                
-                            
+           
+              <!-- {{ $staffs }} -->
+
+              @foreach($staffs as $staff)
+            
                     <!-- <div class="card-transparent mr-5" style="width:120px;">
         
-                        <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>">
+                        <img class="card-img-top" style="height:120px" src="">
                     
                         <p><strong>{{ $staff->full_name }}</strong></p>
                         
                     </div> -->
-                    <div style="width:120px;" class="mr-5 mt-5">
+
+                    <!-- <div style="width:120px;" class="mr-5 mt-5">
                         <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>">
                         <p><strong>{{ $staff->full_name }}</strong></p>
-                    </div>
+                    </div> -->
+                   
+                        <div class="card mr-5 staff-card" style="width: 10rem;">
+                            <a href="{{ route('staffs.staff-info',['id' => $staff->id])}}">
+                                <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>" alt="Card image cap">
+                                <div class="card-body pl-1">
+                                    <span class="font-weight-bold">{{ $staff->full_name}}</span>
+                                    <!-- <h5 class="card-title">Card title</h5>
+                                    
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                </div>
+                            </a>
+                        </div>
                     
-                @endforeach
+              @endforeach
             </div>
             
         </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Staff;
 use App\RoleStaff;
+use App\Department;
 use App\CourseStaff;
 
 class StaffController extends Controller
@@ -89,6 +90,29 @@ class StaffController extends Controller
                 return redirect()->route('home');
             };
         }
+    }
+
+    public function getStaff(Request $request){
+
+       $staff =  Staff::find($request->id);
+
+       $department = Department::where('id',$request->id)->get();
+
+       $roles = $staff->roles;
+       $courses = $staff->courses;
+
+       $education_histories = $staff->educationHistories;
+
+       $employment_histories = $staff->employmentHistories;
+
+       return view('staff',[
+        'staff' => $staff,
+        'department'=>$department,
+        'education' => $education_histories,
+        'employment' => $employment_histories,
+        'roles' => $roles,
+        'courses' => $courses
+        ]);
     }
 
     public function addJobDetails(Request $request){
