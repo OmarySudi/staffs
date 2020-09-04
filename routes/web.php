@@ -36,6 +36,7 @@ Route::group(['prefix'=>'education'],function($router){
 
     $router->get('histories/{email}','EducationHistoryController@getStaffEducationHistory')->name('staff.histories');
     $router->get('{id}','EducationHistoryController@getEducationHistory');
+   
     
     // $router->post('add-biography','StaffController@addBiography')->name('staffs.add-biography');
     // $router->post('add-education-history','StaffController@addEducationHistory')->name('staffs.add-education-history');

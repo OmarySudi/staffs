@@ -96,23 +96,26 @@ class StaffController extends Controller
 
        $staff =  Staff::find($request->id);
 
-       $department = Department::where('id',$request->id)->get();
+       $department = Department::where('id',$staff->department_id)->get();
 
        $roles = $staff->roles;
+       
        $courses = $staff->courses;
 
        $education_histories = $staff->educationHistories;
 
        $employment_histories = $staff->employmentHistories;
 
-       return view('staff',[
-        'staff' => $staff,
-        'department'=>$department,
-        'education' => $education_histories,
-        'employment' => $employment_histories,
-        'roles' => $roles,
-        'courses' => $courses
-        ]);
+       return $department;
+
+    //    return view('staff',[
+    //     'staff' => $staff,
+    //     'department'=>$department,
+    //     'education' => $education_histories,
+    //     'employment' => $employment_histories,
+    //     'roles' => $roles,
+    //     'courses' => $courses
+    //     ]);
     }
 
     public function addJobDetails(Request $request){
