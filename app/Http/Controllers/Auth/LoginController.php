@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use \Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -37,4 +39,20 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function attemptLogin(Request $request)
+    {
+        return \Auth::attempt(
+            $this->credentials($request) + ["verified" => true],
+            $request->filled('remember')
+        );
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            $this->username() => [trans('Authentication failed or Account not activated by administrator')],
+        ]);
+    }
+
 }
