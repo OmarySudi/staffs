@@ -39,6 +39,19 @@
                 }, 2000);
             //$('#currentCourse').hide();
 
+            $('#search').on('keyup',function(){
+
+                $value=$(this).val();
+                $.ajax({
+                    type : 'GET',
+                    url : '/staffs/search/department',
+                    data:{'search':$value},
+                    success:function(data){
+                        $('#staffs-row').html(data);
+                    }
+                });
+            });
+
             $('select[name="role[]"]').on('change',function(){
 
                 // if($('#role option:selected').text() == 'Lecturer')
@@ -186,5 +199,6 @@
             @yield('content')
         </main>
     </div>
+</script>
 </body>
 </html>

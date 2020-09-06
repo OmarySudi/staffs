@@ -240,6 +240,38 @@ class StaffController extends Controller
             return redirect()->route('home');
         };
     }
+    
+    public function searchByFacult(Request $request)
+    {
+        
+
+        if($request->ajax()){
+
+            $output="";
+
+            $staffs = DB::table('staffs')
+                ->join('departments','staffs.department_id','departments.id')
+                ->select('staffs.*','departments.name as department_name')
+                ->where('departments.name','LIKE',$request->search.'%')
+                ->get();
+
+            foreach($staffs as $key => $staff){
+
+                $output.=
+                '<div class="card mr-5 staff-card" style="width: 10rem;">'.
+                    '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
+                        '<img class="card-img-top" style="height:120px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
+                        '<div class="card-body pl-1">'.
+                            '<span class="font-weight-bold">'.$staff->full_name.'</span>'.
+                        '</div>'.
+                    '</a>'.
+                '</div>';
+        
+            }
+
+            return Response($output);
+        }
+    }
 
     public function addCurriculum(Request $request){
 

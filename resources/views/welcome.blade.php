@@ -107,7 +107,13 @@
 
         <div class="container">
 
-            <div class="row">
+        <center>
+        <div class="form-group">
+            <input type="text" class="form-controller" id="search" name="search"></input>
+        </div>
+        </center>
+
+            <div class="row" id="staffs-row">
            
               <!-- {{ $staffs }} -->
 
@@ -131,10 +137,6 @@
                                 <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>" alt="Card image cap">
                                 <div class="card-body pl-1">
                                     <span class="font-weight-bold">{{ $staff->full_name}}</span>
-                                    <!-- <h5 class="card-title">Card title</h5>
-                                    
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                 </div>
                             </a>
                         </div>

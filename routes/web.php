@@ -27,6 +27,8 @@ Route::group(['prefix'=>'staffs'],function($router){
     $router->post('add-job-details','StaffController@addJobDetails')->name('staffs.add-job-details');
     $router->get('/{id}','StaffController@getStaff')->name('staffs.staff-info');
     
+    $router->get('/search/department','StaffController@searchByFacult')->name('staffs.staff-search');
+    
 });
 
 Route::group(['prefix'=>'education'],function($router){
