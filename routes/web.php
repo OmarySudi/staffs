@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'FrontEndController@index')->name('frontend');
-Route::get('/get-total-pages', 'FrontEndController@getTotalPages')->name('total-pages');
+Route::get('/get-total-pages', 'FrontEndController@getTotalPages');
+Route::get('/get-page', 'FrontEndController@getPage');
 
 Route::group(['prefix'=>'staffs'],function($router){
     $router->post('create','StaffController@create')->name('staffs.create');

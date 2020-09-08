@@ -36,7 +36,7 @@
 
             var page_count;
 
-            var items_per_page = 4;
+            var items_per_page = 6;
 
             var page = 1;
 
@@ -90,6 +90,21 @@
 
             }
 
+            function fetchPageData(offset){
+
+                $.ajax({
+
+                    url: '/get-page',
+                    type: "GET",
+                    data: { page_offset: offset},
+                    success:function(data) {
+
+                        $('#staffs-row').html(data);
+                    }
+                });
+
+            }
+
             $('#next').on('click',function(){
 
                 page+=1;
@@ -99,6 +114,12 @@
                 
                 if(page == page_count)
                     disableNext();
+
+                let offset = (page - 1) * items_per_page;
+
+                fetchPageData(offset);
+
+
 
             });
 
@@ -110,6 +131,10 @@
 
                 if(page == 1)
                     disablePrevious();
+
+                let offset = (page - 1) * items_per_page;
+
+                fetchPageData(offset);
                 
             });
 
@@ -121,6 +146,7 @@
                     url : '/staffs/search/department',
                     data:{'search':$value},
                     success:function(data){
+
                         $('#staffs-row').html(data);
                     }
                 });
@@ -246,9 +272,9 @@
     </script>
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar header navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="color:white; font-size:1.2em">
                     {{ config('app.name', 'Staffs') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -266,21 +292,21 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}" style="color:white">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}" style="color:white">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" style="color:white" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="{{ route('logout') }}" style="color:white"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

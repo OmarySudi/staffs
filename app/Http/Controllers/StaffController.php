@@ -12,6 +12,8 @@ use App\CourseStaff;
 class StaffController extends Controller
 {
     
+    private $page_limit = 6;
+
     public function create(Request $request){
 
         $this->validate($request,[
@@ -249,16 +251,29 @@ class StaffController extends Controller
 
             $output="";
 
+            if($request->search == "")
+            {
+                $staffs = DB::table('staffs')
+                ->join('departments','staffs.department_id','departments.id')
+                ->select('staffs.*','departments.name as department_name')
+                ->where('staffs.full_name','LIKE',$request->search.'%')
+                ->limit($this->page_limit)
+                ->get();
+            }
+            else {
+
             $staffs = DB::table('staffs')
                 ->join('departments','staffs.department_id','departments.id')
                 ->select('staffs.*','departments.name as department_name')
                 ->where('staffs.full_name','LIKE',$request->search.'%')
                 ->get();
+            }
+            
 
             foreach($staffs as $key => $staff){
 
                 $output.=
-                '<div class="card mr-5 staff-card" style="width: 10rem;">'.
+                '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
                     '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
                         '<img class="card-img-top" style="height:120px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
                         '<div class="card-body pl-1">'.
