@@ -252,7 +252,7 @@ class StaffController extends Controller
             $staffs = DB::table('staffs')
                 ->join('departments','staffs.department_id','departments.id')
                 ->select('staffs.*','departments.name as department_name')
-                ->where('departments.name','LIKE',$request->search.'%')
+                ->where('staffs.full_name','LIKE',$request->search.'%')
                 ->get();
 
             foreach($staffs as $key => $staff){
