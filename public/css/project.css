@@ -53,3 +53,16 @@
     margin-bottom: 1em;
 }
 
+
+.disable-link
+{
+    text-decoration: none !important;
+    color: black !important;
+    cursor: default;
+}
+.enable-link
+{
+    text-decoration: underline !important;
+    color: #075798 !important;
+    cursor: pointer !important;
+}

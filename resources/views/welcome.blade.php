@@ -20,19 +20,29 @@
             </center>
         
            
-             <div class="row" id="staffs-row">
-            
-                    @foreach($staffs as $staff)
-                            <div class="card mr-4 mb-4 staff-card" style="width: 10rem;">
-                                <a href="{{ route('staffs.staff-info',['id' => $staff->id])}}">
-                                    <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>" alt="Card image cap">
-                                    <div class="card-body pl-1">
-                                        <span class="font-weight-bold">{{ $staff->full_name}}</span>
-                                    </div>
-                                </a>
-                            </div>
-                        
-                    @endforeach
+             <div class="row">
+
+                    <div class="col-12 align-self-end mb-2">
+
+                            <a href="#" id="previous">Previous</a><span> | </span><a href="#" id="next">Next</a>
+                    </div>
+                    
+                    <div class="row" id="staffs-row">
+
+                        @foreach($staffs as $staff)
+                                <div class="card mr-4 mb-4 staff-card" style="width: 10rem;">
+                                    <a href="{{ route('staffs.staff-info',['id' => $staff->id])}}">
+                                        <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>" alt="Card image cap">
+                                        <div class="card-body pl-1">
+                                            <span class="font-weight-bold">{{ $staff->full_name}}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            
+                        @endforeach
+
+                    </div>
+                    
             </div>
         </div>
     </div>

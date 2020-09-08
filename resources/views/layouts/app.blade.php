@@ -30,14 +30,88 @@
 
     <script>
 
-    
+        
+
         $(document).ready(function() {
 
-                //show the alert
-                setTimeout(function() {
-                    $(".alert").alert('close');
-                }, 2000);
-            //$('#currentCourse').hide();
+            var page_count;
+
+            var items_per_page = 4;
+
+            var page = 1;
+
+            var offset = (page - 1) * items_per_page;
+
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 2000);
+           
+            function disableAll(){
+                $('#previous').addClass('disable-link');
+                $('#previous').removeClass('enable-link');
+
+                $('#next').addClass('disable-link');
+                $('#next').removeClass('enable-link');
+            }
+
+            function disablePrevious(){
+
+                $('#previous').addClass('disable-link');
+                $('#previous').removeClass('enable-link');
+            }
+
+            function disableNext(){
+
+                $('#next').addClass('disable-link');
+                $('#next').removeClass('enable-link');
+            }
+
+            function enablePrevious(){
+
+                $('#previous').addClass('enable-link');
+                $('#previous').removeClass('disable-link');
+            }
+
+            function enableNext(){
+
+                $('#next').addClass('enable-link');
+                $('#next').removeClass('disable-link');
+            }
+
+            function checkpage(){
+
+            }
+
+            function fetchNext(){
+
+            }
+
+            function fetchPrevious(){
+
+            }
+
+            $('#next').on('click',function(){
+
+                page+=1;
+
+                if(page > 1)
+                    enablePrevious();
+                
+                if(page == page_count)
+                    disableNext();
+
+            });
+
+            $('#previous').on('click',function(){
+
+                page-=1;
+
+                enableNext();
+
+                if(page == 1)
+                    disablePrevious();
+                
+            });
 
             $('#search').on('keyup',function(){
 
@@ -94,7 +168,35 @@
                 }
                 
             });
+
+
+            $.ajax({
+
+                url: '/get-total-pages',
+
+                type: "GET",
+
+                dataType: "json",
+
+                success:function(data) {
+
+                    page_count = data;
+
+                    if(data == 0 || data == 1){
+
+                        disableAll();
+                    }
+
+                    if(page == 1)
+                        disablePrevious();
+                    else if(page == data)
+                        disableNext();
+                }
+
+            });
+
         });
+
 
     function getEducationHistory(id){
         
