@@ -33,6 +33,18 @@ Route::group(['prefix'=>'staffs'],function($router){
     
 });
 
+Route::group(['prefix'=>'staff-categories'],function($router){
+   
+    $router->get('/','StaffCategoryController@index');
+    
+});
+
+Route::group(['prefix'=>'publication-types'],function($router){
+   
+    $router->get('/','PublicationTypeController@index');
+    
+});
+
 Route::group(['prefix'=>'education'],function($router){
     $router->post('create','EducationHistoryController@create')->name('education.create');
     $router->post('update','EducationHistoryController@updateHistory')->name('education.update');
