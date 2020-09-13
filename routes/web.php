@@ -27,7 +27,10 @@ Route::group(['prefix'=>'staffs'],function($router){
     $router->post('add-cv','StaffController@addCurriculum')->name('staffs.add-cv');
     $router->post('add-education-history','StaffController@addEducationHistory')->name('staffs.add-education-history');
     $router->post('add-job-details','StaffController@addJobDetails')->name('staffs.add-job-details');
+    $router->post('add-areas','StaffController@addAreasOfResearch')->name('staffs.add-areas');
+    $router->post('add-skills','StaffController@addSkills')->name('staffs.add-skills');
     $router->get('/{id}','StaffController@getStaff')->name('staffs.staff-info');
+    $router->post('/account-type','StaffController@addAccountType')->name('staffs.add-account-type');
     
     $router->get('/search/department','StaffController@searchByFacult')->name('staffs.staff-search');
     
@@ -65,6 +68,20 @@ Route::group(['prefix'=>'employment'],function($router){
     $router->post('update','EmploymentHistoryController@updateHistory')->name('employment.update');
     $router->post('delete','EmploymentHistoryController@deleteHistory')->name('employment.deleteHistory');
     $router->get('{id}','EmploymentHistoryController@getEmploymentHistory');
+    
+    // $router->post('add-biography','StaffController@addBiography')->name('staffs.add-biography');
+    // $router->post('add-education-history','StaffController@addEducationHistory')->name('staffs.add-education-history');
+    
+});
+
+Route::group(['prefix'=>'publication'],function($router){
+    $router->post('create','PublicationController@create')->name('publication.create');
+    $router->get('publication/{email}','PublicationController@getStaffPublication')->name('publication.publications');
+    $router->post('update-journal','PublicationController@updateJournalPublication')->name('publication.update-journal');
+    $router->post('update-book','PublicationController@updateBookPublication')->name('publication.update-book');
+    $router->post('update-comference','PublicationController@updateComferencePublication')->name('publication.update-comference');
+    $router->post('delete','PublicationController@deletePublication')->name('publication.deletePublication');
+    $router->get('{id}','PublicationController@getPublication');
     
     // $router->post('add-biography','StaffController@addBiography')->name('staffs.add-biography');
     // $router->post('add-education-history','StaffController@addEducationHistory')->name('staffs.add-education-history');

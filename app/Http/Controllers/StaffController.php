@@ -20,15 +20,16 @@ class StaffController extends Controller
             'name' => 'required',
             'address' => 'required',
             'number' => 'required',
+            'account_type' => 'required'
         ]);
 
         $checkedStaff = Staff::where('email',$request->user()->email)->first();
 
         if($checkedStaff != null){
-
             $checkedStaff->full_name = $request->name;
             $checkedStaff->address = $request->address;
             $checkedStaff->mobile_number = $request->number;
+            $checkedStaff->staff_category = $request->account_type;
 
             if($request->has('picture')){
 
@@ -65,6 +66,7 @@ class StaffController extends Controller
             $staff->full_name = $request->name;
             $staff->address = $request->address;
             $staff->mobile_number = $request->number;
+            $staff->staff_category = $request->account_type;
 
             if($request->has('picture')){
 
@@ -122,7 +124,7 @@ class StaffController extends Controller
     public function addJobDetails(Request $request){
 
         $this->validate($request,[
-            'role' => 'required',
+            // 'role' => 'required',
             'department' => 'required'
         ]);
 
@@ -130,38 +132,38 @@ class StaffController extends Controller
 
         $courses = $staff->courses;
 
-        $roles = $staff->roles;
+        // $roles = $staff->roles;
 
         if($staff){
 
 
-            if(count($roles) > 0)
-            {
-                DB::table('role_staff')->where('staff_id',$staff->id)->delete();
+            // if(count($roles) > 0)
+            // {
+            //     DB::table('role_staff')->where('staff_id',$staff->id)->delete();
 
-                for($i=0; $i<count($request->role); $i++)
-                {
+            //     for($i=0; $i<count($request->role); $i++)
+            //     {
          
-                    $role_staff = new RoleStaff();
+            //         $role_staff = new RoleStaff();
     
-                    $role_staff->role_id = $request->role[$i];
-                    $role_staff->staff_id = $staff->id;
-                    $role_staff->save();
-                }
+            //         $role_staff->role_id = $request->role[$i];
+            //         $role_staff->staff_id = $staff->id;
+            //         $role_staff->save();
+            //     }
 
 
-            } else {
+            // } else {
 
-                for($i=0; $i<count($request->role); $i++)
-                {
+            //     for($i=0; $i<count($request->role); $i++)
+            //     {
          
-                    $role_staff = new RoleStaff();
+            //         $role_staff = new RoleStaff();
     
-                    $role_staff->role_id = $request->role[$i];
-                    $role_staff->staff_id = $staff->id;
-                    $role_staff->save();
-                }
-            }
+            //         $role_staff->role_id = $request->role[$i];
+            //         $role_staff->staff_id = $staff->id;
+            //         $role_staff->save();
+            //     }
+            // }
            
 
             if($request->has('courses')){
@@ -213,6 +215,94 @@ class StaffController extends Controller
     
                 return redirect()->route('home');
             }
+        }
+    }
+
+    public function addSkills(Request $request){
+
+        $staff = Staff::where('email',$request->user()->email)->first();
+
+        if($staff){
+
+            $staff->skills = $request->skills;
+
+            if($staff->save()){
+    
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', ' Skills have been updated successfully');
+    
+                return redirect()->route('home');
+    
+            } else {
+    
+                $request->session()->flash('message.level', 'danger');
+                $request->session()->flash('message.content', 'There is problem, please try again');
+    
+                return redirect()->route('home');
+            };
+        }
+        else {
+
+            $staff->skills = $request->skills;
+
+            if($staff->save()){
+    
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Skills has been added successfully');
+    
+                return redirect()->route('home');
+    
+            } else {
+    
+                $request->session()->flash('message.level', 'danger');
+                $request->session()->flash('message.content', 'There is problem in addition of Skills, please try again');
+    
+                return redirect()->route('home');
+            };
+        }
+    }
+
+    public function addAreasOfResearch(Request $request){
+
+        $staff = Staff::where('email',$request->user()->email)->first();
+
+        if($staff){
+
+            $staff->areas_of_research = $request->areas;
+
+            if($staff->save()){
+    
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', ' Areas of research have been updated successfully');
+    
+                return redirect()->route('home');
+    
+            } else {
+    
+                $request->session()->flash('message.level', 'danger');
+                $request->session()->flash('message.content', 'There is problem, please try again');
+    
+                return redirect()->route('home');
+            };
+        }
+        else {
+
+            $staff->areas_of_research = $request->areas;
+
+            if($staff->save()){
+    
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Areas have been added successfully');
+    
+                return redirect()->route('home');
+    
+            } else {
+    
+                $request->session()->flash('message.level', 'danger');
+                $request->session()->flash('message.content', 'There is problem in addition of Areas of research, please try again');
+    
+                return redirect()->route('home');
+            };
         }
     }
 

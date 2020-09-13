@@ -30,239 +30,514 @@
 
     <script>
 
-        
+            function getPublication(id,name){
+                        
+                $.ajax({
+                    type:'GET',
+                    url: '/publication/'+id,
+                    data:'_token = <?php echo csrf_token() ?>',
+                    success: function(data){
 
-        $(document).ready(function() {
+                        $.each(data,function(key,value){
 
-            var page_count;
+                            switch(value['name'])
+                            {
+                                case "Journal Article":
 
-            var items_per_page = 6;
+                                    document.getElementById('edited_journal_name').setAttribute("value",value['journal_name']);
+                                    document.getElementById('journal_edited_publisher').setAttribute("value",value['publisher']);
+                                    document.getElementById('journal_edited_year').setAttribute("value",value['year']);
+                                    document.getElementById('journal_edited_link').setAttribute("value",value['link']);
+                                    document.getElementById('journal_publication_id').setAttribute("value",value['id']);
+                                    
+                                    
+                                    break;
 
-            var page = 1;
+                                case "Book":
 
-            var offset = (page - 1) * items_per_page;
+                                    document.getElementById('book_edited_publisher').setAttribute("value",value['publisher']);
+                                    document.getElementById('edited_page').setAttribute("value",value['page']);
+                                    document.getElementById('edited_volume').setAttribute("value",value['volume']);
+                                    document.getElementById('edited_issue').setAttribute("value",value['issue']);
+                                    document.getElementById('book_edited_link').setAttribute("value",value['link']);
+                                    document.getElementById('book_publication_id').setAttribute("value",value['id']);
+                                    
+                                    break;
 
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 2000);
-           
-            function disableAll(){
-                $('#previous').addClass('disable-link');
-                $('#previous').removeClass('enable-link');
+                                case "Comference preceedings":
 
-                $('#next').addClass('disable-link');
-                $('#next').removeClass('enable-link');
+                                    document.getElementById('edited_publication_name').setAttribute("value",value['conference_publication_name']);
+                                    document.getElementById('edited_city').setAttribute("value",value['city']);
+                                    document.getElementById('comference_year').setAttribute("value",value['year']);
+                                    document.getElementById('comference_link').setAttribute("value",value['link']);
+                                    document.getElementById('comference_publication_id').setAttribute("value",value['id']);
+                                   
+                                    break;
+
+                                case "Book Chapter":
+
+                                    document.getElementById('book_edited_publisher').setAttribute("value",value['publisher']);
+                                    document.getElementById('edited_page').setAttribute("value",value['page']);
+                                    document.getElementById('edited_volume').setAttribute("value",value['volume']);
+                                    document.getElementById('edited_issue').setAttribute("value",value['issue']);
+                                    document.getElementById('book_edited_link').setAttribute("value",value['link']);
+                                    document.getElementById('book_publication_id').setAttribute("value",value['id']);
+
+                                    break;
+                            }
+                        })
+                        
+                        // document.getElementById('editedposition').setAttribute("value",data['position']);
+                        // document.getElementById('editedplace').setAttribute("value",data['place']);
+                        // document.getElementById('editedstartyear').setAttribute("value",data['start_year']);
+                        // document.getElementById('editedendyear').setAttribute("value",data['end_year']);
+                        // document.getElementById('employment_id').setAttribute("value",data['id']);
+                        // document.getElementById('employment_ondelete_id').setAttribute("value",data['id']);
+                    }
+                });
             }
 
-            function disablePrevious(){
-
-                $('#previous').addClass('disable-link');
-                $('#previous').removeClass('enable-link');
-            }
-
-            function disableNext(){
-
-                $('#next').addClass('disable-link');
-                $('#next').removeClass('enable-link');
-            }
-
-            function enablePrevious(){
-
-                $('#previous').addClass('enable-link');
-                $('#previous').removeClass('disable-link');
-            }
-
-            function enableNext(){
-
-                $('#next').addClass('enable-link');
-                $('#next').removeClass('disable-link');
-            }
-
-            function checkpage(){
-
-            }
-
-            function fetchNext(){
-
-            }
-
-            function fetchPrevious(){
-
-            }
-
-            function fetchPageData(offset){
+            function setPublication(id){
 
                 $.ajax({
+                    type:'GET',
+                    url: '/publication/'+id,
+                    data:'_token = <?php echo csrf_token() ?>',
+                    success: function(data){
 
-                    url: '/get-page',
-                    type: "GET",
-                    data: { page_offset: offset},
-                    success:function(data) {
+                        $.each(data,function(key,value){
 
-                        $('#staffs-row').html(data);
+                            document.getElementById('ondelete_publication_id').setAttribute("value",value['id']);
+                        })
+                    }
+                });
+            }
+
+            $(document).ready(function() {
+
+                var page_count;
+
+                var items_per_page = 6;
+
+                var page = 1;
+
+                var offset = (page - 1) * items_per_page;
+
+                setTimeout(function() {
+                    $(".alert").alert('close');
+                }, 2000);
+
+                initializeTabs();
+
+                fetchPublicationTypes();
+
+                hideAll();
+
+
+                $('select[name="publication_type"]').on('change',function(){
+
+                    var selected = $(this).find('option:selected').text()
+
+                    switch(selected){
+
+                        case "Journal Article":
+                            
+                                showJounal();
+
+                            break;
+
+                        case "Book":
+                                showBook();
+                            break;
+
+                        case "Book Chapter":
+                                showBook();
+                            break;
+
+                        case "Comference preceedings":
+                                showComference();
+                            break;
+
+                        default:
+                                hideAll();
+                            break;
                     }
                 });
 
-            }
+                function disableAll(){
+                    $('#previous').addClass('disable-link');
+                    $('#previous').removeClass('enable-link');
 
-            $('#next').on('click',function(){
+                    $('#next').addClass('disable-link');
+                    $('#next').removeClass('enable-link');
+                }
 
-                page+=1;
+                function disablePrevious(){
 
-                if(page > 1)
-                    enablePrevious();
-                
-                if(page == page_count)
-                    disableNext();
+                    $('#previous').addClass('disable-link');
+                    $('#previous').removeClass('enable-link');
+                }
 
-                let offset = (page - 1) * items_per_page;
+                function disableNext(){
 
-                fetchPageData(offset);
+                    $('#next').addClass('disable-link');
+                    $('#next').removeClass('enable-link');
+                }
 
+                function enablePrevious(){
 
+                    $('#previous').addClass('enable-link');
+                    $('#previous').removeClass('disable-link');
+                }
 
-            });
+                function enableNext(){
 
-            $('#previous').on('click',function(){
+                    $('#next').addClass('enable-link');
+                    $('#next').removeClass('disable-link');
+                }
 
-                page-=1;
+                function fetchPageData(offset){
 
-                enableNext();
-
-                if(page == 1)
-                    disablePrevious();
-
-                let offset = (page - 1) * items_per_page;
-
-                fetchPageData(offset);
-                
-            });
-
-            $('#search').on('keyup',function(){
-
-                $value=$(this).val();
-                $.ajax({
-                    type : 'GET',
-                    url : '/staffs/search/department',
-                    data:{'search':$value},
-                    success:function(data){
-
-                        $('#staffs-row').html(data);
-                    }
-                });
-            });
-
-            $('select[name="role[]"]').on('change',function(){
-
-                // if($('#role option:selected').text() == 'Lecturer')
-                //     $('#currentCourse').show();
-                // else 
-                //     $('#currentCourse').hide();
-            });
-
-            $('select[name="department"]').on('change',function(){
-
-                var departmentId = $(this).val();
-
-                if(departmentId){
                     $.ajax({
 
-                        url: '/courses/get-courses/'+departmentId,
-
+                        url: '/get-page',
                         type: "GET",
-
-                        dataType: "json",
-
+                        data: { page_offset: offset},
                         success:function(data) {
 
-
-                            $('select[name="courses[]"]').empty();
-
-                            $.each(data, function(key, value) {
-
-                                $('select[name="courses[]"]').append('<option value="'+ value['id'] +'">'+ value['name'] +'</option>');
-
-                            });
-
-
+                            $('#staffs-row').html(data);
                         }
-
                     });
-                }else {
 
-                    $('select[name="courses"]').empty();
                 }
-                
-            });
 
+                function initializeTabs(){
 
-            $.ajax({
+                    var account_type = $('#account-hidden').val();
 
-                url: '/get-total-pages',
+                    if(account_type === null || account_type === ''){
 
-                type: "GET",
-
-                dataType: "json",
-
-                success:function(data) {
-
-                    page_count = data;
-
-                    if(data == 0 || data == 1){
-
-                        disableAll();
+                        $('a[href="#publication"').hide();
+                        $('a[href="#project"').hide();
+                        $('a[href="#skills"').hide();
+                        $('a[href="#job"').hide();
+                        $('a[href="#areas"').hide();
                     }
+                    else if(account_type.localeCompare("Administrative") == 0)
+                    {
+                        showAdministrativeTabs();
+                    }
+                    else if(account_type.localeCompare("Academician") == 0)
+                    {
+                        showAcademicianTabs();
+                    }
+                }
+
+                $.ajax({
+
+                    url:'/staff-categories',
+                    type:"GET",
+                    success:function(data){
+
+                        var current_value = $('#account-hidden').val();
+                    
+                        $.each(data,function(key,value){
+
+                            if(current_value.localeCompare(value['name']) == 0)
+                            {
+                                console.log("it passes here 1");
+
+                                $('select[name="account_type"]').append('<option selected value="' + value['name'] + '">'+value['name'] + '</option>');
+                            }
+                                
+                            else
+                            {
+                                console.log("it passes here 2");
+
+                                $('select[name="account_type"]').append('<option value="' + value['name'] + '">'+value['name'] + '</option>');
+                            }
+                                
+
+                        });
+                    }
+                });
+
+                function fetchPublicationTypes(){
+
+                    $.ajax({
+
+                        url:'/publication-types',
+                        type:"GET",
+                        success:function(data){
+
+
+                            $.each(data,function(key,value){
+
+                                    $('select[name="publication_type"]').append('<option value="' + value['id'] + '">'+value['name'] + '</option>');
+                            });
+                        }
+                        });
+                }
+
+                function showJounal(){
+
+                    $('#comference-row,#city-row,#page-row,#volume-row,#issue-row').each(function(){
+                            $(this).hide();
+                    });
+
+                    $('#journal-name-row,#publisher-row,#year-row,#link-row').each(function(){
+                            $(this).show();
+                    });
+
+                    $('#jounal_name,#publisher,#year,#link').each(function(){
+                            $(this).attr('required','required');
+                    });
+
+                    $('#issue,#volume,#page,#city,#publication_name').each(function(){
+                            $(this).removeAttr('required','required');
+                    });
+
+                }
+
+                function showBook(){
+
+                    $('#journal-name-row,#comference-row,#city-row,#year-row').each(function(){
+                            $(this).hide();
+                    });
+
+                    $('#publisher-row,#page-row,#volume-row,#issue-row,#link-row').each(function(){
+
+                            $(this).show();
+                    });
+
+                    $('#issue,#publisher,#link,#page.#volume,').each(function(){
+                            $(this).attr('required','required');
+                    });
+
+                    $('#jounal_name,#year,#city,#publication_name').each(function(){
+                            $(this).removeAttr('required','required');
+                    });
+
+                }
+
+                function showComference(){
+
+                    $('#journal-name-row,#publisher-row,#page-row,#volume-row,#issue-row').each(function(){
+                            $(this).hide();
+                    });
+
+                    $('#comference-row,#city-row,#year-row,#link-row').each(function(){
+                            $(this).show();
+                    });
+
+                    $('#year,#city,#link,#publication_name').each(function(){
+                            $(this).attr('required','required');
+                    });
+
+                    $('#jounal_name,#issue,#volume,page#,#publisher').each(function(){
+                            $(this).removeAttr('required','required');
+                    });
+                    
+                }
+
+                function hideAll(){
+
+                    $('#journal-name-row,#publisher-row,#comference-row,#city-row,#year-row,#page-row,#volume-row,#issue-row,#link-row').each(function(){
+                            $(this).hide();
+                    });
+
+                    $('#link').attr('required','required');
+                }
+
+                $('#next').on('click',function(){
+
+                    page+=1;
+
+                    if(page > 1)
+                        enablePrevious();
+                    
+                    if(page == page_count)
+                        disableNext();
+
+                    let offset = (page - 1) * items_per_page;
+
+                    fetchPageData(offset);
+
+                });
+
+                $('#previous').on('click',function(){
+
+                    page-=1;
+
+                    enableNext();
 
                     if(page == 1)
                         disablePrevious();
-                    else if(page == data)
-                        disableNext();
+
+                    let offset = (page - 1) * items_per_page;
+
+                    fetchPageData(offset);
+                    
+                });
+
+                $('#search').on('keyup',function(){
+
+                    $value=$(this).val();
+                    $.ajax({
+                        type : 'GET',
+                        url : '/staffs/search/department',
+                        data:{'search':$value},
+                        success:function(data){
+
+                            $('#staffs-row').html(data);
+                        }
+                    });
+                });
+
+                $('select[name="role[]"]').on('change',function(){
+
+                    // if($('#role option:selected').text() == 'Lecturer')
+                    //     $('#currentCourse').show();
+                    // else 
+                    //     $('#currentCourse').hide();
+                });
+
+                $('select[name="department"]').on('change',function(){
+
+                    var departmentId = $(this).val();
+
+                    if(departmentId){
+                        $.ajax({
+
+                            url: '/courses/get-courses/'+departmentId,
+
+                            type: "GET",
+
+                            dataType: "json",
+
+                            success:function(data) {
+
+                                $('select[name="courses[]"]').empty();
+
+                                $.each(data, function(key, value) {
+
+                                    $('select[name="courses[]"]').append('<option value="'+ value['id'] +'">'+ value['name'] +'</option>');
+
+                                });
+
+                            }
+                        });
+                    }else {
+
+                        $('select[name="courses"]').empty();
+                    }
+                    
+                });
+
+                function showAcademicianTabs(){
+
+                    $('a[href="#project"').hide();
+                    $('a[href="#skills"').hide();
+
+                    $('a[href="#publication"').show()
+                    $('a[href="#job"').show();
+                    $('a[href="#areas"').show();
                 }
 
-            });
+                function showAdministrativeTabs(){
 
-        });
+                    $('a[href="#publication"').hide()
+                    $('a[href="#job"').hide();
+                    $('a[href="#areas"').hide();
+
+                    $('a[href="#project"').show();
+                    $('a[href="#skills"').show();
+                }
+
+                $('#account_type').on('change',function(){
+
+                    if($(this).val().localeCompare("Academician") == 0)
+                    {
+                        showAcademicianTabs();
+                    }
+                    else if($(this).val().localeCompare("Administrative") == 0){
+
+                        showAdministrativeTabs();
+                    }
+                    else
+                    {
+                        $('a[href="#publication"').hide();
+                        $('a[href="#project"').hide();
+                        $('a[href="#skills"').hide();
+                        $('a[href="#job"').hide();
+                        $('a[href="#areas"').hide();
+                    }
+                });
+
+                $.ajax({
+
+                    url: '/get-total-pages',
+
+                    type: "GET",
+
+                    dataType: "json",
+
+                    success:function(data) {
+
+                        page_count = data;
+
+                        if(data == 0 || data == 1){
+
+                            disableAll();
+                        }
+
+                        if(page == 1)
+                            disablePrevious();
+                        else if(page == data)
+                            disableNext();
+                    }
+
+                });
+
+                });
 
 
-    function getEducationHistory(id){
-        
-        $.ajax({
-            type:'GET',
-            url: '/education/'+id,
-            data:'_token = <?php echo csrf_token() ?>',
-            success: function(data){
+                function getEducationHistory(id){
 
-                document.getElementById('editedcollege').setAttribute("value",data['university']);
-                document.getElementById('editedfaculty').setAttribute("value",data['course']);
-                document.getElementById('editedyear').setAttribute("value",data['year']);
-                document.getElementById('education_id').setAttribute("value",data['id']);
-                document.getElementById('ondelete_id').setAttribute("value",data['id']);
-            }
-        });
-    }
+                $.ajax({
+                type:'GET',
+                url: '/education/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success: function(data){
 
-    function getEmploymentHistory(id){
+                    document.getElementById('editedcollege').setAttribute("value",data['university']);
+                    document.getElementById('editedfaculty').setAttribute("value",data['course']);
+                    document.getElementById('editedyear').setAttribute("value",data['year']);
+                    document.getElementById('education_id').setAttribute("value",data['id']);
+                    document.getElementById('ondelete_id').setAttribute("value",data['id']);
+                }
+                });
+                }
 
-        $.ajax({
-            type:'GET',
-            url: '/employment/'+id,
-            data:'_token = <?php echo csrf_token() ?>',
-            success: function(data){
+                function getEmploymentHistory(id){
 
-                console.log(data);
-                document.getElementById('editedposition').setAttribute("value",data['position']);
-                document.getElementById('editedplace').setAttribute("value",data['place']);
-                document.getElementById('editedstartyear').setAttribute("value",data['start_year']);
-                document.getElementById('editedendyear').setAttribute("value",data['end_year']);
-                document.getElementById('employment_id').setAttribute("value",data['id']);
-                document.getElementById('employment_ondelete_id').setAttribute("value",data['id']);
-            }
-        });
-    }
+                    $.ajax({
+                    type:'GET',
+                    url: '/employment/'+id,
+                    data:'_token = <?php echo csrf_token() ?>',
+                    success: function(data){
+
+                        document.getElementById('editedposition').setAttribute("value",data['position']);
+                        document.getElementById('editedplace').setAttribute("value",data['place']);
+                        document.getElementById('editedstartyear').setAttribute("value",data['start_year']);
+                        document.getElementById('editedendyear').setAttribute("value",data['end_year']);
+                        document.getElementById('employment_id').setAttribute("value",data['id']);
+                        document.getElementById('employment_ondelete_id').setAttribute("value",data['id']);
+                    }
+                    });
+                }
 
     </script>
-
-   
 
 </head>
 <body>

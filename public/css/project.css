@@ -89,3 +89,19 @@ body{
     font-size: 1.1em;
 }
 
+.btn-type{
+    background: blue;
+    font-weight: bold;
+    font-size:1.3em;
+}
+
+.card-header{
+    background: rgba(16,124,229,0.7);
+    color:white;
+    font-weight:bold;
+    font-size:1.4em;
+}
+
+
+
+

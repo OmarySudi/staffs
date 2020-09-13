@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePublicationTable extends Migration
+class CreatePublicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePublicationTable extends Migration
      */
     public function up()
     {
-        Schema::create('publication', function (Blueprint $table) {
+        Schema::create('publications', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->foreignId('type_id')->constrained('publication_types');
             $table->foreignId('staff_id')->constrained('staffs')->onDelete('cascade');
             $table->string('publisher')->nullable();
@@ -26,7 +26,7 @@ class CreatePublicationTable extends Migration
             $table->string('issue')->nullable();
             $table->string('city')->nullable();
             $table->string('conference_publication_name')->nullable();
-            $table->string('link');
+            $table->string('link')->nullable();
 
 
             $table->timestamps();

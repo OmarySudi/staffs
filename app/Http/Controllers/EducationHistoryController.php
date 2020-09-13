@@ -170,7 +170,6 @@ class EducationHistoryController extends Controller
 
             $histories = Staff::find($staff->id)->educationHistories;
 
-            
             return $histories;
         }
         else 

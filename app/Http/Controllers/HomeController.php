@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Staff;
+use Illuminate\Support\Facades\DB;
 use App\EducationHistory;
 use App\Department;
 use App\Role;
@@ -50,10 +51,6 @@ class HomeController extends Controller
         }
       
 
-       
-
-       
-
         $departments = Department::all();
 
         $roles = Role::all();
@@ -77,10 +74,18 @@ class HomeController extends Controller
 
             $employment_histories = Staff::find($staff->id)->employmentHistories;
 
+            $publications = DB::table('publications')
+                        ->join('staffs','publications.staff_id','staffs.id')
+                        ->join('publication_types','publications.type_id','publication_types.id')
+                        ->select('publications.*','publication_types.name')
+                        ->where('publications.staff_id',$staff->id)
+                        ->get();
+
             return view('home',[
                 'employment_histories' => $employment_histories,
                 'education_histories'=>$education_histories,
                 'departments' => $departments,
+                'publications' => $publications,
                 'roles' => $roles,
                 'department' => $department,
                 'staff_roles' => $staff_roles,
@@ -106,6 +111,7 @@ class HomeController extends Controller
             return view('home',[
                 'employment_histories' => '',
                 'education_histories'=>'',
+                'publications'=>'',
                 'departments' => $departments,
                 'roles' => $roles,
                 'department' => $department,

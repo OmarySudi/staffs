@@ -31,6 +31,11 @@ class Staff extends Model
         return $this->belongsToMany('App\Course');
     }
 
+    public function publications(){
+
+        return $this->belongsToMany('App\Publication');
+    }
+
     public function roles(){
 
         return $this->belongsToMany('App\Role');
