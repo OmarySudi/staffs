@@ -20,7 +20,8 @@ class StaffController extends Controller
             'name' => 'required',
             'address' => 'required',
             'number' => 'required',
-            'account_type' => 'required'
+            'account_type' => 'required',
+            'job_title' => 'required'
         ]);
 
         $checkedStaff = Staff::where('email',$request->user()->email)->first();
@@ -30,6 +31,7 @@ class StaffController extends Controller
             $checkedStaff->address = $request->address;
             $checkedStaff->mobile_number = $request->number;
             $checkedStaff->staff_category = $request->account_type;
+            $checkedStaff->job_title = $request->job_title;
 
             if($request->has('picture')){
 
@@ -67,6 +69,8 @@ class StaffController extends Controller
             $staff->address = $request->address;
             $staff->mobile_number = $request->number;
             $staff->staff_category = $request->account_type;
+            $staff->job_title = $request->title;
+
 
             if($request->has('picture')){
 
