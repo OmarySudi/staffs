@@ -88,6 +88,16 @@ Route::group(['prefix'=>'publication'],function($router){
     
 });
 
+
+Route::group(['prefix'=>'project'],function($router){
+
+    $router->post('create','ProjectController@create')->name('project.create');
+    $router->get('projects/{email}','ProjectController@getStaffProjects')->name('project.projects');
+    $router->post('update','ProjectController@updateProject')->name('project.update');
+    $router->post('delete','ProjectController@deleteProject')->name('project.deleteProject');
+    $router->get('{id}','ProjectController@getProject');  
+});
+
 Route::group(['prefix'=>'courses'],function($router){
   
     $router->get('get-courses/{id}','CourseController@getCourses');

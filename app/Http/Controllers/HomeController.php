@@ -74,6 +74,8 @@ class HomeController extends Controller
 
             $employment_histories = Staff::find($staff->id)->employmentHistories;
 
+            $projects = Staff::find($staff->id)->projects;
+
             $publications = DB::table('publications')
                         ->join('staffs','publications.staff_id','staffs.id')
                         ->join('publication_types','publications.type_id','publication_types.id')
@@ -86,6 +88,7 @@ class HomeController extends Controller
                 'education_histories'=>$education_histories,
                 'departments' => $departments,
                 'publications' => $publications,
+                'projects' => $projects,
                 'roles' => $roles,
                 'department' => $department,
                 'staff_roles' => $staff_roles,
@@ -111,6 +114,7 @@ class HomeController extends Controller
             return view('home',[
                 'employment_histories' => '',
                 'education_histories'=>'',
+                'projects'=>'',
                 'publications'=>'',
                 'departments' => $departments,
                 'roles' => $roles,

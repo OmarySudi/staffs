@@ -113,6 +113,25 @@
                 });
             }
 
+            function getProject(id){
+                $.ajax({
+
+                    type:'GET',
+                    url: '/project/'+id,
+                    data:'_token = <?php echo csrf_token() ?>',
+                    success: function(data){
+
+                        if(data !== null){
+                            document.getElementById('edited_project_title').setAttribute("value",data['title']);
+                            document.getElementById('edited_project_description').value = data['description'];
+                            document.getElementById('edited_project_year').setAttribute("value",data['year']);
+                            document.getElementById('project_id').setAttribute("value",data['id']);
+                            document.getElementById('project_ondelete_id').setAttribute("value",data['id']);
+                        }
+                    }
+                });
+            }
+
             $(document).ready(function() {
 
                 var page_count;

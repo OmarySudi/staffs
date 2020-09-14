@@ -800,6 +800,250 @@
                 </div>
 
 
+                <div class="modal" id="projectDeleteModal" tabindex="-1" role="dialog" aria-labelledby="projectDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="card">
+                                <div class="card-header">{{__('Are you sure you want to delete this record?') }}</div>
+                                <div class="card-body">
+                                    <form method="POST" action="{{ route('project.deleteProject') }}">
+                                        @csrf
+
+                                        <input type="hidden" id="project_ondelete_id" name="project_ondelete_id">
+
+                                        <div class="form-group">
+                                            <div class="pull-right">
+
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                    {{ __('No') }}
+                                                </button>
+
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Yes') }}
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="projectEditModal" tabindex="-1" role="dialog" aria-labelledby="projectEditModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            
+                            <div class="card">
+                                <div class="card-header">{{_('Edit Project')}}</div>
+                                <div class="card-body">
+                                    <form method="POST" action="{{ route('project.update') }}">
+                                        @csrf
+
+                                        <input type="hidden" id="project_id" name="project_id">
+
+                                        <div class="form-group row">
+                                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="edited_project_title" type="text" class="form-control @error('edited_project_title') is-invalid @enderror" name="edited_project_title" value="{{ old('edited_project_title') }}" required autocomplete="edited_project_title" autofocus>
+
+                                                @error('edited_project_title')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+
+                                            <div class="col-md-6">
+                                                <textarea rows="7" id="edited_project_description" class="form-control @error('edited_project_description') is-invalid @enderror" name="edited_project_description" value="{{ old('edited_project_description') }}" required autocomplete="edited_project_description" autofocus>
+                                                    
+                                                </textarea>
+
+                                                @error('edited_project_description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="edited_project_year" type="text" class="form-control @error('edited_project_year') is-invalid @enderror" name="edited_project_year" value="{{ old('edited_project_year') }}" required autocomplete="edited_project_year" autofocus>
+
+                                                @error('edited_project_year')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-0">
+                                            <div class="col-md-6 offset-md-5">
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Save') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="project" role="tabpanel">
+                
+                    <p>
+                        <span class="mr-3">Click Add button to add new project</span>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#projectModal">
+                           ADD
+                        </button>
+                    </p>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="card">
+                                <div class="card-header">{{_('New Project')}}</div>
+                                <div class="card-body">
+                                    <form method="POST" action="{{ route('project.create') }}">
+                                        @csrf
+
+                                        <div class="form-group row">
+                                            <label for="project_title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="project_title" type="text" class="form-control @error('project_title') is-invalid @enderror" name="project_title" value="{{ old('project_title') }}" required autocomplete="project_title" autofocus>
+
+                                                @error('project_title')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="project_description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+
+                                            <div class="col-md-6">
+
+                                                <textarea rows="7" id="project_description" class="form-control @error('project_description') is-invalid @enderror" name="project_description" value="{{ old('project_description') }}" required autocomplete="project_description" autofocus>
+                                                    
+                                                </textarea>
+
+                                                @error('project_description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="project_year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="project_year" type="text" class="form-control @error('project_year') is-invalid @enderror" name="project_year" value="{{ old('start_year') }}" required autocomplete="project_year" autofocus>
+
+                                                @error('project_year')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group row">
+                                            <label for="end_year" class="col-md-4 col-form-label text-md-right">{{ __('End Year') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="end_year" type="text" class="form-control @error('end_year') is-invalid @enderror" name="end_year" value="{{ old('end_year') }}" required autocomplete="end_year" autofocus>
+
+                                                @error('end_year')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group row mb-0">
+                                            <div class="col-md-6 offset-md-5">
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Save') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Year</th>
+                                <th colspan="2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @if($projects != '')
+                                @foreach($projects as $project)
+                                    <tr>
+                                    <td>{{ $project->title}}</td>
+                                    <td>{{ $project->description}}</td>
+                                    <td>{{ $project->year}}</td>
+                                    <td>
+                                        <button 
+                                            type="button"
+                                            data-toggle="modal"
+                                            data-target = "#projectEditModal"
+                                            onclick="getProject({{ $project->id}})"
+                                            class="btn btn-sm btn-success ml-5">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button 
+
+                                        type="button" 
+                                        data-toggle="modal"
+                                        data-target = "#projectDeleteModal"
+                                        onclick="getProject({{ $project->id}})"
+                                        class="btn  btn-sm btn-danger ml-5">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
+                       
+                    </div>
+                </div>
+
+
                 <div class="modal" id="publicationDeleteModal" tabindex="-1" role="dialog" aria-labelledby="publicationDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

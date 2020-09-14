@@ -31,6 +31,11 @@ class Staff extends Model
         return $this->belongsToMany('App\Course');
     }
 
+    public function projects(){
+
+        return $this->hasMany('App\Project');
+    }
+
     public function publications(){
 
         return $this->belongsToMany('App\Publication');
