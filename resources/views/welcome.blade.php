@@ -36,7 +36,8 @@
                                     <a href="{{ route('staffs.staff-info',['id' => $staff->id])}}">
                                         <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>" alt="Card image cap">
                                         <div class="card-body pl-1">
-                                            <span class="font-weight-bold">{{ $staff->full_name}}</span>
+                                            <span class="font-weight-bold">{{ $staff->full_name}}</span><br>
+                                            <span style="margin-top:-1">{{ $staff->job_title}}</span>
                                         </div>
                                     </a>
                                 </div>

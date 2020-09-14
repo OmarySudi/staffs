@@ -110,6 +110,16 @@ class StaffController extends Controller
 
        $courses = $staff->courses;
 
+       $projects = $staff->projects;
+
+    //    $publications = $staff->publications;
+
+       $publications = DB::table('publications')
+                            ->join('publication_types','publications.type_id','publication_types.id')
+                            ->select('publications.*','publication_types.name as category')
+                            ->where('publications.staff_id',$request->id)
+                            ->get();
+
        $education_histories = $staff->educationHistories;
 
        $employment_histories = $staff->employmentHistories;
@@ -120,6 +130,8 @@ class StaffController extends Controller
         'department'=>$department,
         'education' => $education_histories,
         'employment' => $employment_histories,
+        'projects' => $projects,
+        'publications' => $publications,
         'roles' => $roles,
         'courses' => $courses
         ]);

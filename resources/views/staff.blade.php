@@ -24,21 +24,47 @@
 
                      <div id="tabbed-content">
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation" style="width: 30%">
-                                <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
-                            </li>
 
-                            @foreach($roles as $role)
-                                @if($role->name == 'Lecturer')
-                                    <li class="nav-item" role="presentation" style="width: 30%">
-                                        <a class="nav-link" id="pills-courses-tab" data-toggle="pill" href="#pills-courses" role="tab" aria-controls="pills-courses" aria-selected="false">Courses</a>
-                                    </li>
-                                    @break
+                            @if($staff->staff_category == 'Academician')
+                                <li class="nav-item" role="presentation" style="width: 20%">
+                                    <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
+                                </li>
+                            @elseif($staff->staff_category == 'Administrative')
+                                <li class="nav-item" role="presentation" style="width: 30%">
+                                    <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
+                                </li>
+                            @endif
+
+                            @if($staff->staff_category == 'Academician')
+                                <li class="nav-item" role="presentation" style="width: 20%">
+                                    <a class="nav-link" id="pills-courses-tab" data-toggle="pill" href="#pills-courses" role="tab" aria-controls="pills-courses" aria-selected="false">Courses</a>
+                                </li>
+                                <li class="nav-item" role="presentation" style="width: 20%">
+                                    <a class="nav-link" id="pills-publications-tab" data-toggle="pill" href="#pills-publications" role="tab" aria-controls="pills-publications" aria-selected="false">Publications</a>
+                                </li>
+                                <li class="nav-item" role="presentation" style="width: 25%">
+                                    <a class="nav-link" id="pills-areas-tab" data-toggle="pill" href="#pills-areas" role="tab" aria-controls="pills-areas" aria-selected="false">Areas of research</a>
+                                </li>
+                            @elseif($staff->staff_category == 'Administrative')
+                                <li class="nav-item" role="presentation" style="width: 30%">
+                                    <a class="nav-link" id="pills-projects-tab" data-toggle="pill" href="#pills-projects" role="tab" aria-controls="pills-projects" aria-selected="false">Projects</a>
+                                </li>
+                                <li class="nav-item" role="presentation" style="width: 30%">
+                                    <a class="nav-link" id="pills-skills-tab" data-toggle="pill" href="#pills-skills" role="tab" aria-controls="pills-skills" aria-selected="false">Skills</a>
+                                </li>
+                            @endif
+
+                            <!-- @foreach($roles as $role)
+                                @if($role->name == 'Lecturer') -->
+                            <!-- <li class="nav-item" role="presentation" style="width: 30%">
+                                <a class="nav-link" id="pills-courses-tab" data-toggle="pill" href="#pills-courses" role="tab" aria-controls="pills-courses" aria-selected="false">Courses</a>
+                            </li> -->
+                                    <!-- @break
                                 @endif
-                            @endforeach
-                            <li class="nav-item" role="presentation" style="width: 30%">
+                            @endforeach -->
+                            <!-- <li class="nav-item" role="presentation" style="width: 30%">
                                 <a  class="nav-link" id="pills-background-tab" data-toggle="pill" href="#pills-background" role="tab" aria-controls="pills-background" aria-selected="false">Background</a>
-                            </li>
+                            </li> -->
                         </ul>
                         <div class="tab-content staff-dir" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
@@ -57,7 +83,19 @@
                                 </ul>
                               
                             </div>
-                            <div class="tab-pane fade" id="pills-background" role="tabpanel" aria-labelledby="pills-background-tab">
+
+                            <div class="tab-pane fade" id="pills-publications" role="tabpanel" aria-labelledby="pills-publications-tab">
+                                <h2>Publications</h2>
+                                <ul>
+
+                                  @foreach($publications as $publication)
+                                    
+                                    <li class="mt-3">{{ $publication->id}}</li>
+                                  @endforeach
+                                </ul>
+                              
+                            </div>
+                            <!-- <div class="tab-pane fade" id="pills-background" role="tabpanel" aria-labelledby="pills-background-tab">
                                 
                                 <h2>Education History</h2>
 
@@ -80,6 +118,27 @@
                                             @endforeach
                                         </li>
                                     </ul>
+                            </div> -->
+                            <div class="tab-pane fade" id="pills-skills" role="tabpanel" aria-labelledby="pills-skills-tab">
+                                <h2>Skills</h2>
+
+                                <p> {{ $staff->skills }}</p>
+                              
+                            </div>
+                            <div class="tab-pane fade" id="pills-projects" role="tabpanel" aria-labelledby="pills-projects-tab">
+                                <h2>Projects</h2>
+                                <ul>
+
+                                  @foreach($projects as $project)
+                                    <li class="mt-3">{{ $project->title}}, {{ $project->description}} , {{ $project->year}}</li>
+                                  @endforeach
+                                </ul>
+                              
+                            </div>
+                            <div class="tab-pane fade" id="pills-areas" role="tabpanel" aria-labelledby="pills-areas-tab">
+                                <h2>Areas of research</h2>
+                                 <p>{{ $staff->areas_of_research}}</p>
+                              
                             </div>
                         </div>
                      </div>
