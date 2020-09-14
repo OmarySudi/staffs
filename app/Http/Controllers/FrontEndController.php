@@ -9,7 +9,7 @@ use App\Staff;
 class FrontEndController extends Controller
 {
     //
-    private $page_limit = 6;
+    private $page_limit = 12;
 
     public function index(){
 

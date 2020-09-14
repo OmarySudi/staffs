@@ -10,7 +10,6 @@ use App\Staff;
 class ProjectController extends Controller
 {
     //
-
     public function create(Request $request){
 
         $this->validate($request,[

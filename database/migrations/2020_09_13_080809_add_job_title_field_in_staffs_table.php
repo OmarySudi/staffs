@@ -15,7 +15,7 @@ class AddJobTitleFieldInStaffsTable extends Migration
     {
         Schema::table('staffs', function (Blueprint $table) {
             //
-            $table->string('job_title')->default();
+            $table->string('job_title')->default('');
         });
     }
 

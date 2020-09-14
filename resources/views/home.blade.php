@@ -102,6 +102,20 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="job_title">Job Title</label>
+
+                                    <div class="col-md-6">
+                                    <input id="job_title" type="text" class="form-control @error('job_title') is-invalid @enderror" value="@if($staff != '') {{ $staff->job_title}} @else {{ old('job_title') }}@endif" name="job_title" required autocomplete="job_title">
+
+                                        @error('job_title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                 <label for="picture" class="col-md-4 col-form-label text-md-right">{{ __('Profile picture') }}</label> 
 
                                     <div class="col-md-6">
