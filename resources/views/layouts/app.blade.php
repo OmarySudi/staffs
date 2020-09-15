@@ -30,6 +30,14 @@
 
     <script>
 
+        var page_count;
+
+        var items_per_page = 6;
+
+        var page = 1;
+
+        var offset = (page - 1) * items_per_page;
+
             function getPublication(id,name){
                         
                 $.ajax({
@@ -132,58 +140,7 @@
                 });
             }
 
-            $(document).ready(function() {
-
-                var page_count;
-
-                var items_per_page = 6;
-
-                var page = 1;
-
-                var offset = (page - 1) * items_per_page;
-
-                setTimeout(function() {
-                    $(".alert").alert('close');
-                }, 2000);
-
-                initializeTabs();
-
-                fetchPublicationTypes();
-
-                hideAll();
-
-
-                $('select[name="publication_type"]').on('change',function(){
-
-                    var selected = $(this).find('option:selected').text()
-
-                    switch(selected){
-
-                        case "Journal Article":
-                            
-                                showJounal();
-
-                            break;
-
-                        case "Book":
-                                showBook();
-                            break;
-
-                        case "Book Chapter":
-                                showBook();
-                            break;
-
-                        case "Comference preceedings":
-                                showComference();
-                            break;
-
-                        default:
-                                hideAll();
-                            break;
-                    }
-                });
-
-                function disableAll(){
+              function disableAll(){
                     $('#previous').addClass('disable-link');
                     $('#previous').removeClass('enable-link');
 
@@ -251,35 +208,6 @@
                         showAcademicianTabs();
                     }
                 }
-
-                $.ajax({
-
-                    url:'/staff-categories',
-                    type:"GET",
-                    success:function(data){
-
-                        var current_value = $('#account-hidden').val();
-                    
-                        $.each(data,function(key,value){
-
-                            if(current_value.localeCompare(value['name']) == 0)
-                            {
-                                console.log("it passes here 1");
-
-                                $('select[name="account_type"]').append('<option selected value="' + value['name'] + '">'+value['name'] + '</option>');
-                            }
-                                
-                            else
-                            {
-                                console.log("it passes here 2");
-
-                                $('select[name="account_type"]').append('<option value="' + value['name'] + '">'+value['name'] + '</option>');
-                            }
-                                
-
-                        });
-                    }
-                });
 
                 function fetchPublicationTypes(){
 
@@ -368,13 +296,110 @@
                     $('#link').attr('required','required');
                 }
 
-                $('#next').on('click',function(){
+                 function showAcademicianTabs(){
 
+                    $('a[href="#project"').hide();
+                    $('a[href="#skills"').hide();
+
+                    $('a[href="#publication"').show()
+                    $('a[href="#job"').show();
+                    $('a[href="#areas"').show();
+                }
+
+                function showAdministrativeTabs(){
+
+                    $('a[href="#publication"').hide()
+                    $('a[href="#job"').hide();
+                    $('a[href="#areas"').hide();
+
+                    $('a[href="#project"').show();
+                    $('a[href="#skills"').show();
+                }
+
+                function getTotalPages(){
+
+                    $.ajax({
+
+                        url: '/get-total-pages',
+
+                        type: "GET",
+
+                        dataType: "json",
+
+                        success:function(data) {
+
+                            page_count = data;
+
+                            if(data == 0 || data == 1){
+
+                                disableAll();
+                            }
+
+                            if(page == 1)
+                                disablePrevious();
+                            else if(page == data)
+                                disableNext();
+                        }
+
+                        });
+                }
+
+                function getStaffCategories(){
+                    $.ajax({
+
+                    url:'/staff-categories',
+                    type:"GET",
+                    success:function(data){
+
+                            var current_value = $('#account-hidden').val();
+                        
+                            $.each(data,function(key,value){
+
+                                if(current_value.localeCompare(value['name']) == 0)
+                                {
+                                    console.log("it passes here 1");
+
+                                    $('select[name="account_type"]').append('<option selected value="' + value['name'] + '">'+value['name'] + '</option>');
+                                }
+                                    
+                                else
+                                {
+                                    console.log("it passes here 2");
+
+                                    $('select[name="account_type"]').append('<option value="' + value['name'] + '">'+value['name'] + '</option>');
+                                }
+                                    
+
+                            });
+                        }
+                    });
+                }
+
+            $(document).ready(function() {
+
+                $('#search').on('keyup',function(){
+
+                    $value=$(this).val();
+
+                    $.ajax({
+                        type : 'GET',
+                        url : '/staffs/search/department',
+                        data:{'search':$value},
+                        success:function(data){
+
+                            $('#staffs-row').html(data);
+                        }
+                    });
+               });
+
+               $('#next').on('click',function(){
+
+                    
                     page+=1;
 
                     if(page > 1)
                         enablePrevious();
-                    
+
                     if(page == page_count)
                         disableNext();
 
@@ -396,29 +421,71 @@
                     let offset = (page - 1) * items_per_page;
 
                     fetchPageData(offset);
-                    
+
                 });
 
-                $('#search').on('keyup',function(){
+                $('#account_type').on('change',function(){
 
-                    $value=$(this).val();
-                    $.ajax({
-                        type : 'GET',
-                        url : '/staffs/search/department',
-                        data:{'search':$value},
-                        success:function(data){
+                    if($(this).val().localeCompare("Academician") == 0)
+                    {
+                        showAcademicianTabs();
+                    }
+                    else if($(this).val().localeCompare("Administrative") == 0){
 
-                            $('#staffs-row').html(data);
-                        }
-                    });
+                        showAdministrativeTabs();
+                    }
+                    else
+                    {
+                        $('a[href="#publication"').hide();
+                        $('a[href="#project"').hide();
+                        $('a[href="#skills"').hide();
+                        $('a[href="#job"').hide();
+                        $('a[href="#areas"').hide();
+                    }
                 });
 
-                $('select[name="role[]"]').on('change',function(){
+               getTotalPages();
 
-                    // if($('#role option:selected').text() == 'Lecturer')
-                    //     $('#currentCourse').show();
-                    // else 
-                    //     $('#currentCourse').hide();
+               getStaffCategories();
+
+               initializeTabs();
+
+               fetchPublicationTypes();
+
+               hideAll();
+
+               setTimeout(function() {
+                    $(".alert").alert('close');
+                }, 2000);
+
+               $('select[name="publication_type"]').on('change',function(){
+
+                    var selected = $(this).find('option:selected').text()
+
+                    switch(selected){
+
+                        case "Journal Article":
+                            
+                                showJounal();
+
+                            break;
+
+                        case "Book":
+                                showBook();
+                            break;
+
+                        case "Book Chapter":
+                                showBook();
+                            break;
+
+                        case "Comference preceedings":
+                                showComference();
+                            break;
+
+                        default:
+                                hideAll();
+                            break;
+                    }
                 });
 
                 $('select[name="department"]').on('change',function(){
@@ -453,72 +520,7 @@
                     
                 });
 
-                function showAcademicianTabs(){
-
-                    $('a[href="#project"').hide();
-                    $('a[href="#skills"').hide();
-
-                    $('a[href="#publication"').show()
-                    $('a[href="#job"').show();
-                    $('a[href="#areas"').show();
-                }
-
-                function showAdministrativeTabs(){
-
-                    $('a[href="#publication"').hide()
-                    $('a[href="#job"').hide();
-                    $('a[href="#areas"').hide();
-
-                    $('a[href="#project"').show();
-                    $('a[href="#skills"').show();
-                }
-
-                $('#account_type').on('change',function(){
-
-                    if($(this).val().localeCompare("Academician") == 0)
-                    {
-                        showAcademicianTabs();
-                    }
-                    else if($(this).val().localeCompare("Administrative") == 0){
-
-                        showAdministrativeTabs();
-                    }
-                    else
-                    {
-                        $('a[href="#publication"').hide();
-                        $('a[href="#project"').hide();
-                        $('a[href="#skills"').hide();
-                        $('a[href="#job"').hide();
-                        $('a[href="#areas"').hide();
-                    }
-                });
-
-                $.ajax({
-
-                    url: '/get-total-pages',
-
-                    type: "GET",
-
-                    dataType: "json",
-
-                    success:function(data) {
-
-                        page_count = data;
-
-                        if(data == 0 || data == 1){
-
-                            disableAll();
-                        }
-
-                        if(page == 1)
-                            disablePrevious();
-                        else if(page == data)
-                            disableNext();
-                    }
-
-                });
-
-                });
+            });
 
 
                 function getEducationHistory(id){
