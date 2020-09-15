@@ -85,14 +85,60 @@
                             </div>
 
                             <div class="tab-pane fade" id="pills-publications" role="tabpanel" aria-labelledby="pills-publications-tab">
-                                <h2>Publications</h2>
-                                <ul>
+    
+                                @foreach($publications as $publication)
+                                    <div class="card">
+                                        <div class="card-body mb-2">
+                                            <div class="row">
+                                                @switch($publication->category)
+                                                    @case("Journal Article")
+                                                        <h5>
+                                                            <span class="font-weight-bold">Publisher:</span> {{ $publication->publisher}} , 
+                                                            <span class="font-weight-bold">Journal Name:</span> {{ $publication->journal_name}} ,
+                                                            <span class="font-weight-bold">Year:</span> {{ $publication->year}}
+                                                        </h5>
+                                                    @break
 
-                                  @foreach($publications as $publication)
-                                    
-                                    <li class="mt-3">{{ $publication->id}}</li>
-                                  @endforeach
-                                </ul>
+                                                    @case("Book")
+                                                        <h5>
+                                                            <span class="font-weight-bold">Publisher:</span> {{ $publication->publisher}} , 
+                                                            <span class="font-weight-bold">Pages:</span> {{ $publication->page}} ,
+                                                            <span class="font-weight-bold">Volume:</span> {{ $publication->volume}} ,
+                                                            <span class="font-weight-bold">Issue:</span> {{ $publication->issue}} ,
+
+                                                        </h5>
+                                                    @break
+
+                                                    @case("Book Chapter")
+                                                        <h5>
+                                                            <span class="font-weight-bold">Publisher:</span> {{ $publication->publisher}} , 
+                                                            <span class="font-weight-bold">Pages:</span> {{ $publication->page}} ,
+                                                            <span class="font-weight-bold">Volume:</span> {{ $publication->volume}} ,
+                                                            <span class="font-weight-bold">Issue:</span> {{ $publication->issue}} ,
+                                                        </h5>
+                                                    @break
+
+                                                    @case("Comference preceedings")
+                                                        <h5>
+                                                            <span class="font-weight-bold">Publication name:</span> {{ $publication->conference_publication_name}} , 
+                                                            <span class="font-weight-bold">City:</span> {{ $publication->city}} ,
+                                                            <span class="font-weight-bold">year:</span> {{ $publication->year}} ,
+                                                        </h5>
+                                                    @break
+                                                @endswitch
+                                            </div>
+
+                                            <div class="row mt-2">
+                                              <h5><span class="font-weight-bold">Link: </span> <a style="color:red" href="{{$publication->link}}" target="_blank">{{ $publication->link}}</a><h5> 
+                                            </div>
+
+                                            <div class="mt-3" style="float:right">
+                                                <h5><span class="font-weight-bold">Type: </span> {{ $publication->category}}<h5>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                @endforeach
                               
                             </div>
                             <!-- <div class="tab-pane fade" id="pills-background" role="tabpanel" aria-labelledby="pills-background-tab">
@@ -149,8 +195,8 @@
         <div class="col-sm-12 col-md-3 mt-5">
             <div class="card-transparent mr-5 staff-card">
                 
-                <img class="card-img-top" style="height:120px" src="<?php echo asset("images/$staff->profile_picture_path")?>" alt="Card image cap">
-                <div class="card-body" style="margin-top: 100px">
+                <img class="card-img-top mb-4" style="height:200px" src="<?php echo asset("images/$staff->profile_picture_path")?>" alt="Card image cap">
+                <div class="card-body">
                     
                     <p>{{ $staff->email}}</P>
 
