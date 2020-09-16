@@ -379,13 +379,21 @@ class StaffController extends Controller
             foreach($staffs as $key => $staff){
 
                 $output.=
-                '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
-                    '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
-                        '<img class="card-img-top" style="height:120px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
-                        '<div class="card-body pl-1">'.
-                            '<span class="font-weight-bold">'.$staff->full_name.'</span>'.
+                '<div style="width: 12em;" class="mr-5 mb-4">'.
+                    '<div class="row">'.
+                        '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
+                            '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
+                                '<img class="card-img-top" style="height:150px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
+                            '</a>'.
                         '</div>'.
-                    '</a>'.
+                    '</div>'.
+
+                    '<div class="row">'.
+                        '<div>'.
+                            '<h5 class="font-weight-bold">'.$staff->full_name.'</h5>'.
+                            '<h6 class="margin-top:-1">'.$staff->job_title.'</h6>'.
+                        '</div>'.
+                    '</div>'.
                 '</div>';
         
             }
