@@ -308,7 +308,7 @@
                     </div>
                 </div>
 
-                <div class="tab-pane" id="education" role="tabpanel">
+                <!-- <div class="tab-pane" id="education" role="tabpanel">
 
                     <p>
                         <span class="mr-3">Click Add button to add another history to list</span>
@@ -316,10 +316,10 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#educationHistoryModal">
                             ADD
                         </button>
-                    </p>
+                    </p> -->
 
                     <!-- Modal -->
-                    <div class="modal fade" id="educationHistoryModal" tabindex="-1" role="dialog" aria-labelledby="educationHistoryModalLabel" aria-hidden="true">
+                    <!-- <div class="modal fade" id="educationHistoryModal" tabindex="-1" role="dialog" aria-labelledby="educationHistoryModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                
@@ -442,9 +442,9 @@
                             </tbody>
                         </table>
                        
-                    </div>
+                    </div> -->
 
-                    <div class="modal" id="educationDeleteModal" tabindex="-1" role="dialog" aria-labelledby="educationDeleteModalLabel" aria-hidden="true">
+                    <!-- <div class="modal" id="educationDeleteModal" tabindex="-1" role="dialog" aria-labelledby="educationDeleteModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="card">
@@ -474,9 +474,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="modal fade" id="educationEditModal" tabindex="-1" role="dialog" aria-labelledby="educationEditModalLabel" aria-hidden="true">
+                    <!-- <div class="modal fade" id="educationEditModal" tabindex="-1" role="dialog" aria-labelledby="educationEditModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                
@@ -682,7 +682,6 @@
                         </button>
                     </p>
 
-                    <!-- Modal -->
                     <div class="modal fade" id="employmentHistoryModal" tabindex="-1" role="dialog" aria-labelledby="employmentHistoryModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -811,7 +810,7 @@
                         </table>
                        
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="modal" id="projectDeleteModal" tabindex="-1" role="dialog" aria-labelledby="projectDeleteModalLabel" aria-hidden="true">
@@ -892,7 +891,16 @@
                                             <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
 
                                             <div class="col-md-6">
-                                                <input id="edited_project_year" type="text" class="form-control @error('edited_project_year') is-invalid @enderror" name="edited_project_year" value="{{ old('edited_project_year') }}" required autocomplete="edited_project_year" autofocus>
+                                                
+                                                <select id="edited_project_year" name="edited_project_year" class="form-control @error('edited_project_year') is-invalid @enderror">
+                                                   
+                                                    <?php 
+                                                        for($startYear=1950;$startYear <= date("Y"); $startYear++){
+
+                                                            echo '<option id="'.$startYear.'" value="'.$startYear.'">'.$startYear.'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
 
                                                 @error('edited_project_year')
                                                     <span class="invalid-feedback" role="alert">
@@ -970,7 +978,16 @@
                                             <label for="project_year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
 
                                             <div class="col-md-6">
-                                                <input id="project_year" type="text" class="form-control @error('project_year') is-invalid @enderror" name="project_year" value="{{ old('start_year') }}" required autocomplete="project_year" autofocus>
+
+                                                <select id="project_year" name="project_year" class="form-control @error('project_year') is-invalid @enderror">
+                                                    <option value="1950">1950</option>
+                                                    <?php 
+                                                        for($startYear=1951;$startYear <= date("Y"); $startYear++){
+
+                                                            echo '<option id="'.$startYear.'" value="'.$startYear.'">'.$startYear.'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
 
                                                 @error('project_year')
                                                     <span class="invalid-feedback" role="alert">
@@ -1135,8 +1152,15 @@
                                             <label for="edited_year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
 
                                             <div class="col-md-6">
-                                                <input id="journal_edited_year" type="text" required class="form-control @error('journal_edited_year') is-invalid @enderror" name="journal_edited_year" value="{{ old('journal_edited_year') }}" autocomplete="journal_edited_year" autofocus>
-
+                                                
+                                                <select id="journal_edited_year" name="journal_edited_year" class="form-control @error('journal_edited_year') is-invalid @enderror">
+                                                   
+                                                   <?php 
+                                                       for($startYear=1950;$startYear <= date("Y"); $startYear++){
+                                                           echo '<option id="'.$startYear.'" value="'.$startYear.'">'.$startYear.'</option>';
+                                                       }
+                                                   ?>
+                                               </select>
                                                 @error('journal_edited_year')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -1314,8 +1338,22 @@
                                             <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
 
                                             <div class="col-md-6">
-                                                <input id="comference_year" required type="text" class="form-control @error('comference_year') is-invalid @enderror" name="comference_year" value="{{ old('comference_year') }}" autocomplete="comference_year" autofocus>
+                                                <!-- <input id="comference_year" required type="text" class="form-control @error('comference_year') is-invalid @enderror" name="comference_year" value="{{ old('comference_year') }}" autocomplete="comference_year" autofocus>
 
+                                                @error('comference_year')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror -->
+                                                <select id="comference_year" name="comference_year" class="form-control @error('comference_year') is-invalid @enderror">
+                                                   
+                                                    <?php 
+                                                        for($startYear=1950;$startYear <= date("Y"); $startYear++){
+
+                                                            echo '<option id="'.$startYear.'" value="'.$startYear.'">'.$startYear.'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
                                                 @error('comference_year')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -1453,7 +1491,22 @@
                                             <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
 
                                             <div class="col-md-6">
-                                                <input id="year" type="text" class="form-control @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" autocomplete="year" autofocus>
+                                                <!-- <input id="year" type="text" class="form-control @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" autocomplete="year" autofocus>
+
+                                                @error('year')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror -->
+                                                <select id="year" name="year" class="form-control @error('year') is-invalid @enderror">
+                                                    <option value="1950" selected>1950</option>
+
+                                                    <?php 
+                                                        for($startYear=1951;$startYear <= date("Y"); $startYear++){
+                                                            echo '<option value="'.$startYear.'">'.$startYear.'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
 
                                                 @error('year')
                                                     <span class="invalid-feedback" role="alert">

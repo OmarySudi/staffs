@@ -54,7 +54,9 @@
 
                                     document.getElementById('edited_journal_name').setAttribute("value",value['journal_name']);
                                     document.getElementById('journal_edited_publisher').setAttribute("value",value['publisher']);
-                                    document.getElementById('journal_edited_year').setAttribute("value",value['year']);
+
+                                    $('select[name="journal_edited_year"]').prepend('<option selected value="' + value['year'] + '">'+value['year'] + '</option>');
+                                    // document.getElementById('journal_edited_year').setAttribute("value",value['year']);
                                     document.getElementById('journal_edited_link').setAttribute("value",value['link']);
                                     document.getElementById('journal_publication_id').setAttribute("value",value['id']);
                                     
@@ -76,7 +78,9 @@
 
                                     document.getElementById('edited_publication_name').setAttribute("value",value['conference_publication_name']);
                                     document.getElementById('edited_city').setAttribute("value",value['city']);
-                                    document.getElementById('comference_year').setAttribute("value",value['year']);
+
+                                    $('select[name="comference_year"]').prepend('<option selected value="' + value['year'] + '">'+value['year'] + '</option>');
+                               
                                     document.getElementById('comference_link').setAttribute("value",value['link']);
                                     document.getElementById('comference_publication_id').setAttribute("value",value['id']);
                                    
@@ -132,7 +136,10 @@
                         if(data !== null){
                             document.getElementById('edited_project_title').setAttribute("value",data['title']);
                             document.getElementById('edited_project_description').value = data['description'];
-                            document.getElementById('edited_project_year').setAttribute("value",data['year']);
+
+                            
+                            $('select[name="edited_project_year"]').prepend('<option selected value="' + data['year'] + '">'+data['year'] + '</option>');
+
                             document.getElementById('project_id').setAttribute("value",data['id']);
                             document.getElementById('project_ondelete_id').setAttribute("value",data['id']);
                         }
