@@ -11,7 +11,7 @@
                     <h3>{{ $staff->full_name }}</h3>
 
                     
-                     @foreach($roles as $role)
+                     <!-- @foreach($roles as $role)
                         @if($loop->last)
                             <h4 class="role">{{ $role->name}}</h4>
                         @else
@@ -20,7 +20,8 @@
                      @endforeach
                     
 
-                     <h4> Faculty: {{ $department[0]->name }} </h4>
+                     <h4> Faculty: {{ $department[0]->name }} </h4> -->
+                     <h4>{{ $staff->job_title}} </h4>
 
                      <div id="tabbed-content">
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
