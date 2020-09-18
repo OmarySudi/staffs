@@ -69,7 +69,7 @@ class StaffController extends Controller
             $staff->address = $request->address;
             $staff->mobile_number = $request->number;
             $staff->staff_category = $request->account_type;
-            $staff->job_title = $request->title;
+            $staff->job_title = $request->job_title;
 
 
             if($request->has('picture')){
