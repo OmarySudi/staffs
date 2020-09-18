@@ -14,7 +14,7 @@ class FrontEndController extends Controller
     public function index(){
 
         $staffs = DB::table('staffs')
-                    ->join('departments','staffs.department_id','departments.id')
+                    ->leftJoin('departments','staffs.department_id','departments.id')
                     ->select('staffs.*','departments.name as department_name')
                     ->limit($this->page_limit)
                     ->get();
@@ -27,7 +27,7 @@ class FrontEndController extends Controller
     public function getTotalPages(){
 
         $all_staffs = DB::table('staffs')
-            ->join('departments','staffs.department_id','departments.id')
+            ->leftJoin('departments','staffs.department_id','departments.id')
             ->select('staffs.*','departments.name as department_name')
             ->get();
 
@@ -41,7 +41,7 @@ class FrontEndController extends Controller
         $output = "";
 
         $all_staffs = DB::table('staffs')
-            ->join('departments','staffs.department_id','departments.id')
+            ->leftJoin('departments','staffs.department_id','departments.id')
             ->select('staffs.*','departments.name as department_name')
             ->offset($request->page_offset)
             ->limit($this->page_limit)

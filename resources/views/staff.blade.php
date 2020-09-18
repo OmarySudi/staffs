@@ -19,8 +19,11 @@
                         @endif
                      @endforeach
                     
+                     @if($department !== '')
 
-                     <h4> Faculty: {{ $department[0]->name }} </h4> -->
+                        <h4> Faculty: {{ $department[0]->name }}</h4> 
+                    @endif-->
+
                      <h4>{{ $staff->job_title}} </h4>
 
                      <div id="tabbed-content">

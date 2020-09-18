@@ -104,7 +104,14 @@ class StaffController extends Controller
 
        $staff =  Staff::find($request->id);
 
-       $department = Department::where('id',$staff->department_id)->get();
+       
+
+       if($staff->department_id === null)
+       {
+            $department = '';
+       }
+       else
+        $department = Department::where('id',$staff->department_id)->get();
 
        $roles = $staff->roles;
 
