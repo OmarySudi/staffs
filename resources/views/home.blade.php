@@ -38,7 +38,11 @@
 
                         <div class="card-body">
 
-                            <input type="hidden" id="account-hidden" value="{{$staff->staff_category}}"></input>
+                            @if($staff != '')
+                                <input type="hidden" id="account-hidden" value="{{$staff->staff_category}}"></input>
+                            @else
+                                <input type="hidden" id="account-hidden" value=""></input>
+                            @endif
                             <form method="POST" action="{{ route('staffs.create') }}" enctype="multipart/form-data">
                                 @csrf
 
@@ -196,17 +200,15 @@
 
                 <div class="tab-pane" id="areas" role="tabpanel">
                     
-                    <!-- @if($staff->areas_of_research != '')
-                        <div class="card mb-4">
-                            <div class="card-header">Current areas of research</div>
-                            <div class="card-body">
-                                {{ $staff->areas_of_research}}
-                            </div>
-                        </div>
-                    @endif -->
+                   
 
                     <div class="card">
-                        <div class="card-header">@if($staff->areas_of_research == ''){{ __('Add areas of research') }} @else {{ __('Update areas of research') }}@endif</div>
+
+                        @if($staff != '')
+                            <div class="card-header">@if($staff->areas_of_research == ''){{ __('Add areas of research') }} @else {{ __('Update areas of research') }}@endif</div>
+                        @else
+                            <div class="card-header">{{ __('Add areas of research') }}</div>
+                        @endif
 
                         <div class="card-body">
                             <form method="POST" action="{{ route('staffs.add-areas') }}">
@@ -253,17 +255,14 @@
 
                 <div class="tab-pane" id="skills" role="tabpanel">
                     
-                    <!-- @if($staff->skills != '')
-                        <div class="card mb-4">
-                            <div class="card-header">Current Skills</div>
-                            <div class="card-body">
-                                {{ $staff->skills}}
-                            </div>
-                        </div>
-                    @endif -->
-
+                   
                     <div class="card">
-                        <div class="card-header">@if($staff->skills == ''){{ __('Add Skills') }} @else {{ __('Update skills') }}@endif</div>
+
+                        @if($staff != '')
+                            <div class="card-header">@if($staff->skills == ''){{ __('Add Skills') }} @else {{ __('Update skills') }}@endif</div>
+                        @else
+                            <div class="card-header">{{ __('Add Skills') }}</div>
+                        @endif
 
                         <div class="card-body">
                             <form method="POST" action="{{ route('staffs.add-skills') }}">
