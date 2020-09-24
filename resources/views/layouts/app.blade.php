@@ -136,7 +136,9 @@
                         if(data !== null){
                             document.getElementById('edited_project_title').setAttribute("value",data['title']);
                             document.getElementById('edited_project_description').value = data['description'];
-
+                            
+                            document.getElementById('edited_project_client').setAttribute("value",data['client']);
+                            document.getElementById('edited_project_link').value = data['link'];
                             
                             $('select[name="edited_project_year"]').prepend('<option selected value="' + data['year'] + '">'+data['year'] + '</option>');
 

@@ -176,19 +176,30 @@
                               
                             </div>
                             <div class="tab-pane fade" id="pills-projects" role="tabpanel" aria-labelledby="pills-projects-tab">
-                                <h2>Projects</h2>
-                                <ul>
+                                
+                                @foreach($projects as $project)
+                                    <div class="card">
+                                        <div class="card-body mb-2">
+                                            <div class="row">
+                                                <ul style="list-style-type:none">
+                                                    <li><h5><span class="font-weight-bold">Project title:</span> {{ $project->title}}</h5></li>
+                                                    <li><h5><span class="font-weight-bold">Description:</span> {{ $project->description}}</h5></li>
+                                                    <li><h5><span class="font-weight-bold">Year:</span> {{ $project->year}}</h5></li>
+                                                    <li><h5><span class="font-weight-bold">Client:</span> {{ $project->client}}</h5></li>
+                                                </ul>
+                                            </div>
 
-                                  @foreach($projects as $project)
-                                    <li class="mt-3">{{ $project->title}}, {{ $project->description}} , {{ $project->year}}</li>
-                                  @endforeach
-                                </ul>
+                                            <div class="row mt-2">
+                                              <h5><span class="font-weight-bold">Link: </span> <a style="color:red" href="{{$project->link}}" target="_blank">{{ $project->link}}</a><h5> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                               
                             </div>
                             <div class="tab-pane fade" id="pills-areas" role="tabpanel" aria-labelledby="pills-areas-tab">
                                 <h2>Areas of research</h2>
-                                 <p>{{ $staff->areas_of_research}}</p>
-                              
+                                <p>{{ $staff->areas_of_research}}</p>
                             </div>
                         </div>
                      </div>

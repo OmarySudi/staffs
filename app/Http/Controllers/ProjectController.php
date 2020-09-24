@@ -25,6 +25,8 @@ class ProjectController extends Controller
             $project->title = $request->project_title;
             $project->description = $request->project_description;
             $project->year = $request->project_year;
+            $project->link = $request->project_link;
+            $project->client = $request->project_client;
            
             if($project->save()){
 
@@ -67,6 +69,8 @@ class ProjectController extends Controller
             $project->title = $request->edited_project_title;
             $project->description = $request->edited_project_description;
             $project->year = $request->edited_project_year;
+            $project->link = $request->edited_project_link;
+            $project->client = $request->edited_project_client;
           
             if($project->save()){
 

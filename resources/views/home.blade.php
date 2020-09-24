@@ -909,6 +909,36 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group row">
+                                            <label for="client" class="col-md-4 col-form-label text-md-right">{{ __('Client') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="edited_project_client" type="text" class="form-control @error('edited_project_client') is-invalid @enderror" name="edited_project_client" value="{{ old('edited_project_client') }}" required autocomplete="edited_project_client" autofocus>
+
+                                                @error('edited_project_client')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="link" class="col-md-4 col-form-label text-md-right">{{ __('Link') }}</label>
+
+                                            <div class="col-md-6">
+                                                <textarea rows="7" id="edited_project_link" class="form-control @error('edited_project_link') is-invalid @enderror" name="edited_project_link" value="{{ old('edited_project_link') }}" required autocomplete="edited_project_link" autofocus>
+                                                    
+                                                </textarea>
+
+                                                @error('edited_project_link')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                         <div class="form-group row mb-0">
                                             <div class="col-md-6 offset-md-5">
                                                 <button type="submit" class="btn btn-primary">
@@ -996,6 +1026,37 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group row">
+                                            <label for="project_client" class="col-md-4 col-form-label text-md-right">{{ __('Client') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="project_client" type="text" class="form-control @error('project_client') is-invalid @enderror" name="project_client" value="{{ old('project_client') }}" required autocomplete="project_client" autofocus>
+
+                                                @error('project_client')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="project_link" class="col-md-4 col-form-label text-md-right">{{ __('Link') }}</label>
+
+                                            <div class="col-md-6">
+
+                                                <textarea rows="3" id="project_link" class="form-control @error('project_link') is-invalid @enderror" name="project_link" value="{{ old('project_link') }}" required autocomplete="project_link" autofocus>
+                                                    
+                                                </textarea>
+
+                                                @error('project_link')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                         <!-- <div class="form-group row">
                                             <label for="end_year" class="col-md-4 col-form-label text-md-right">{{ __('End Year') }}</label>
 
@@ -1025,52 +1086,50 @@
                     </div>
                     </div>
 
-                    <div class="table-responsive">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Year</th>
-                                <th colspan="2"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div class="container-fluid">
+                        <div class="row">
                             @if($projects != '')
                                 @foreach($projects as $project)
-                                    <tr>
-                                    <td>{{ $project->title}}</td>
-                                    <td>{{ $project->description}}</td>
-                                    <td>{{ $project->year}}</td>
-                                    <td>
-                                        <button 
-                                            type="button"
-                                            data-toggle="modal"
-                                            data-target = "#projectEditModal"
-                                            onclick="getProject({{ $project->id}})"
-                                            class="btn btn-sm btn-success ml-5">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button 
-
-                                        type="button" 
-                                        data-toggle="modal"
-                                        data-target = "#projectDeleteModal"
-                                        onclick="getProject({{ $project->id}})"
-                                        class="btn  btn-sm btn-danger ml-5">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    </tr>
+                                    <div class="card mr-2 mb-2" style="width:32%;">
+                                        <div class="card-body">
+                                           
+                                            <p><span style="font-weight:bold">Project title: </span>{{ $project->title}}</p>
+                                            <p><span style="font-weight:bold">Description: </span>{{ $project->description}}</p>
+                                            <p><span style="font-weight:bold">Year: </span>{{ $project->year}}</p>
+                                            <p><span style="font-weight:bold">Client: </span>{{ $project->client}}</p>
+                                            <p><span style="font-weight:bold">Link: </span>{{ $project->link}}</p>
+                                          
+                                            <div style="position:absolute; bottom:1px; left:0px" class="action-div">
+                                                
+                                                <div style="float:left">
+                                                    <button 
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target = "#projectEditModal"
+                                                        onclick="getProject({{ $project->id}})"
+                                                        class="btn btn-sm btn-success ml-5">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                               
+                                                <div style="float:right">
+                                                    <button 
+                                                        type="button" 
+                                                        data-toggle="modal"
+                                                        data-target = "#projectDeleteModal"
+                                                        onclick="getProject({{ $project->id}})"
+                                                        class="btn  btn-sm btn-danger ml-5">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             @endif
-                            </tbody>
-                        </table>
-                       
+                        </div>
                     </div>
+                    
                 </div>
 
 
