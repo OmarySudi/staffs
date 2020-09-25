@@ -202,7 +202,7 @@
                     
                    
 
-                    <div class="card">
+                    <!-- <div class="card">
 
                         @if($staff != '')
                             <div class="card-header">@if($staff->areas_of_research == ''){{ __('Add areas of research') }} @else {{ __('Update areas of research') }}@endif</div>
@@ -250,7 +250,31 @@
                                 </div>
                             </form>
                         </div>
+                    </div> -->
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="control-group" id="fields">
+                                <label class="control-label" for="field1">Nice Multiple Form Fields</label>
+                                <div class="controls"> 
+                                    <form role="form" autocomplete="off">
+                                        <div class="entry input-group col-xs-3">
+                                            <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-success btn-add" type="button">
+                                                    <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                                    <i class="mdi mdi-plus-thick" aria-hidden="true"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                <br>
+                                <small>Press <i class="mdi mdi-minus" aria-hidden="true"></i> to add another form field :)</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="tab-pane" id="skills" role="tabpanel">
