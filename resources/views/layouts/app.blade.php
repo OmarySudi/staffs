@@ -308,7 +308,7 @@
 
                  function showAcademicianTabs(){
 
-                    $('a[href="#project"').hide();
+                    //$('a[href="#project"').hide();
                     $('a[href="#skills"').hide();
 
                     $('a[href="#publication"').show()
@@ -322,7 +322,7 @@
                     $('a[href="#job"').hide();
                     $('a[href="#areas"').hide();
 
-                    $('a[href="#project"').show();
+                    //$('a[href="#project"').show();
                     $('a[href="#skills"').show();
                 }
 
