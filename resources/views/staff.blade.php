@@ -27,7 +27,7 @@
                      <h4>{{ $staff->job_title}} </h4>
 
                      <div id="tabbed-content">
-                     
+
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 
                             @if($staff->staff_category == 'Academician')
@@ -176,7 +176,11 @@
                             <div class="tab-pane fade" id="pills-skills" role="tabpanel" aria-labelledby="pills-skills-tab">
                                 <h2>Skills</h2>
 
-                                <p> {{ $staff->skills }}</p>
+                                <ul>
+                                    @foreach($skills as $skill)
+                                    <li>{{ $skill->name }}</li>
+                                    @endforeach
+                                </ul>
                               
                             </div>
                             <div class="tab-pane fade" id="pills-projects" role="tabpanel" aria-labelledby="pills-projects-tab">
@@ -203,7 +207,12 @@
                             </div>
                             <div class="tab-pane fade" id="pills-areas" role="tabpanel" aria-labelledby="pills-areas-tab">
                                 <h2>Areas of research</h2>
-                                <p>{{ $staff->areas_of_research}}</p>
+
+                                <ul>
+                                    @foreach($areas as $area)
+                                    <li>{{ $area->name }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                      </div>

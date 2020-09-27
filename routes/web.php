@@ -74,6 +74,24 @@ Route::group(['prefix'=>'employment'],function($router){
     
 });
 
+Route::group(['prefix'=>'areas'],function($router){
+
+    $router->post('update','AreaOfResearchController@updateArea')->name('area.update');
+    $router->post('delete','AreaOfResearchController@deleteArea')->name('area.delete');
+    $router->get('{id}','AreaOfResearchController@getArea');
+
+});
+
+
+Route::group(['prefix'=>'skills'],function($router){
+
+    $router->post('update','SkillController@updateSkill')->name('skill.update');
+    $router->post('delete','SkillController@deleteSkill')->name('skill.delete');
+    $router->get('{id}','SkillController@getSkill');
+
+});
+
+
 Route::group(['prefix'=>'publication'],function($router){
     $router->post('create','PublicationController@create')->name('publication.create');
     $router->get('publication/{email}','PublicationController@getStaffPublication')->name('publication.publications');

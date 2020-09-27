@@ -36,6 +36,16 @@ class Staff extends Model
         return $this->hasMany('App\Project');
     }
 
+    public function user_skills(){
+
+        return $this->hasMany('App\Skill');
+    }
+
+    public function areas(){
+
+        return $this->hasMany('App\AreaOfResearch');
+    }
+
     public function publications(){
 
         return $this->hasMany('App\Publication');

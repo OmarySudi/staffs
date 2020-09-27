@@ -107,6 +107,11 @@ body{
     margin-top: 10px;
 }
 
+.skill-entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+
 .mdi
 {
     font-size: 12px;

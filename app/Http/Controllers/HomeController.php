@@ -34,21 +34,21 @@ class HomeController extends Controller
 
         $staff = Staff::where('email',$user->email)->first();
 
-        if($staff){
+        // if($staff){
 
-            $staff_roles = $staff->roles;
+        //     $staff_roles = $staff->roles;
 
-            $staff_courses = $staff->courses;
+        //     $staff_courses = $staff->courses;
 
-            if($staff->department_id != null){
+        //     if($staff->department_id != null){
 
-                $department = Department::where('id',$staff->department_id)->value('name');
+        //         $department = Department::where('id',$staff->department_id)->value('name');
     
-            } else 
-            {
-                $department = '';
-            }
-        }
+        //     } else 
+        //     {
+        //         $department = '';
+        //     }
+        // }
       
 
         $departments = Department::all();
@@ -58,6 +58,10 @@ class HomeController extends Controller
         if($staff !== null){
 
             $staff_roles = $staff->roles;
+
+            $staff_skills = $staff->user_skills;
+
+            $staff_areas = $staff->areas;
 
             $staff_courses = $staff->courses;
 
@@ -90,6 +94,8 @@ class HomeController extends Controller
                 'publications' => $publications,
                 'projects' => $projects,
                 'roles' => $roles,
+                'skills' => $staff_skills,
+                'areas' => $staff_areas,
                 'department' => $department,
                 'staff_roles' => $staff_roles,
                 'staff_courses' => $staff_courses,
@@ -109,6 +115,10 @@ class HomeController extends Controller
 
             $staff_courses = [];
 
+            $staff_skills = '';
+
+            $staff_areas = '';
+
             $department = '';
 
             return view('home',[
@@ -118,6 +128,8 @@ class HomeController extends Controller
                 'publications'=>'',
                 'departments' => $departments,
                 'roles' => $roles,
+                'skills' => $staff_skills,
+                'areas' => $staff_areas,
                 'department' => $department,
                 'staff_roles' => $staff_roles,
                 'staff_courses' => $staff_courses,

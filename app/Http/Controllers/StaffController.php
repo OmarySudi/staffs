@@ -8,6 +8,8 @@ use App\Staff;
 use App\RoleStaff;
 use App\Department;
 use App\CourseStaff;
+use App\AreaOfResearch;
+use App\Skill;
 
 class StaffController extends Controller
 {
@@ -119,6 +121,10 @@ class StaffController extends Controller
 
        $projects = $staff->projects;
 
+       $areas = $staff->areas;
+
+       $skills = $staff->user_skills;
+
     //    $publications = $staff->publications;
 
        $publications = DB::table('publications')
@@ -138,6 +144,8 @@ class StaffController extends Controller
         'education' => $education_histories,
         'employment' => $employment_histories,
         'projects' => $projects,
+        'skills' => $skills,
+        'areas' => $areas,
         'publications' => $publications,
         'roles' => $roles,
         'courses' => $courses
@@ -245,43 +253,67 @@ class StaffController extends Controller
 
         $staff = Staff::where('email',$request->user()->email)->first();
 
-        if($staff){
+        // if($staff){
 
-            $staff->skills = $request->skills;
+        //     $staff->skills = $request->skills;
 
-            if($staff->save()){
+        //     if($staff->save()){
     
-                $request->session()->flash('message.level', 'success');
-                $request->session()->flash('message.content', ' Skills have been updated successfully');
+        //         $request->session()->flash('message.level', 'success');
+        //         $request->session()->flash('message.content', ' Skills have been updated successfully');
     
-                return redirect()->route('home');
+        //         return redirect()->route('home');
     
-            } else {
+        //     } else {
     
-                $request->session()->flash('message.level', 'danger');
-                $request->session()->flash('message.content', 'There is problem, please try again');
+        //         $request->session()->flash('message.level', 'danger');
+        //         $request->session()->flash('message.content', 'There is problem, please try again');
     
-                return redirect()->route('home');
-            };
-        }
+        //         return redirect()->route('home');
+        //     };
+        // }
+        // else {
+
+        //     $staff->skills = $request->skills;
+
+        //     if($staff->save()){
+    
+        //         $request->session()->flash('message.level', 'success');
+        //         $request->session()->flash('message.content', 'Skills has been added successfully');
+    
+        //         return redirect()->route('home');
+    
+        //     } else {
+    
+        //         $request->session()->flash('message.level', 'danger');
+        //         $request->session()->flash('message.content', 'There is problem in addition of Skills, please try again');
+    
+        //         return redirect()->route('home');
+        //     };
+        // }
+
+        if(count($request->fields) > 0)
+        {
+            foreach($request->fields as $field){
+
+                $skill = new Skill();
+                $skill->staff_id = $staff->id;
+                $skill->name = $field;
+
+                $skill->save();
+            }
+
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Skills have been added successfully');
+
+            return redirect()->route('home');
+        } 
         else {
 
-            $staff->skills = $request->skills;
-
-            if($staff->save()){
+            $request->session()->flash('message.level', 'danger');
+            $request->session()->flash('message.content', 'You need to send at least one field, please try again');
     
-                $request->session()->flash('message.level', 'success');
-                $request->session()->flash('message.content', 'Skills has been added successfully');
-    
-                return redirect()->route('home');
-    
-            } else {
-    
-                $request->session()->flash('message.level', 'danger');
-                $request->session()->flash('message.content', 'There is problem in addition of Skills, please try again');
-    
-                return redirect()->route('home');
-            };
+            return redirect()->route('home');
         }
     }
 
@@ -289,43 +321,70 @@ class StaffController extends Controller
 
         $staff = Staff::where('email',$request->user()->email)->first();
 
-        if($staff){
+        // if($staff){
 
-            $staff->areas_of_research = $request->areas;
+        //     if(count($request->fields) > 0)
+        //         $staff->areas_of_research = implode(",",$request->fields);
+        //     else
+        //         $staff->areas_of_research = $request->fields[0];
+            
+        //     if($staff->save()){
+    
+        //         $request->session()->flash('message.level', 'success');
+        //         $request->session()->flash('message.content', ' Areas of research have been updated successfully');
+    
+        //         return redirect()->route('home');
+    
+        //     } else {
+    
+        //         $request->session()->flash('message.level', 'danger');
+        //         $request->session()->flash('message.content', 'There is problem, please try again');
+    
+        //         return redirect()->route('home');
+        //     };
+        // }
+        // else {
 
-            if($staff->save()){
+        //     $staff->areas_of_research = $request->areas;
+
+        //     if($staff->save()){
     
-                $request->session()->flash('message.level', 'success');
-                $request->session()->flash('message.content', ' Areas of research have been updated successfully');
+        //         $request->session()->flash('message.level', 'success');
+        //         $request->session()->flash('message.content', 'Areas have been added successfully');
     
-                return redirect()->route('home');
+        //         return redirect()->route('home');
     
-            } else {
+        //     } else {
     
-                $request->session()->flash('message.level', 'danger');
-                $request->session()->flash('message.content', 'There is problem, please try again');
+        //         $request->session()->flash('message.level', 'danger');
+        //         $request->session()->flash('message.content', 'There is problem in addition of Areas of research, please try again');
     
-                return redirect()->route('home');
-            };
-        }
+        //         return redirect()->route('home');
+        //     };
+        // }
+
+        if(count($request->fields) > 0)
+        {
+            foreach($request->fields as $field){
+
+                $area_of_research = new AreaOfResearch();
+                $area_of_research->staff_id = $staff->id;
+                $area_of_research->name = $field;
+
+                $area_of_research->save();
+            }
+
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Areas have been added successfully');
+
+            return redirect()->route('home');
+        } 
         else {
 
-            $staff->areas_of_research = $request->areas;
-
-            if($staff->save()){
+            $request->session()->flash('message.level', 'danger');
+            $request->session()->flash('message.content', 'You need to send at least one field, please try again');
     
-                $request->session()->flash('message.level', 'success');
-                $request->session()->flash('message.content', 'Areas have been added successfully');
-    
-                return redirect()->route('home');
-    
-            } else {
-    
-                $request->session()->flash('message.level', 'danger');
-                $request->session()->flash('message.content', 'There is problem in addition of Areas of research, please try again');
-    
-                return redirect()->route('home');
-            };
+            return redirect()->route('home');
         }
     }
 

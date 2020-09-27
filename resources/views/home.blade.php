@@ -200,87 +200,192 @@
 
                 <div class="tab-pane" id="areas" role="tabpanel">
                     
-                   
+                    <p>
+                        <span class="mr-3">Click Add button to add areas of research</span>
 
-                    <!-- <div class="card">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AreaOfResearchModal">
+                            ADD
+                        </button>
+                    </p>
+                    
 
-                        @if($staff != '')
-                            <div class="card-header">@if($staff->areas_of_research == ''){{ __('Add areas of research') }} @else {{ __('Update areas of research') }}@endif</div>
-                        @else
-                            <div class="card-header">{{ __('Add areas of research') }}</div>
-                        @endif
+                    <div class="modal fade" id="AreaOfResearchModal" tabindex="-1" role="dialog" aria-labelledby="AreaOfResearchModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!-- <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12"> -->
+                                            <div class="card">
 
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('staffs.add-areas') }}">
-                                @csrf
+                                                <div class="card-header">{{ __('Areas of research') }}</div>
 
-                                <div class="form-group row">
-                                   
-                                    <div class="col-sm-12">
+                                                <div class="card-body">
+                                                    <div class="control-group" id="fields">
+                                                        <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                        <div class="controls"> 
 
-                                        <div class="form-group">
-                                            <textarea 
-                                                rows="3" id="areas" 
-                                                class="form-control @error('areas') is-invalid @enderror" 
-                                                name="areas" 
-                                                value="{{ old('areas') }}" 
-                                                placeholder="area one, area two, area three"
-                                                required 
-                                                autocomplete="areas" 
-                                                autofocus
-                                            >
-                                                @if($staff != '') {{ $staff->areas_of_research }} @endif
-                                            </textarea>
-                                        </div>
+                                                        <form method="POST" action="{{ route('staffs.add-areas') }}">
+                                                            @csrf
 
-                                        @error('areas')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                                            <div class="entry input-group col-xs-3">
+                                                                <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-success btn-add" type="button">
+                                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                                        <i class="mdi mdi-plus-thick" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="form-group row mt-5" id="areaSave">
+                                                                <div class="col-md-6 offset-md-5">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        {{ __('Save') }}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                            <br>
+                                                            <small>Press <i class="mdi mdi-plus-thick" aria-hidden="true"></i> to add another form field</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-5">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ __('Save') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                                </div> -->
+                            </div>
                         </div>
-                    </div> -->
+                    </div>
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="control-group" id="fields">
-                                <label class="control-label" for="field1">Nice Multiple Form Fields</label>
-                                <div class="controls"> 
-                                    <form role="form" autocomplete="off">
-                                        <div class="entry input-group col-xs-3">
-                                            <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-success btn-add" type="button">
-                                                    <!-- <span class="glyphicon glyphicon-plus"></span> -->
-                                                    <i class="mdi mdi-plus-thick" aria-hidden="true"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </form>
-                                <br>
-                                <small>Press <i class="mdi mdi-minus" aria-hidden="true"></i> to add another form field :)</small>
+
+                    <div class="modal fade" id="areaEditModal" tabindex="-1" role="dialog" aria-labelledby="areaEditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!-- <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12"> -->
+                                            <div class="card">
+
+                                                <div class="card-header">{{ __('Edit Areas') }}</div>
+
+                                                <div class="card-body">
+                                                    <form method="POST" action="{{ route('area.update') }}">
+                                                        @csrf
+
+                                                        <input type="hidden" id="area_id" name="area_id">
+
+                                                        <div class="form-group row">
+                                                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                                                            <div class="col-md-6">
+                                                                <input id="edited_area_name" type="text" class="form-control @error('edited_area_name') is-invalid @enderror" name="edited_area_name" value="{{ old('edited_area_name') }}" required autocomplete="edited_area_name" autofocus>
+
+                                                                @error('edited_area_name')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-md-6 offset-md-5">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    {{ __('Save') }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <!-- </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal" id="areaDeleteModal" tabindex="-1" role="dialog" aria-labelledby="areaDeleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-header">{{__('Are you sure you want to delete this record?') }}</div>
+                                    <div class="card-body">
+                                        <form method="POST" action="{{ route('area.delete') }}">
+                                            @csrf
+
+                                            <input type="hidden" id="area_ondelete_id" name="area_ondelete_id">
+
+                                            <div class="form-group">
+                                                <div class="pull-right">
+
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                        {{ __('No') }}
+                                                    </button>
+
+                                                    <button type="submit" class="btn btn-primary">
+                                                        {{ __('Yes') }}
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                <th scope="col">Name</th>
+                                <th colspan="2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @if($areas != '')
+                                @foreach($areas as $area)
+                                    <tr>
+                                    <td>{{ $area->name}}</td>
+                                    <td>
+                                        <button 
+                                            type="button"
+                                            data-toggle="modal"
+                                            data-target = "#areaEditModal"
+                                            onclick="getArea({{ $area->id}})"
+                                            class="btn btn-sm btn-success ml-5">
+                                            <i class="fa fa-pencil" aria-hidden="true">&nbsp;Edit</i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button 
+
+                                        type="button" 
+                                        data-toggle="modal"
+                                        data-target = "#areaDeleteModal"
+                                        onclick="getArea({{ $area->id}})"
+                                        class="btn  btn-sm btn-danger ml-5">
+                                        <i class="fa fa-trash" aria-hidden="true">&nbsp;Delete</i>
+                                        </button>
+                                    </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="tab-pane" id="skills" role="tabpanel">
                     
                    
-                    <div class="card">
+                    <!-- <div class="card">
 
                         @if($staff != '')
                             <div class="card-header">@if($staff->skills == ''){{ __('Add Skills') }} @else {{ __('Update skills') }}@endif</div>
@@ -328,6 +433,184 @@
                                 </div>
                             </form>
                         </div>
+                    </div> -->
+
+                    <p>
+                        <span class="mr-3">Click Add button to add Skills</span>
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SkillsModal">
+                            ADD
+                        </button>
+                    </p>
+                    
+                    <div class="modal fade" id="SkillsModal" tabindex="-1" role="dialog" aria-labelledby="SkillsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!-- <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12"> -->
+                                            <div class="card">
+
+                                                <div class="card-header">{{ __('Skills') }}</div>
+
+                                                <div class="card-body">
+                                                    <div class="control-group" id="skill-fields">
+                                                        <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                        <div class="skill-controls"> 
+
+                                                        <form method="POST" action="{{ route('staffs.add-skills') }}">
+                                                            @csrf
+
+                                                            <div class="skill-entry input-group col-xs-3">
+                                                                <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-success skill-btn-add" type="button">
+                                                                        <i class="mdi mdi-plus-thick" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="form-group row mt-5" id="skillSave">
+                                                                <div class="col-md-6 offset-md-5">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        {{ __('Save') }}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                            <br>
+                                                            <small>Press <i class="mdi mdi-plus-thick" aria-hidden="true"></i> to add another form field</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="skillEditModal" tabindex="-1" role="dialog" aria-labelledby="skillEditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!-- <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12"> -->
+                                            <div class="card">
+
+                                                <div class="card-header">{{ __('Edit Skills') }}</div>
+
+                                                <div class="card-body">
+                                                    <form method="POST" action="{{ route('skill.update') }}">
+                                                        @csrf
+
+                                                        <input type="hidden" id="skill_id" name="skill_id">
+
+                                                        <div class="form-group row">
+                                                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                                                            <div class="col-md-6">
+                                                                <input id="edited_skill_name" type="text" class="form-control @error('edited_skill_name') is-invalid @enderror" name="edited_skill_name" value="{{ old('edited_skill_name') }}" required autocomplete="edited_skill_name" autofocus>
+
+                                                                @error('edited_skill_name')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-md-6 offset-md-5">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    {{ __('Save') }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <!-- </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal" id="skillDeleteModal" tabindex="-1" role="dialog" aria-labelledby="skillDeleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-header">{{__('Are you sure you want to delete this record?') }}</div>
+                                    <div class="card-body">
+                                        <form method="POST" action="{{ route('skill.delete') }}">
+                                            @csrf
+
+                                            <input type="hidden" id="skill_ondelete_id" name="skill_ondelete_id">
+
+                                            <div class="form-group">
+                                                <div class="pull-right">
+
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                        {{ __('No') }}
+                                                    </button>
+
+                                                    <button type="submit" class="btn btn-primary">
+                                                        {{ __('Yes') }}
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                <th scope="col">Name</th>
+                                <th colspan="2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @if($skills != '')
+                                @foreach($skills as $skill)
+                                    <tr>
+                                    <td>{{ $skill->name}}</td>
+                                    <td>
+                                        <button 
+                                            type="button"
+                                            data-toggle="modal"
+                                            data-target = "#skillEditModal"
+                                            onclick="getSkill({{ $skill->id}})"
+                                            class="btn btn-sm btn-success ml-5">
+                                            <i class="fa fa-pencil" aria-hidden="true">&nbsp;Edit</i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button 
+
+                                        type="button" 
+                                        data-toggle="modal"
+                                        data-target = "#skillDeleteModal"
+                                        onclick="getSkill({{ $skill->id}})"
+                                        class="btn  btn-sm btn-danger ml-5">
+                                        <i class="fa fa-trash" aria-hidden="true">&nbsp;Delete</i>
+                                        </button>
+                                    </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

@@ -39,6 +39,37 @@
 
         var offset = (page - 1) * items_per_page;
 
+
+        function getArea(id){
+
+            $.ajax({
+                type:'GET',
+                url: '/areas/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success: function(data){
+
+                    document.getElementById('edited_area_name').setAttribute("value",data['name']);
+                    document.getElementById('area_id').setAttribute("value",data['id']);
+                    document.getElementById('area_ondelete_id').setAttribute("value",data['id']);
+                }
+            });
+        }
+
+        function getSkill(id){
+
+            $.ajax({
+                type:'GET',
+                url: '/skills/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success: function(data){
+
+                    document.getElementById('edited_skill_name').setAttribute("value",data['name']);
+                    document.getElementById('skill_id').setAttribute("value",data['id']);
+                    document.getElementById('skill_ondelete_id').setAttribute("value",data['id']);
+                }
+            });
+        }
+
             function getPublication(id,name){
                         
                 $.ajax({
@@ -392,8 +423,11 @@
                     e.preventDefault();
 
                     var controlForm = $('.controls form:first'),
-                        currentEntry = $(this).parents('.entry:first'),
-                        newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                    currentEntry = $(this).parents('.entry:first'),
+                    //newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                    //newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                   
+                    newEntry = $('#areaSave').before(currentEntry.clone());
 
                     newEntry.find('input').val('');
                     controlForm.find('.entry:not(:last) .btn-add')
@@ -404,6 +438,32 @@
                 }).on('click', '.btn-remove', function(e)
                 {
                     $(this).parents('.entry:first').remove();
+
+                    e.preventDefault();
+                    return false;
+                });
+
+
+                $(document).on('click', '.skill-btn-add', function(e)
+                {
+                    e.preventDefault();
+
+                    var controlForm = $('.skill-controls form:first'),
+                    currentEntry = $(this).parents('.skill-entry:first'),
+                    //newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                    //newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                   
+                    newEntry = $('#skillSave').before(currentEntry.clone());
+
+                    newEntry.find('input').val('');
+                    controlForm.find('.skill-entry:not(:last) .skill-btn-add')
+                        .removeClass('skill-btn-add').addClass('skill-btn-remove')
+                        .removeClass('btn-success').addClass('btn-danger')
+                        .html('<span class="mdi mdi-minus"></span>');
+                        
+                }).on('click', '.skill-btn-remove', function(e)
+                {
+                    $(this).parents('.skill-entry:first').remove();
 
                     e.preventDefault();
                     return false;
