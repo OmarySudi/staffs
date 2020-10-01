@@ -1959,7 +1959,7 @@
                                     <div class="card mr-2 mb-2" style="width:32%;">
                                         <div class="card-body">
                                             @if($publication->name == "Journal Article")
-                                                <p><span style="font-weight:bold">Jounal Name: </span>{{ $publication->journal_name}}</p>
+                                                <p><span style="font-weight:bold">Title of publication: </span>{{ $publication->journal_name}}</p>
                                                 <p><span style="font-weight:bold">Publisher: </span>{{ $publication->publisher}}</p>
                                                 <p><span style="font-weight:bold">Year: </span>{{ $publication->year}}</p>
                                                 <p><span style="font-weight:bold">Link: </span>{{ $publication->link}}</p>
