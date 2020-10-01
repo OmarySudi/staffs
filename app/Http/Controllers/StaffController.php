@@ -14,7 +14,7 @@ use App\Skill;
 class StaffController extends Controller
 {
     
-    private $page_limit = 6;
+    private $page_limit = 15;
 
     public function create(Request $request){
 
@@ -29,7 +29,7 @@ class StaffController extends Controller
         $checkedStaff = Staff::where('email',$request->user()->email)->first();
 
         if($checkedStaff != null){
-            $checkedStaff->full_name = $request->name;
+            $checkedStaff->full_name = ucwords($request->name);
             $checkedStaff->address = $request->address;
             $checkedStaff->mobile_number = $request->number;
             $checkedStaff->staff_category = $request->account_type;
@@ -67,7 +67,7 @@ class StaffController extends Controller
             $staff = new Staff();
 
             $staff->email = $request->user()->email;
-            $staff->full_name = $request->name;
+            $staff->full_name = ucwords($request->name);
             $staff->address = $request->address;
             $staff->mobile_number = $request->number;
             $staff->staff_category = $request->account_type;
@@ -105,8 +105,6 @@ class StaffController extends Controller
     public function getStaff(Request $request){
 
        $staff =  Staff::find($request->id);
-
-       
 
        if($staff->department_id === null)
        {
@@ -426,11 +424,10 @@ class StaffController extends Controller
             if($request->search == "")
             {
                 $staffs = DB::table('staffs')
-                ->join('departments','staffs.department_id','departments.id')
-                ->select('staffs.*','departments.name as department_name')
-                ->where('staffs.full_name','LIKE',$request->search.'%')
-                ->limit($this->page_limit)
-                ->get();
+                    ->leftJoin('departments','staffs.department_id','departments.id')
+                    ->select('staffs.*','departments.name as department_name')
+                    ->limit($this->page_limit)
+                    ->get();
             }
             else {
 
@@ -441,7 +438,6 @@ class StaffController extends Controller
                 ->get();
             }
             
-
             foreach($staffs as $key => $staff){
 
                 $output.=

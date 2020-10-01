@@ -1486,7 +1486,7 @@
 
                                         <div id="edited_journal-name-row" class="form-group row">
 
-                                            <label for="edited_journal_name" class="col-md-4 col-form-label text-md-right">{{ __('Jounal name(title)') }}</label>
+                                            <label for="edited_journal_name" class="col-md-4 col-form-label text-md-right">{{ __('Title of publication') }}</label>
 
                                             <div class="col-md-6">
                                                 <input id="edited_journal_name" type="text" required class="form-control @error('edited_journal_name') is-invalid @enderror" name="edited_journal_name" value="{{ old('edited_journal_name') }}" autocomplete="edited_journal_name" autofocus>

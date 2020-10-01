@@ -33,7 +33,7 @@
 
         var page_count;
 
-        var items_per_page = 6;
+        var items_per_page = 15;
 
         var page = 1;
 
