@@ -432,7 +432,7 @@ class StaffController extends Controller
             else {
 
             $staffs = DB::table('staffs')
-                ->join('departments','staffs.department_id','departments.id')
+                ->leftJoin('departments','staffs.department_id','departments.id')
                 ->select('staffs.*','departments.name as department_name')
                 ->where('staffs.full_name','LIKE',$request->search.'%')
                 ->get();
