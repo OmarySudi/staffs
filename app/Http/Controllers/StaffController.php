@@ -247,6 +247,57 @@ class StaffController extends Controller
         }
     }
 
+    public function searchByDepartment($id){
+
+        $output="";
+
+        // if($request->search == "")
+        // {
+        //     $staffs = DB::table('staffs')
+        //         ->leftJoin('departments','staffs.department_id','departments.id')
+        //         ->select('staffs.*','departments.name as department_name')
+        //         ->limit($this->page_limit)
+        //         ->get();
+        // }
+        // else {
+
+        // $staffs = DB::table('staffs')
+        //     ->leftJoin('departments','staffs.department_id','departments.id')
+        //     ->select('staffs.*','departments.name as department_name')
+        //     ->where('staffs.full_name','LIKE',$request->search.'%')
+        //     ->get();
+        // }
+
+        $department = Department::find($id);
+
+        $staffs = $department->staffs;
+        
+        foreach($staffs as $key => $staff){
+
+            $output.=
+            '<div style="width: 12em;" class="mr-4 mb-4">'.
+                '<div class="row">'.
+                    '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
+                        '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
+                            '<img class="card-img-top" style="height:150px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
+                        '</a>'.
+                    '</div>'.
+                '</div>'.
+
+                '<div class="row">'.
+                    '<div style="width: 10rem;">'.
+                        '<h5 class="font-weight-bold">'.$staff->full_name.'</h5>'.
+                        '<h6 class="margin-top:-1">'.$staff->job_title.'</h6>'.
+                    '</div>'.
+                '</div>'.
+            '</div>';
+    
+        }
+
+        return Response($output);
+        
+    }
+
     public function addSkills(Request $request){
 
         $staff = Staff::where('email',$request->user()->email)->first();
@@ -441,7 +492,7 @@ class StaffController extends Controller
             foreach($staffs as $key => $staff){
 
                 $output.=
-                '<div style="width: 12em;" class="mr-5 mb-4">'.
+                '<div style="width: 12em;" class="mr-4 mb-4">'.
                     '<div class="row">'.
                         '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
                             '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
@@ -451,7 +502,7 @@ class StaffController extends Controller
                     '</div>'.
 
                     '<div class="row">'.
-                        '<div>'.
+                        '<div style="width: 10rem;">'.
                             '<h5 class="font-weight-bold">'.$staff->full_name.'</h5>'.
                             '<h6 class="margin-top:-1">'.$staff->job_title.'</h6>'.
                         '</div>'.
@@ -494,5 +545,40 @@ class StaffController extends Controller
 
             return redirect()->route('home');
         };
+    }
+
+    public function getAllStaffs(){
+
+        $output="";
+
+        $staffs = DB::table('staffs')
+                ->leftJoin('departments','staffs.department_id','departments.id')
+                ->select('staffs.*','departments.name as department_name')
+                ->limit($this->page_limit)
+                ->get();
+
+        foreach($staffs as $key => $staff){
+
+            $output.=
+            '<div style="width: 12em;" class="mr-4 mb-4">'.
+                '<div class="row">'.
+                    '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
+                        '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
+                            '<img class="card-img-top" style="height:150px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
+                        '</a>'.
+                    '</div>'.
+                '</div>'.
+
+                '<div class="row">'.
+                    '<div style="width: 10rem;">'.
+                        '<h5 class="font-weight-bold">'.$staff->full_name.'</h5>'.
+                        '<h6 class="margin-top:-1">'.$staff->job_title.'</h6>'.
+                    '</div>'.
+                '</div>'.
+            '</div>';
+    
+        }
+    
+        return Response($output);
     }
 }

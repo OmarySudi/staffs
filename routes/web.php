@@ -30,9 +30,11 @@ Route::group(['prefix'=>'staffs'],function($router){
     $router->post('add-areas','StaffController@addAreasOfResearch')->name('staffs.add-areas');
     $router->post('add-skills','StaffController@addSkills')->name('staffs.add-skills');
     $router->get('/{id}','StaffController@getStaff')->name('staffs.staff-info');
+    $router->get('/','StaffController@getAllStaffs');
     $router->post('/account-type','StaffController@addAccountType')->name('staffs.add-account-type');
     
     $router->get('/search/department','StaffController@searchByFacult')->name('staffs.staff-search');
+    $router->get('/search/department-staffs/{id}','StaffController@searchByDepartment');
     
 });
 

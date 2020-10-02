@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Staff;
+use App\Department;
 
 class FrontEndController extends Controller
 {
@@ -19,8 +20,11 @@ class FrontEndController extends Controller
                     ->limit($this->page_limit)
                     ->get();
 
+        $departments = Department::all();
+
         return view('welcome',[
-                'staffs' => $staffs
+                'staffs' => $staffs,
+                'departments' => $departments,
                 ]);
     }
 

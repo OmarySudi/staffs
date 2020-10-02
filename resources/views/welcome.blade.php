@@ -22,17 +22,35 @@
            
              <div class="row">
 
-                    <div class="col-12 align-self-end mb-2">
+                <div class="col-12 align-self-end mb-2">
 
-                        <div style="float:right">
-                            <a href="#" id="previous" class="page-links">Previous</a><span> | </span><a href="#" class="page-links" id="next">Next</a>
-                        </div>
+                    <div style="float:right">
+                        <a href="#" id="previous" class="page-links">Previous</a><span> | </span><a href="#" class="page-links" id="next">Next</a>
                     </div>
+                </div>
+            </div>
                     
-                    <div class="row" id="staffs-row">
+            <div class="row">
 
-                        @foreach($staffs as $staff)
-                                <div style="width: 12em;" class="mr-5 mb-4">
+                <div class="col-12 col-sm-5 col-md-3">
+
+                    <div class="list-group" id="myList" role="tablist">
+
+                        <a class="list-group-item list-group-item-action active" onClick="fetchAllStaffs()" data-toggle="list" href="#" role="tab">All</a>
+
+                        @foreach($departments as $department)
+                            <a class="list-group-item list-group-item-action" onClick="fetchStaffsByDepartment(<?php echo $department->id?>)" data-toggle="list" href="#" role="tab">{{ $department->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-7 col-md-9" >
+                   
+                    <div class="container-fluid">
+                        <div class="row" id="staffs-row">
+
+                            @foreach($staffs as $staff)
+                                <div style="width: 12em;" class="mr-4 mb-4">
                                     <div class="row">
                                         <div class="card staff-card" style="width: 10rem;">
                                             <a href="{{ route('staffs.staff-info',['id' => $staff->id])}}">
@@ -41,17 +59,18 @@
                                         </div> 
                                     </div>
                                     <div class="row mt-3">
-                                        <div>
+                                        <div style="width: 10rem;">
                                             <h5 class="font-weight-bold">{{ $staff->full_name}}</h5>
                                             <h6 style="margin-top:-1">{{ $staff->job_title}}</h6>
                                         </div>
                                     </div>
                                 </div>
-                            
-                        @endforeach
-
+                            @endforeach
+                        
+                        </div>
                     </div>
                     
+                </div>
             </div>
         </div>
     </div>

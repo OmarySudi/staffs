@@ -55,6 +55,30 @@
             });
         }
 
+        function fetchAllStaffs(){
+
+            $.ajax({
+                type : 'GET',
+                url : '/staffs/',
+                data:'_token = <?php echo csrf_token() ?>',
+                success:function(data){
+                    $('#staffs-row').html(data);
+                }
+            });
+        }
+
+        function fetchStaffsByDepartment(id){
+
+            $.ajax({
+                type : 'GET',
+                url : '/staffs/search/department-staffs/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success:function(data){
+                    $('#staffs-row').html(data);
+                }
+            });
+        }
+
         function getSkill(id){
 
             $.ajax({
