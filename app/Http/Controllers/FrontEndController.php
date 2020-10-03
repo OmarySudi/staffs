@@ -10,7 +10,7 @@ use App\Department;
 class FrontEndController extends Controller
 {
     //
-    private $page_limit = 6;
+    private $page_limit = 15;
 
     public function index(){
 
