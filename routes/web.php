@@ -44,6 +44,12 @@ Route::group(['prefix'=>'staff-categories'],function($router){
     
 });
 
+Route::group(['prefix'=>'departments'],function($router){
+   
+    $router->get('/','DepartmentController@index');
+    
+});
+
 Route::group(['prefix'=>'publication-types'],function($router){
    
     $router->get('/','PublicationTypeController@index');

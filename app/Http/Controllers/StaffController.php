@@ -23,7 +23,8 @@ class StaffController extends Controller
             'address' => 'required',
             'number' => 'required',
             'account_type' => 'required',
-            'job_title' => 'required'
+            'job_title' => 'required',
+            'department_name' => 'required'
         ]);
 
         $checkedStaff = Staff::where('email',$request->user()->email)->first();
@@ -34,6 +35,7 @@ class StaffController extends Controller
             $checkedStaff->mobile_number = $request->number;
             $checkedStaff->staff_category = $request->account_type;
             $checkedStaff->job_title = $request->job_title;
+            $checkedStaff->department_id = $request->department_name;
 
             if($request->has('picture')){
 
@@ -72,6 +74,7 @@ class StaffController extends Controller
             $staff->mobile_number = $request->number;
             $staff->staff_category = $request->account_type;
             $staff->job_title = $request->job_title;
+            $staff->department_id = $request->department_name;
 
 
             if($request->has('picture')){
@@ -224,11 +227,8 @@ class StaffController extends Controller
                         $course_staff->save();
                     }
                 }
-
                
             }
-
-            $staff->department_id = $request->department;
 
             if($staff->save()){
 
@@ -275,9 +275,9 @@ class StaffController extends Controller
         foreach($staffs as $key => $staff){
 
             $output.=
-            '<div style="width: 12em;" class="mr-4 mb-4">'.
+            '<div style="width: 11em;" class="mr-1 mb-4">'.
                 '<div class="row">'.
-                    '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
+                    '<div class="card mr-4 mb-4 staff-card" style="width: 9rem;">'.
                         '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
                             '<img class="card-img-top" style="height:150px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
                         '</a>'.
@@ -285,7 +285,7 @@ class StaffController extends Controller
                 '</div>'.
 
                 '<div class="row">'.
-                    '<div style="width: 10rem;">'.
+                    '<div style="width: 9rem;">'.
                         '<h5 class="font-weight-bold">'.$staff->full_name.'</h5>'.
                         '<h6 class="margin-top:-1">'.$staff->job_title.'</h6>'.
                     '</div>'.
@@ -492,9 +492,9 @@ class StaffController extends Controller
             foreach($staffs as $key => $staff){
 
                 $output.=
-                '<div style="width: 12em;" class="mr-4 mb-4">'.
+                '<div style="width: 11em;" class="mr-1 mb-4">'.
                     '<div class="row">'.
-                        '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
+                        '<div class="card mr-4 mb-4 staff-card" style="width: 9rem;">'.
                             '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
                                 '<img class="card-img-top" style="height:150px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
                             '</a>'.
@@ -502,7 +502,7 @@ class StaffController extends Controller
                     '</div>'.
 
                     '<div class="row">'.
-                        '<div style="width: 10rem;">'.
+                        '<div style="width: 9rem;">'.
                             '<h5 class="font-weight-bold">'.$staff->full_name.'</h5>'.
                             '<h6 class="margin-top:-1">'.$staff->job_title.'</h6>'.
                         '</div>'.
@@ -560,9 +560,9 @@ class StaffController extends Controller
         foreach($staffs as $key => $staff){
 
             $output.=
-            '<div style="width: 12em;" class="mr-4 mb-4">'.
+            '<div style="width: 11em;" class="mr-1 mb-4">'.
                 '<div class="row">'.
-                    '<div class="card mr-4 mb-4 staff-card" style="width: 10rem;">'.
+                    '<div class="card mr-4 mb-4 staff-card" style="width: 9rem;">'.
                         '<a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">'.
                             '<img class="card-img-top" style="height:150px" src="images/'.$staff->profile_picture_path.'" alt="Card image cap">'.
                         '</a>'.
@@ -570,7 +570,7 @@ class StaffController extends Controller
                 '</div>'.
 
                 '<div class="row">'.
-                    '<div style="width: 10rem;">'.
+                    '<div style="width: 9rem;">'.
                         '<h5 class="font-weight-bold">'.$staff->full_name.'</h5>'.
                         '<h6 class="margin-top:-1">'.$staff->job_title.'</h6>'.
                     '</div>'.

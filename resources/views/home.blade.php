@@ -40,8 +40,10 @@
 
                             @if($staff != '')
                                 <input type="hidden" id="account-hidden" value="{{$staff->staff_category}}"></input>
+                                <input type="hidden" id="department-hidden" value="{{$staff->department_id}}"></input>
                             @else
                                 <input type="hidden" id="account-hidden" value=""></input>
+                                <input type="hidden" id="department-hidden" value=""></input>
                             @endif
                             <form method="POST" action="{{ route('staffs.create') }}" enctype="multipart/form-data">
                                 @csrf
@@ -112,6 +114,25 @@
                                     <input id="job_title" type="text" class="form-control @error('job_title') is-invalid @enderror" value="@if($staff != '') {{ $staff->job_title}} @else {{ old('job_title') }}@endif" name="job_title" required autocomplete="job_title">
 
                                         @error('job_title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="award">Department</strong></label>
+
+                                    <div class="col-md-6">
+                                        <select id="department_name" name="department_name" class="form-control @error('department_name') is-invalid @enderror" required>
+                                        <option value="">--- Select Department ---</option>
+                                            <!-- @foreach($departments as $department)
+                                                <option value="{{$department->id}}">{{ $department->name }}</option>
+                                            @endforeach -->
+                                        </select>
+
+                                        @error('department_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

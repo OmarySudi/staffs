@@ -367,6 +367,7 @@
                     $('a[href="#skills"').hide();
 
                     $('a[href="#publication"').show()
+                    $('a[href="#project"').show();
                     $('a[href="#job"').show();
                     $('a[href="#areas"').show();
                 }
@@ -377,7 +378,7 @@
                     $('a[href="#job"').hide();
                     $('a[href="#areas"').hide();
 
-                    //$('a[href="#project"').show();
+                    $('a[href="#project"').show();
                     $('a[href="#skills"').show();
                 }
 
@@ -435,6 +436,38 @@
                                 }
                                     
 
+                            });
+                        }
+                    });
+                }
+
+                function getDepartments(){
+                    $.ajax({
+
+                    url:'/departments',
+                    type:"GET",
+                    success:function(data){
+
+                            var current_value = $('#department-hidden').val();
+
+                            console.log("current department value is "+current_value);
+                        
+                            $.each(data,function(key,value){
+
+                                if(current_value == value['id'])
+                                {
+                                    console.log("it passes here 1******************");
+
+                                    $('select[name="department_name"]').append('<option selected value="' + value['id'] + '">'+value['name'] + '</option>');
+                                }
+                                    
+                                else
+                                {
+                                    console.log("it passes here 2*******************");
+
+                                    $('select[name="department_name"]').append('<option value="' + value['id'] + '">'+value['name'] + '</option>');
+                                }
+                                    
                             });
                         }
                     });
@@ -563,6 +596,8 @@
                getTotalPages();
 
                getStaffCategories();
+
+               getDepartments();
 
                initializeTabs();
 
