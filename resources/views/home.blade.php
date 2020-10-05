@@ -2156,7 +2156,7 @@
                 <div class="tab-pane" id="job" role="tabpanel">
 
 
-                    @if(count($staff_roles) > 0)
+                    <!-- @if(count($staff_roles) > 0)
 
                     <div class="card">
                             <div class="card-header"><center>{{ __ ('Current courses')}}</center></div>
@@ -2165,14 +2165,7 @@
                                 <div class="table-responsive">
 
                                     <table class="table table-sm table-bordered">
-                                        <!-- <tr>
-                                            <td>Position: </td>
-                                            <td>
-                                            @foreach($staff_roles as $staff_role)
-                                                <p>{{ $staff_role['name'] }}</p>
-                                            @endforeach
-                                            </td>
-                                        </tr> -->
+                                       
                                         <tr>
                                             <td>Department: </td>
                                             <td>
@@ -2211,19 +2204,6 @@
                         <form method="POST" action="{{ route('staffs.add-job-details') }}" enctype="multipart/form-data">
                             @csrf
 
-                            <!-- <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right" for="award">Position<strong class="text-danger">*</strong></label>
-
-                                <div class="col-md-6">
-                                    <select id="role" name="role[]" multiple class="form-control @error('role') is-invalid @enderror" required>
-                                        <option value="">--- Select Position ---</option>
-                                        @foreach($roles as $role)
-                                            <option value="{{$role->id}}">{{ $role->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> -->
-
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label text-md-right" for="award">Department<strong class="text-danger">*</strong></label>
 
@@ -2244,10 +2224,6 @@
                                     <p class="text-danger">(This option is for lecturers)</p>
                                     <select id="courses" name="courses[]" multiple>
                                         <option value="">--- Select Courses ---</option>
-                                        <!-- <option selected value="Bachelor of Science Degree">Bachelor of Science Degree</option>
-                                        <option value="Bachelor of Arts Degree">Bachelor of Arts Degree</option>
-                                        <option value="Masters of Science Degree">Masters of Science Degree</option>
-                                        <option value="Masters of Arts Degree">Masters of Arts Degree</option> -->
                                     </select>
 
                                    
@@ -2264,6 +2240,183 @@
                         </form>
 
                         </div>
+                    </div> -->
+
+                    <p>
+                        <span class="mr-3">Click Add button to add current courses</span>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#courseModal">
+                            ADD
+                        </button>
+                    </p>
+                    
+                    <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="courseModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!-- <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12"> -->
+                                            <div class="card">
+
+                                                <div class="card-header">{{ __('Current courses') }}</div>
+
+                                                <div class="card-body">
+                                                    <div class="control-group" id="course-fields">
+                                                        <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                        <div class="course-controls"> 
+
+                                                        <form method="POST" action="{{ route('staffs.add-job-details') }}">
+                                                            @csrf
+
+                                                            <div class="course-entry input-group col-xs-3 mt-2">
+                                                                <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-success course-btn-add" type="button">
+                                                                        <i class="mdi mdi-plus-thick" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="form-group row mt-5" id="courseSave">
+                                                                <div class="col-md-6 offset-md-5">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        {{ __('Save') }}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                            <br>
+                                                            <small>Press <i class="mdi mdi-plus-thick" aria-hidden="true"></i> to add another form field</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="courseEditModal" tabindex="-1" role="dialog" aria-labelledby="courseEditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!-- <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12"> -->
+                                            <div class="card">
+
+                                                <div class="card-header">{{ __('Edit Courses') }}</div>
+
+                                                <div class="card-body">
+                                                    <form method="POST" action="{{ route('course.update') }}">
+                                                        @csrf
+
+                                                        <input type="hidden" id="course_id" name="course_id">
+
+                                                        <div class="form-group row">
+                                                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                                                            <div class="col-md-6">
+                                                                <input id="edited_course_name" type="text" class="form-control @error('edited_course_name') is-invalid @enderror" name="edited_course_name" value="{{ old('edited_course_name') }}" required autocomplete="edited_course_name" autofocus>
+
+                                                                @error('edited_course_name')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-md-6 offset-md-5">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    {{ __('Save') }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <!-- </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal" id="courseDeleteModal" tabindex="-1" role="dialog" aria-labelledby="courseDeleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="card">
+                                    <div class="card-header">{{__('Are you sure you want to delete this record?') }}</div>
+                                    <div class="card-body">
+                                        <form method="POST" action="{{ route('course.delete') }}">
+                                            @csrf
+
+                                            <input type="hidden" id="course_ondelete_id" name="course_ondelete_id">
+
+                                            <div class="form-group">
+                                                <div class="pull-right">
+
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                        {{ __('No') }}
+                                                    </button>
+
+                                                    <button type="submit" class="btn btn-primary">
+                                                        {{ __('Yes') }}
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                <th scope="col">Name</th>
+                                <th colspan="2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @if($courses != '')
+                                @foreach($courses as $course)
+                                    <tr>
+                                    <td>{{ $course->name}}</td>
+                                    <td>
+                                        <button 
+                                            type="button"
+                                            data-toggle="modal"
+                                            data-target = "#courseEditModal"
+                                            onclick="getCourse({{ $course->id}})"
+                                            class="btn btn-sm btn-success ml-5">
+                                            <i class="fa fa-pencil" aria-hidden="true">&nbsp;Edit</i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button 
+
+                                        type="button" 
+                                        data-toggle="modal"
+                                        data-target = "#courseDeleteModal"
+                                        onclick="getCourse({{ $course->id}})"
+                                        class="btn  btn-sm btn-danger ml-5">
+                                        <i class="fa fa-trash" aria-hidden="true">&nbsp;Delete</i>
+                                        </button>
+                                    </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>

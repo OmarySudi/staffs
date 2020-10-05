@@ -10,6 +10,7 @@ use App\Department;
 use App\CourseStaff;
 use App\AreaOfResearch;
 use App\Skill;
+use App\Course;
 
 class StaffController extends Controller
 {
@@ -155,95 +156,30 @@ class StaffController extends Controller
 
     public function addJobDetails(Request $request){
 
-        $this->validate($request,[
-            // 'role' => 'required',
-            'department' => 'required'
-        ]);
-
         $staff = Staff::where('email',$request->user()->email)->first();
 
-        $courses = $staff->courses;
+        if(count($request->fields) > 0)
+        {
+            foreach($request->fields as $field){
 
-        // $roles = $staff->roles;
+                $skill = new Course();
+                $skill->staff_id = $staff->id;
+                $skill->name = $field;
 
-        if($staff){
-
-
-            // if(count($roles) > 0)
-            // {
-            //     DB::table('role_staff')->where('staff_id',$staff->id)->delete();
-
-            //     for($i=0; $i<count($request->role); $i++)
-            //     {
-         
-            //         $role_staff = new RoleStaff();
-    
-            //         $role_staff->role_id = $request->role[$i];
-            //         $role_staff->staff_id = $staff->id;
-            //         $role_staff->save();
-            //     }
-
-
-            // } else {
-
-            //     for($i=0; $i<count($request->role); $i++)
-            //     {
-         
-            //         $role_staff = new RoleStaff();
-    
-            //         $role_staff->role_id = $request->role[$i];
-            //         $role_staff->staff_id = $staff->id;
-            //         $role_staff->save();
-            //     }
-            // }
-           
-
-            if($request->has('courses')){
-
-                if(count($courses) > 0)
-                {
-
-                    DB::table('course_staff')->where('staff_id',$staff->id)->delete();
-
-                    for($i=0; $i<count($request->courses); $i++)
-                    {
-             
-                        $course_staff = new CourseStaff();
-                        
-                        $course_staff->course_id = $request->courses[$i];
-                        $course_staff->staff_id = $staff->id;
-                        $course_staff->save();
-                    }
-                    
-                } else {
-
-                    for($i=0; $i<count($request->courses); $i++)
-                    {
-             
-                        $course_staff = new CourseStaff();
-                        
-                        $course_staff->course_id = $request->courses[$i];
-                        $course_staff->staff_id = $staff->id;
-                        $course_staff->save();
-                    }
-                }
-               
+                $skill->save();
             }
 
-            if($staff->save()){
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Courses have been added successfully');
 
-                $request->session()->flash('message.level', 'success');
-                $request->session()->flash('message.content', 'Operation completed successfully');
+            return redirect()->route('home');
+        } 
+        else {
+
+            $request->session()->flash('message.level', 'danger');
+            $request->session()->flash('message.content', 'You need to send at least one field, please try again');
     
-                return redirect()->route('home');
-    
-            } else {
-    
-                $request->session()->flash('message.level', 'danger');
-                $request->session()->flash('message.content', 'There is problem, please try again');
-    
-                return redirect()->route('home');
-            }
+            return redirect()->route('home');
         }
     }
 
@@ -301,45 +237,6 @@ class StaffController extends Controller
     public function addSkills(Request $request){
 
         $staff = Staff::where('email',$request->user()->email)->first();
-
-        // if($staff){
-
-        //     $staff->skills = $request->skills;
-
-        //     if($staff->save()){
-    
-        //         $request->session()->flash('message.level', 'success');
-        //         $request->session()->flash('message.content', ' Skills have been updated successfully');
-    
-        //         return redirect()->route('home');
-    
-        //     } else {
-    
-        //         $request->session()->flash('message.level', 'danger');
-        //         $request->session()->flash('message.content', 'There is problem, please try again');
-    
-        //         return redirect()->route('home');
-        //     };
-        // }
-        // else {
-
-        //     $staff->skills = $request->skills;
-
-        //     if($staff->save()){
-    
-        //         $request->session()->flash('message.level', 'success');
-        //         $request->session()->flash('message.content', 'Skills has been added successfully');
-    
-        //         return redirect()->route('home');
-    
-        //     } else {
-    
-        //         $request->session()->flash('message.level', 'danger');
-        //         $request->session()->flash('message.content', 'There is problem in addition of Skills, please try again');
-    
-        //         return redirect()->route('home');
-        //     };
-        // }
 
         if(count($request->fields) > 0)
         {

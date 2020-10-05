@@ -98,7 +98,7 @@ class HomeController extends Controller
                 'areas' => $staff_areas,
                 'department' => $department,
                 'staff_roles' => $staff_roles,
-                'staff_courses' => $staff_courses,
+                'courses' => $staff_courses,
                 'staff' => $staff,
                 'education' => '',
                 'employment' => '',
@@ -113,7 +113,7 @@ class HomeController extends Controller
 
             $staff_roles = [];
 
-            $staff_courses = [];
+            $staff_courses = '';
 
             $staff_skills = '';
 
@@ -132,7 +132,7 @@ class HomeController extends Controller
                 'areas' => $staff_areas,
                 'department' => $department,
                 'staff_roles' => $staff_roles,
-                'staff_courses' => $staff_courses,
+                'courses' => $staff_courses,
                 'staff' => '',
                 'education' => '',
                 'employment' => '',

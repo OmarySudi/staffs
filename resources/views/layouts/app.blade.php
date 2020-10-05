@@ -94,6 +94,21 @@
             });
         }
 
+        function getCourse(id){
+
+            $.ajax({
+                type:'GET',
+                url: '/courses/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success: function(data){
+
+                    document.getElementById('edited_course_name').setAttribute("value",data['name']);
+                    document.getElementById('course_id').setAttribute("value",data['id']);
+                    document.getElementById('course_ondelete_id').setAttribute("value",data['id']);
+                }
+            });
+        }
+
             function getPublication(id,name){
                         
                 $.ajax({
@@ -525,6 +540,36 @@
                     e.preventDefault();
                     return false;
                 });
+
+
+                $(document).on('click', '.course-btn-add', function(e)
+                {
+                    e.preventDefault();
+
+                    var controlForm = $('.course-controls form:first'),
+                    currentEntry = $(this).parents('.course-entry:first'),
+                    //newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                    //newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                   
+                    newEntry = $('#courseSave').before(currentEntry.clone());
+
+                    newEntry.find('input').val('');
+
+                    controlForm.find('.course-entry:not(:last) .course-btn-add')
+                        .removeClass('course-btn-add').addClass('course-btn-remove')
+                        .removeClass('btn-success').addClass('btn-danger')
+                        .html('<span class="mdi mdi-minus"></span>');
+                        
+                }).on('click', '.course-btn-remove', function(e)
+                {
+                    $(this).parents('.course-entry:first').remove();
+
+                    e.preventDefault();
+
+                    return false;
+                });
+
+
 
                 $('#search').on('keyup',function(){
 

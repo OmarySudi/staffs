@@ -8,10 +8,17 @@ class Course extends Model
 {
     //
 
-    protected $fillable = ['name','department_id'];
+    // protected $fillable = ['name','department_id'];
 
-    public function staffs(){
+    // public function staffs(){
 
-        return $this->belongsToMany('App\Staff');
-    }
+    //     return $this->belongsToMany('App\Staff');
+    // }
+
+    protected $fillable = [
+        'staff_id', 
+        'name',
+    ];
+
+    protected $table = 'staff_courses';
 }

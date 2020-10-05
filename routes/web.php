@@ -127,6 +127,10 @@ Route::group(['prefix'=>'project'],function($router){
 Route::group(['prefix'=>'courses'],function($router){
   
     $router->get('get-courses/{id}','CourseController@getCourses');
+    
+    $router->post('update','CourseController@updateCourse')->name('course.update');
+    $router->post('delete','CourseController@deleteCourse')->name('course.delete');
+    $router->get('{id}','CourseController@getCourse');
 
 });
 

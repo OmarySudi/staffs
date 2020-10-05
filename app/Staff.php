@@ -28,7 +28,7 @@ class Staff extends Model
 
     public function courses(){
 
-        return $this->belongsToMany('App\Course');
+        return $this->hasMany('App\Course');
     }
 
     public function projects(){
