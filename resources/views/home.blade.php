@@ -1818,7 +1818,7 @@
 
                                         <div id="journal-name-row" class="form-group row">
 
-                                            <label for="jounal_name" class="col-md-4 col-form-label text-md-right">{{ __('Jounal name(title)') }}</label>
+                                            <label for="jounal_name" class="col-md-4 col-form-label text-md-right">{{ __('Title of publication') }}</label>
 
                                             <div class="col-md-6">
                                                 <input id="journal_name" type="text" class="form-control @error('journal_name') is-invalid @enderror" name="journal_name" value="{{ old('journal_name') }}" autocomplete="journal_name" autofocus>
