@@ -593,6 +593,18 @@
                     }
                 });
 
+                $('#select-department').on('change',function(){
+
+                    if($(this).val().localeCompare("all") == 0)
+                    {
+                        fetchAllStaffs();
+                    }
+                    else
+                    {
+                        fetchStaffsByDepartment($(this).val());
+                    }
+                });
+
                getTotalPages();
 
                getStaffCategories();

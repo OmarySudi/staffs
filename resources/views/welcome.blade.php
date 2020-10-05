@@ -33,15 +33,21 @@
             <div class="row">
 
                 <div class="col-12 col-sm-5 col-md-3">
+                
+                    <div class="form-group row">
 
-                    <div class="list-group" id="myList" role="tablist">
+                        <div class="col-12">
 
-                        <a class="list-group-item list-group-item-action active" onClick="fetchAllStaffs()" data-toggle="list" href="#" role="tab">All</a>
+                            <select id="select-department" name="select-department" class="form-control">
+                                <option value="all">All Departments</option>
 
-                        @foreach($departments as $department)
-                            <a class="list-group-item list-group-item-action" onClick="fetchStaffsByDepartment(<?php echo $department->id?>)" data-toggle="list" href="#" role="tab">{{ $department->name }}</a>
-                        @endforeach
+                                @foreach($departments as $department)
+                                    <option value="<?php echo $department->id?>">{{ $department->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="col-12 col-sm-7 col-md-9" >
