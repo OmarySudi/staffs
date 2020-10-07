@@ -436,21 +436,21 @@
                         
                             $.each(data,function(key,value){
 
-                                if(current_value.localeCompare(value['name']) == 0)
-                                {
-                                    console.log("it passes here 1");
+                                $('select[name="account_type"]').append('<option value="' + value['name'] + '">'+value['name'] + '</option>');
 
-                                    $('select[name="account_type"]').append('<option selected value="' + value['name'] + '">'+value['name'] + '</option>');
-                                }
+                                // if(current_value.localeCompare(value['name']) == 0)
+                                // {
+                                //     console.log("it passes here 1");
+
+                                //     $('select[name="account_type"]').append('<option selected value="' + value['name'] + '">'+value['name'] + '</option>');
+                                // }
                                     
-                                else
-                                {
-                                    console.log("it passes here 2");
+                                // else
+                                // {
+                                //     console.log("it passes here 2");
 
-                                    $('select[name="account_type"]').append('<option value="' + value['name'] + '">'+value['name'] + '</option>');
-                                }
-                                    
-
+                                //     $('select[name="account_type"]').append('<option value="' + value['name'] + '">'+value['name'] + '</option>');
+                                // }
                             });
                         }
                     });
@@ -656,7 +656,7 @@
 
                getDepartments();
 
-               initializeTabs();
+               //initializeTabs();
 
                fetchPublicationTypes();
 

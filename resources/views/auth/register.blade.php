@@ -26,6 +26,22 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right" for="type">Account type</label>
+
+                            <div class="col-md-6">
+                                <select id="account_type" name="account_type" class="form-control @error('account_type') is-invalid @enderror" required autocomplete="account_type" autofocus>
+                                    <!-- <option>--- Select Account Type ---</option> -->
+                                </select>
+
+                                @error('account_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">

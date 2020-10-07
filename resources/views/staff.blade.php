@@ -38,6 +38,10 @@
                                 <li class="nav-item" role="presentation" style="width: 30%">
                                     <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
                                 </li>
+                            @else
+                                <li class="nav-item" role="presentation" style="width: 100%">
+                                    <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
+                                </li>
                             @endif
 
                             @if($staff->staff_category == 'Academician')

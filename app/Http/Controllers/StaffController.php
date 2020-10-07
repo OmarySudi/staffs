@@ -23,18 +23,19 @@ class StaffController extends Controller
             'name' => 'required',
             'address' => 'required',
             'number' => 'required',
-            'account_type' => 'required',
             'job_title' => 'required',
             'department_name' => 'required'
         ]);
 
+        $signed_user = auth()->user();
+
         $checkedStaff = Staff::where('email',$request->user()->email)->first();
 
         if($checkedStaff != null){
+
             $checkedStaff->full_name = ucwords($request->name);
             $checkedStaff->address = $request->address;
             $checkedStaff->mobile_number = $request->number;
-            $checkedStaff->staff_category = $request->account_type;
             $checkedStaff->job_title = $request->job_title;
             $checkedStaff->department_id = $request->department_name;
 
@@ -72,8 +73,8 @@ class StaffController extends Controller
             $staff->email = $request->user()->email;
             $staff->full_name = ucwords($request->name);
             $staff->address = $request->address;
+            $staff->staff_category = $signed_user->account_type;
             $staff->mobile_number = $request->number;
-            $staff->staff_category = $request->account_type;
             $staff->job_title = $request->job_title;
             $staff->department_id = $request->department_name;
 

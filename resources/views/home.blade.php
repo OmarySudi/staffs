@@ -12,12 +12,20 @@
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#biography" role="tab">Biography</a>
                 <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#education"  role="tab" id="educationTab">Education History</a>
                 <a class="list-group-item list-group-item-action" data-toggle="list" href="#emplyoment" role="tab">Employment History</a> -->
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#job" role="tab">Courses</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#areas" role="tab">Areas of research</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#skills" role="tab">Skills</a>
-                <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#attachments" role="tab">Attachments</a> -->
+                @if(Auth::user()->account_type == 'Academician')
+
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#job" role="tab">Courses</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#areas" role="tab">Areas of research</a>
+
+                @elseif(Auth::user()->account_type == 'Administrative')
+
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#skills" role="tab">Skills</a>
+                    
+                @endif
             </div>
         </div>
 
@@ -49,7 +57,7 @@
                                 @csrf
 
                                 
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label class="col-md-4 col-form-label text-md-right" for="type">Account type</label>
 
                                     <div class="col-md-6">
@@ -63,8 +71,8 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-
+                                </div> -->
+                              
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}</label>
 
