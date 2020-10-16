@@ -56,6 +56,17 @@ Route::group(['prefix'=>'departments'],function($router){
     
 });
 
+Route::group(['prefix'=>'users'],function($router){
+   
+    $router->post('verify','UserController@verifyUser')->name('users.verify');
+    $router->post('deny','UserController@denyVerification')->name('users.deny');
+    $router->get('get-total-pages','UserController@getTotalPages');
+    $router->get('get-page','UserController@getPage');
+    $router->get('search','UserController@searchByName');
+    $router->get('/{id}','UserController@getUser');
+    
+});
+
 Route::group(['prefix'=>'publication-types'],function($router){
    
     $router->get('/','PublicationTypeController@index');

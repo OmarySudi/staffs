@@ -347,6 +347,150 @@
                             </div>
                         </div> -->
                     </div>
+
+                    <div class="modal" id="RequestDenyModal" tabindex="-1" role="dialog" aria-labelledby="RequestDenyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="card">
+                                <div class="card-header">{{__('Are you sure you want to deny verification?') }}</div>
+                                <div class="card-body">
+                                    <form method="POST" action="{{ route('users.deny') }}">
+                                        @csrf
+
+                                        <input type="hidden" id="user_ondeny_id" name="user_ondeny_id">
+
+                                        <div class="form-group">
+                                            <div class="pull-right">
+
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                    {{ __('No') }}
+                                                </button>
+
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Yes') }}
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" id="RequestVerifyModal" tabindex="-1" role="dialog" aria-labelledby="RequestVerifyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="card">
+                                <div class="card-header">{{__('Are you sure you want to verify this user?') }}</div>
+                                <div class="card-body">
+                                    <form method="POST" action="{{ route('users.verify') }}">
+                                        @csrf
+
+                                        <input type="hidden" id="user_onverify_id" name="user_onverify_id">
+
+                                        <div class="form-group">
+                                            <div class="pull-right">
+
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                    {{ __('No') }}
+                                                </button>
+
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Yes') }}
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="tab-pane show" id="requests" role="tabpanel">
+
+                    <center>
+                        <div class="input-group mb-3" style="width:50%; height: 40px">
+                            <input type="text" class="form-control" style="height:40px" id="request-search" name="search" placeholder="Search by name" arial-label="Search by name" aria-describedby="basic-addon3">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon3">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </center>
+
+                        <div class="table-responsive">
+                            <table id="requestsTable" class="table table-hover table-bordered">
+                                <caption>List of requests</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Full Name</th>
+                                        <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Email</th>
+                                        <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="RequestTableBody">
+                                   @foreach($users as $user)
+                                    <tr>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>
+                                            <button 
+                                                type="button" 
+                                                data-toggle="modal"
+                                                data-target = "#RequestVerifyModal"
+                                                onclick="getUser({{ $user->id}})";
+                                                class="btn  btn-sm btn-success ml-5">
+                                                <i class="fa fa-check" aria-hidden="true">&nbsp;Verify</i>
+                                            </button>
+
+                                            <!-- <button 
+
+                                                type="button" 
+                                                data-toggle="modal"
+                                                data-target = "#RequestDenyModal"
+                                                onclick="getStaff({{ $staff->id}})";
+                                                class="btn  btn-sm btn-danger ml-5">
+                                                <i class="fa fa-trash" aria-hidden="true">&nbsp;Deny</i>
+                                            </button> -->
+                                        </td> 
+                                    </tr>
+                                   @endforeach
+                                </tbody>
+                                <tr >
+                                    <td style="border-right-style:hidden;"></td>
+                                    <td style="border-right-style:hidden;"></td>
+                                    <td align="right" style="border-right-style:hidden;"><a href="#" id="request-previous" class="page-links">Previous</a> | <a href="#" id="request-next" class="page-links">Next</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    
+                        <!-- <div class="card">
+                            <div class="card-header">{{ __('Staffs') }}</div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Full Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
                 @endif
 
                 <div class="tab-pane" id="areas" role="tabpanel">

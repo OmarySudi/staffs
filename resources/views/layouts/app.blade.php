@@ -36,11 +36,15 @@
         var page = 1;
         var offset = (page - 1) * items_per_page;
 
-
         var staff_page_count;
         var staff_items_per_page = 2;
         var staff_page=1;
-        var staff_offset = (page - 1) * staff_items_per_page;
+        var staff_offset = (staff_page - 1) * staff_items_per_page;
+
+        var request_page_count;
+        var request_items_per_page = 2;
+        var request_page = 1;
+        var request_offset = (request_page - 1) * request_items_per_page;
 
         function getArea(id){
 
@@ -66,6 +70,20 @@
                 success: function(data){
                     
                     document.getElementById('staff_ondelete_id').setAttribute("value",data['id']);
+                }
+            });
+        }
+
+        function getUser(id){
+
+            $.ajax({
+                type:'GET',
+                url: '/users/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success: function(data){
+                    
+                    if(data != null)
+                        document.getElementById('user_onverify_id').setAttribute("value",data['id']);
                 }
             });
         }
@@ -281,6 +299,7 @@
                     $('#next').removeClass('disable-link');
                 }
 
+                //controlling next and previous buttons for staffs
                 function disableAllStaff(){
 
                     $('#staff-previous').addClass('disable-link');
@@ -311,6 +330,41 @@
                     $('#staff-next').removeClass('disable-link');
                 }
 
+                //**********************************//
+
+                //controlling next and previous buttons for requests
+                function disableAllRequest(){
+
+                    $('#request-previous').addClass('disable-link');
+                    $('#request-previous').removeClass('enable-link');
+
+                    $('#request-next').addClass('disable-link');
+                    $('#request-next').removeClass('enable-link');
+                }
+
+                function disablePreviousRequest(){
+
+                    $('#request-previous').addClass('disable-link');
+                    $('#request-previous').removeClass('enable-link');
+                }
+
+                function disableNextRequest(){
+                    $('#request-next').addClass('disable-link');
+                    $('#request-next').removeClass('enable-link');
+                }
+
+                function enablePreviousRequest(){
+                    $('#request-previous').addClass('enable-link');
+                    $('#request-previous').removeClass('disable-link');
+                }
+
+                function enableNextRequest(){
+                    $('#request-next').addClass('enable-link');
+                    $('#request-next').removeClass('disable-link');
+                }
+
+                //****************************//
+
                 function fetchPageData(offset){
 
                     $.ajax({
@@ -339,6 +393,22 @@
                             //testTable
 
                             $('#StaffTableBody').html(data);
+
+                        }
+                    });
+
+                }
+
+                function fetchRequestPageData(offset){
+
+                    $.ajax({
+
+                        url: '/users/get-page',
+                        type: "GET",
+                        data: { page_offset: offset},
+                        success:function(data) {
+
+                            $('#RequestTableBody').html(data);
 
                         }
                     });
@@ -531,6 +601,34 @@
                     });
                 }
 
+                function getRequestTotalPages(){
+
+                    $.ajax({
+
+                        url: '/users/get-total-pages',
+
+                        type: "GET",
+
+                        dataType: "json",
+
+                        success:function(data) {
+
+                            request_page_count = data;
+
+                            if(data == 0 || data == 1){
+
+                                disableAllRequest();
+                            }
+
+                            if(request_page == 1)
+                                disablePreviousRequest();
+                            else if(request_page == data)
+                                disableNextRequest();
+                        }
+
+                    });
+                }
+
                 function getStaffCategories(){
                     $.ajax({
 
@@ -705,6 +803,21 @@
                     });
                 });
 
+                $('#request-search').on('keyup',function(){
+
+                    $value = $(this).val();
+
+                    $.ajax({
+                        type : 'GET',
+                        url : '/users/search/',
+                        data:{'search':$value},
+                        success:function(data){
+
+                            $('#RequestTableBody').html(data);
+                        }
+                    });
+                });
+
                $('#next').on('click',function(){
 
                     page+=1;
@@ -767,6 +880,39 @@
 
                 });
 
+
+                $('#request-previous').on('click',function(){
+
+                    request_page-=1;
+
+                    enableNextRequest();
+
+                    if(request_page == 1)
+                        disablePreviousRequest();
+
+                    let offset = (request_page - 1) * request_items_per_page;
+
+                    fetchRequestPageData(offset);
+
+                });
+
+                $('#request-next').on('click',function(){
+
+                    request_page+=1;
+
+                    if(request_page > 1)
+                        enablePreviousRequest();
+
+                    if(request_page == request_page_count)
+                        disableNextRequest();
+
+                    let offset = (request_page - 1) * request_items_per_page;
+
+                    fetchRequestPageData(offset);
+
+                });
+
+
                 $('#account_type').on('change',function(){
 
                     if($(this).val().localeCompare("Academician") == 0)
@@ -800,6 +946,8 @@
                 });
 
                getTotalPages();
+
+               getRequestTotalPages();
 
                getStaffTotalPages();
 

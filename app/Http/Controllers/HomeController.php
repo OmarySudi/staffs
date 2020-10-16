@@ -40,6 +40,12 @@ class HomeController extends Controller
             ->limit(2)
             ->get();
 
+        $users = DB::table('users')
+                ->select('users.*')
+                ->where(['users.verified'=>0])
+                ->limit(2)
+                ->get();
+
         // if($staff){
 
         //     $staff_roles = $staff->roles;
@@ -103,6 +109,7 @@ class HomeController extends Controller
                 'skills' => $staff_skills,
                 'areas' => $staff_areas,
                 'all_staffs' =>$all_staffs,
+                'users' =>$users,
                 'department' => $department,
                 'staff_roles' => $staff_roles,
                 'courses' => $staff_courses,
@@ -139,6 +146,7 @@ class HomeController extends Controller
                 'areas' => $staff_areas,
                 'department' => $department,
                 'all_staffs' =>$all_staffs,
+                'users' =>$users,
                 'staff_roles' => $staff_roles,
                 'courses' => $staff_courses,
                 'staff' => '',
