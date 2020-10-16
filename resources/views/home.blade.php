@@ -426,7 +426,7 @@
 
                         <div class="table-responsive">
                             <table id="requestsTable" class="table table-hover table-bordered">
-                                <caption>List of requests</caption>
+                                <caption>List of registered users</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Full Name</th>
