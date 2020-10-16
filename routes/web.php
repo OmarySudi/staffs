@@ -23,17 +23,23 @@ Route::get('/get-page', 'FrontEndController@getPage');
 
 Route::group(['prefix'=>'staffs'],function($router){
     $router->post('create','StaffController@create')->name('staffs.create');
+    $router->post('delete','StaffController@deleteStaff')->name('staffs.delete');
     $router->post('add-biography','StaffController@addBiography')->name('staffs.add-biography');
     $router->post('add-cv','StaffController@addCurriculum')->name('staffs.add-cv');
     $router->post('add-education-history','StaffController@addEducationHistory')->name('staffs.add-education-history');
     $router->post('add-job-details','StaffController@addJobDetails')->name('staffs.add-job-details');
     $router->post('add-areas','StaffController@addAreasOfResearch')->name('staffs.add-areas');
     $router->post('add-skills','StaffController@addSkills')->name('staffs.add-skills');
+    $router->get('/get-total-pages','StaffController@getTotalPages');
+    $router->get('/get-page','StaffController@getPage');
+    $router->get('/staffs','StaffController@getStaffs');
     $router->get('/{id}','StaffController@getStaff')->name('staffs.staff-info');
+    $router->get('/info/{id}','StaffController@getStaffInfo');
     $router->get('/','StaffController@getAllStaffs');
     $router->post('/account-type','StaffController@addAccountType')->name('staffs.add-account-type');
     
     $router->get('/search/department','StaffController@searchByFacult')->name('staffs.staff-search');
+    $router->get('/search/name','StaffController@searchByName');
     $router->get('/search/department-staffs/{id}','StaffController@searchByDepartment');
     
 });

@@ -32,13 +32,15 @@
     <script>
 
         var page_count;
-
         var items_per_page = 15;
-
         var page = 1;
-
         var offset = (page - 1) * items_per_page;
 
+
+        var staff_page_count;
+        var staff_items_per_page = 2;
+        var staff_page=1;
+        var staff_offset = (page - 1) * staff_items_per_page;
 
         function getArea(id){
 
@@ -55,6 +57,19 @@
             });
         }
 
+        function getStaff(id){
+
+            $.ajax({
+                type:'GET',
+                url: '/staffs/info/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success: function(data){
+                    
+                    document.getElementById('staff_ondelete_id').setAttribute("value",data['id']);
+                }
+            });
+        }
+
         function fetchAllStaffs(){
 
             $.ajax({
@@ -63,6 +78,20 @@
                 data:'_token = <?php echo csrf_token() ?>',
                 success:function(data){
                     $('#staffs-row').html(data);
+                }
+            });
+        }
+
+        function fetchStaffs(){
+            $.ajax({
+                type : 'GET',
+                url : '/staffs/staffs',
+                data:'_token = <?php echo csrf_token() ?>',
+                success:function(data){
+                   
+                    $.each(data, function(key,value){
+                        $('#staffsTable > tbody').append('<tr><td>' + value["full_name"] + '</td><td>' + value["email"] + '</td><td></td></tr>');
+                    });
                 }
             });
         }
@@ -252,6 +281,36 @@
                     $('#next').removeClass('disable-link');
                 }
 
+                function disableAllStaff(){
+
+                    $('#staff-previous').addClass('disable-link');
+                    $('#staff-previous').removeClass('enable-link');
+
+                    $('#staff-next').addClass('disable-link');
+                    $('#staff-next').removeClass('enable-link');
+                }
+
+                function disablePreviousStaff(){
+
+                    $('#staff-previous').addClass('disable-link');
+                    $('#staff-previous').removeClass('enable-link');
+                }
+
+                function disableNextStaff(){
+                    $('#staff-next').addClass('disable-link');
+                    $('#staff-next').removeClass('enable-link');
+                }
+
+                function enablePreviousStaff(){
+                    $('#staff-previous').addClass('enable-link');
+                    $('#staff-previous').removeClass('disable-link');
+                }
+
+                function enableNextStaff(){
+                    $('#staff-next').addClass('enable-link');
+                    $('#staff-next').removeClass('disable-link');
+                }
+
                 function fetchPageData(offset){
 
                     $.ajax({
@@ -262,6 +321,25 @@
                         success:function(data) {
 
                             $('#staffs-row').html(data);
+                        }
+                    });
+
+                }
+
+                function fetchStaffPageData(offset){
+
+                    $.ajax({
+
+                        url: '/staffs/get-page',
+                        type: "GET",
+                        data: { page_offset: offset},
+                        success:function(data) {
+
+                            //$('#staffsTable > tbody').html(data);
+                            //testTable
+
+                            $('#StaffTableBody').html(data);
+
                         }
                     });
 
@@ -425,6 +503,34 @@
                         });
                 }
 
+                function getStaffTotalPages(){
+
+                    $.ajax({
+
+                        url: '/staffs/get-total-pages',
+
+                        type: "GET",
+
+                        dataType: "json",
+
+                        success:function(data) {
+
+                            staff_page_count = data;
+
+                            if(data == 0 || data == 1){
+
+                                disableAllStaff();
+                            }
+
+                            if(page == 1)
+                                disablePreviousStaff();
+                            else if(page == data)
+                                disableNextStaff();
+                        }
+
+                    });
+                }
+
                 function getStaffCategories(){
                     $.ajax({
 
@@ -489,6 +595,8 @@
                 }
 
             $(document).ready(function() {
+
+                //fetchStaffs();
 
                 $(document).on('click', '.btn-add', function(e)
                 {
@@ -569,26 +677,36 @@
                     return false;
                 });
 
-
-
                 $('#search').on('keyup',function(){
 
-                    $value=$(this).val();
+                    $value = $(this).val();
 
                     $.ajax({
                         type : 'GET',
                         url : '/staffs/search/department',
                         data:{'search':$value},
                         success:function(data){
-
                             $('#staffs-row').html(data);
                         }
                     });
                });
 
+               $('#staff-search').on('keyup',function(){
+
+                    $value = $(this).val();
+
+                    $.ajax({
+                        type : 'GET',
+                        url : '/staffs/search/name',
+                        data:{'search':$value},
+                        success:function(data){
+                            $('#StaffTableBody').html(data);
+                        }
+                    });
+                });
+
                $('#next').on('click',function(){
 
-                    
                     page+=1;
 
                     if(page > 1)
@@ -615,6 +733,37 @@
                     let offset = (page - 1) * items_per_page;
 
                     fetchPageData(offset);
+
+                 });
+
+                $('#staff-previous').on('click',function(){
+
+                    staff_page-=1;
+
+                    enableNextStaff();
+
+                    if(staff_page == 1)
+                        disablePreviousStaff();
+
+                    let offset = (staff_page - 1) * staff_items_per_page;
+
+                    fetchStaffPageData(offset);
+
+                });
+
+                $('#staff-next').on('click',function(){
+
+                    staff_page+=1;
+
+                    if(staff_page > 1)
+                        enablePreviousStaff();
+
+                    if(staff_page == staff_page_count)
+                        disableNextStaff();
+
+                    let offset = (staff_page - 1) * staff_items_per_page;
+
+                    fetchStaffPageData(offset);
 
                 });
 
@@ -651,6 +800,8 @@
                 });
 
                getTotalPages();
+
+               getStaffTotalPages();
 
                getStaffCategories();
 

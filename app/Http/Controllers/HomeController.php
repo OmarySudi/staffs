@@ -34,6 +34,12 @@ class HomeController extends Controller
 
         $staff = Staff::where('email',$user->email)->first();
 
+        $all_staffs = DB::table('staffs')
+            ->leftJoin('departments','staffs.department_id','departments.id')
+            ->select('staffs.*','departments.name as department_name')
+            ->limit(2)
+            ->get();
+
         // if($staff){
 
         //     $staff_roles = $staff->roles;
@@ -96,6 +102,7 @@ class HomeController extends Controller
                 'roles' => $roles,
                 'skills' => $staff_skills,
                 'areas' => $staff_areas,
+                'all_staffs' =>$all_staffs,
                 'department' => $department,
                 'staff_roles' => $staff_roles,
                 'courses' => $staff_courses,
@@ -131,6 +138,7 @@ class HomeController extends Controller
                 'skills' => $staff_skills,
                 'areas' => $staff_areas,
                 'department' => $department,
+                'all_staffs' =>$all_staffs,
                 'staff_roles' => $staff_roles,
                 'courses' => $staff_courses,
                 'staff' => '',

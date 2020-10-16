@@ -8,24 +8,28 @@
 
             <div class="list-group" id="myList" role="tablist">
 
-                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#personal" role="tab">Personal details</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#biography" role="tab">Biography</a>
-                <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#education"  role="tab" id="educationTab">Education History</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#emplyoment" role="tab">Employment History</a> -->
-                @if(Auth::user()->account_type == 'Academician')
+                @if(Auth::user()->is_admin)
+                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#allStaffs" role="tab">All staffs</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#requests" role="tab">Activation Requests</a>
+                @else
+                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#personal" role="tab">Personal details</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#biography" role="tab">Biography</a>
+                    @if(Auth::user()->account_type == 'Academician')
 
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#job" role="tab">Courses</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#areas" role="tab">Areas of research</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#job" role="tab">Courses</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#areas" role="tab">Areas of research</a>
 
-                @elseif(Auth::user()->account_type == 'Administrative')
+                    @elseif(Auth::user()->account_type == 'Administrative')
 
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#skills" role="tab">Skills</a>
-                    
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#skills" role="tab">Skills</a>
+                        
+                    @endif
                 @endif
+               
             </div>
         </div>
 
@@ -39,6 +43,8 @@
             @endif
 
             <div class="tab-content">
+
+                @if(Auth::user()->is_admin == false)
                 <div class="tab-pane show active" id="personal" role="tabpanel">
                     <div class="card">
 
@@ -188,6 +194,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <div class="tab-pane" id="biography" role="tabpanel">
                     <div class="card">
@@ -226,6 +233,121 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal" id="staffDeleteModal" tabindex="-1" role="dialog" aria-labelledby="staffDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="card">
+                                <div class="card-header">{{__('Are you sure you want to delete this staff?') }}</div>
+                                <div class="card-body">
+                                    <form method="POST" action="{{ route('staffs.delete') }}">
+                                        @csrf
+
+                                        <input type="hidden" id="staff_ondelete_id" name="staff_ondelete_id">
+
+                                        <div class="form-group">
+                                            <div class="pull-right">
+
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                    {{ __('No') }}
+                                                </button>
+
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Yes') }}
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if(Auth::user()->is_admin)
+                    <div class="tab-pane show active" id="allStaffs" role="tabpanel">
+
+                    <center>
+                        <div class="input-group mb-3" style="width:50%; height: 40px">
+                            <input type="text" class="form-control" style="height:40px" id="staff-search" name="search" placeholder="Search by staff name" arial-label="Search by staff name" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </center>
+
+                        <div class="table-responsive">
+                            <table id="staffsTable" class="table table-hover table-bordered">
+                                <caption>List of staffs</caption>
+                                <thead >
+                                    <tr>
+                                        <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Full Name</th>
+                                        <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Email</th>
+                                        <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="StaffTableBody">
+                                   @foreach($all_staffs as $staff)
+                                    <tr>
+                                        <td>{{ $staff->full_name }}</td>
+                                        <td>{{ $staff->email }}</td>
+                                        <td>
+                                            <a href="{{ route('staffs.staff-info',['id' => $staff->id])}}">
+                                                <button 
+                                                    type="button"
+                                                    class="btn btn-sm btn-primary ml-5">
+                                                    <i class="fa fa-eye" aria-hidden="true">&nbsp;View</i>
+                                                </button>
+                                            </a>
+
+                                            <button 
+
+                                                type="button" 
+                                                data-toggle="modal"
+                                                data-target = "#staffDeleteModal"
+                                                onclick="getStaff({{ $staff->id}})";
+                                                class="btn  btn-sm btn-danger ml-5">
+                                                <i class="fa fa-trash" aria-hidden="true">&nbsp;Delete</i>
+                                            </button>
+
+                                        </td> 
+                                    </tr>
+                                   @endforeach
+                                </tbody>
+                                <tr >
+                                    <td style="border-right-style:hidden;"></td>
+                                    <td style="border-right-style:hidden;"></td>
+                                    <td align="right" style="border-right-style:hidden;"><a href="#" id="staff-previous" class="page-links">Previous</a> | <a href="#" id="staff-next" class="page-links">Next</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    
+                        <!-- <div class="card">
+                            <div class="card-header">{{ __('Staffs') }}</div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Full Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                @endif
 
                 <div class="tab-pane" id="areas" role="tabpanel">
                     

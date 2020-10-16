@@ -17,6 +17,8 @@ class StaffController extends Controller
     
     private $page_limit = 15;
 
+    private $staff_page_limit = 2;
+
     public function create(Request $request){
 
         $this->validate($request,[
@@ -364,8 +366,6 @@ class StaffController extends Controller
     
     public function searchByFacult(Request $request)
     {
-        
-
         if($request->ajax()){
 
             $output="";
@@ -406,6 +406,62 @@ class StaffController extends Controller
                         '</div>'.
                     '</div>'.
                 '</div>';
+        
+            }
+
+            return Response($output);
+        }
+    }
+
+    public function searchByName(Request $request){
+
+        if($request->ajax()){
+
+            $output="";
+
+            if($request->search == "")
+            {
+                $staffs = DB::table('staffs')
+                    ->leftJoin('departments','staffs.department_id','departments.id')
+                    ->select('staffs.*','departments.name as department_name')
+                    ->limit($this->staff_page_limit)
+                    ->get();
+            }
+            else {
+
+            $staffs = DB::table('staffs')
+                ->leftJoin('departments','staffs.department_id','departments.id')
+                ->select('staffs.*','departments.name as department_name')
+                ->where('staffs.full_name','LIKE',$request->search.'%')
+                ->get();
+            }
+            
+            foreach($staffs as $key => $staff){
+
+                $output.=
+                '<tr>'.
+                '<td>'.$staff->full_name.'</td>'. 
+                 '<td>'.$staff->email.'</td>'.
+                   '<td>
+                       <a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">
+                       <button 
+                           type="button"
+                           class="btn btn-sm btn-primary ml-5">
+                           <i class="fa fa-eye" aria-hidden="true">&nbsp;View</i>
+                       </button>
+                       </a>
+
+                       <button 
+                           type="button" 
+                           data-toggle="modal"
+                           data-target = "#staffDeleteModal"
+                           onclick="getStaff('.$staff->id.')";
+                           class="btn  btn-sm btn-danger ml-5">
+                           <i class="fa fa-trash" aria-hidden="true">&nbsp;Delete</i>
+                       </button>
+
+                   </td>'.
+               '</tr>';
         
             }
 
@@ -479,4 +535,114 @@ class StaffController extends Controller
     
         return Response($output);
     }
+
+    public function getStaffs(Request $request){
+
+        $staffs = DB::table('staffs')
+            ->leftJoin('departments','staffs.department_id','departments.id')
+            ->select('staffs.*','departments.name as department_name')
+            ->limit($this->staff_page_limit)
+            ->get();
+
+        return Response($staffs);
+    }
+
+    public function deleteStaff(Request $request){
+
+        $staff =Staff::where('id',$request->staff_ondelete_id)->first();
+
+        if($staff !== null){
+
+            if(DB::table('staffs')->where('id',$request->staff_ondelete_id)->delete()){
+
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Record has been deleted');
+
+                return redirect()->route('home');
+
+            } else {
+
+                $request->session()->flash('message.level', 'danger');
+                $request->session()->flash('message.content', 'The delete of record has failed, please try again');
+    
+                return redirect()->route('home');
+            }
+
+        } else {
+
+            $request->session()->flash('message.level', 'danger');
+            $request->session()->flash('message.content', 'Error you are trying to delete non existent field');
+
+            return redirect()->route('home');
+        }
+    }
+
+    public function getStaffInfo($id){
+
+        $staff = Staff::where('id',$id)->first();
+
+        if($staff != null){
+
+            return $staff;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+    
+    public function getTotalPages(){
+
+        $all_staffs = DB::table('staffs')
+            ->leftJoin('departments','staffs.department_id','departments.id')
+            ->select('staffs.*','departments.name as department_name')
+            ->get();
+
+        $total_pages = (int) ceil($all_staffs->count()/$this->staff_page_limit);
+
+        return response($total_pages);
+    }
+
+    public function getPage(Request $request){
+
+        $output = "";
+
+        $all_staffs = DB::table('staffs')
+            ->leftJoin('departments','staffs.department_id','departments.id')
+            ->select('staffs.*','departments.name as department_name')
+            ->offset($request->page_offset)
+            ->limit($this->staff_page_limit)
+            ->get();
+
+            foreach($all_staffs as $key => $staff){
+
+                $output.=
+                '<tr>'.
+                 '<td>'.$staff->full_name.'</td>'. 
+                  '<td>'.$staff->email.'</td>'.
+                    '<td>
+                        <a href="'.route( "staffs.staff-info",["id" => $staff->id]).'">
+                        <button 
+                            type="button"
+                            class="btn btn-sm btn-primary ml-5">
+                            <i class="fa fa-eye" aria-hidden="true">&nbsp;View</i>
+                        </button>
+                        </a>
+
+                        <button 
+                            type="button" 
+                            data-toggle="modal"
+                            data-target = "#staffDeleteModal"
+                            onclick="getStaff('.$staff->id.')";
+                            class="btn  btn-sm btn-danger ml-5">
+                            <i class="fa fa-trash" aria-hidden="true">&nbsp;Delete</i>
+                        </button>
+
+                    </td>'.
+                '</tr>';
+            }
+
+        return Response($output);
+    }
+    
 }
