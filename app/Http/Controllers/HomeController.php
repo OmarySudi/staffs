@@ -30,6 +30,8 @@ class HomeController extends Controller
     public function index()
     {
 
+        $page_limit = 20;
+
         $user = auth()->user();
 
         $staff = Staff::where('email',$user->email)->first();
@@ -37,13 +39,13 @@ class HomeController extends Controller
         $all_staffs = DB::table('staffs')
             ->leftJoin('departments','staffs.department_id','departments.id')
             ->select('staffs.*','departments.name as department_name')
-            ->limit(2)
+            ->limit($page_limit)
             ->get();
 
         $users = DB::table('users')
                 ->select('users.*')
                 ->where(['users.verified'=>0])
-                ->limit(2)
+                ->limit($page_limit)
                 ->get();
 
         // if($staff){

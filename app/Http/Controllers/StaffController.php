@@ -17,7 +17,7 @@ class StaffController extends Controller
     
     private $page_limit = 15;
 
-    private $staff_page_limit = 2;
+    private $staff_page_limit = 20;
 
     public function create(Request $request){
 

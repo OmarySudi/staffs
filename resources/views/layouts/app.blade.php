@@ -37,12 +37,12 @@
         var offset = (page - 1) * items_per_page;
 
         var staff_page_count;
-        var staff_items_per_page = 2;
+        var staff_items_per_page = 20;
         var staff_page=1;
         var staff_offset = (staff_page - 1) * staff_items_per_page;
 
         var request_page_count;
-        var request_items_per_page = 2;
+        var request_items_per_page = 20;
         var request_page = 1;
         var request_offset = (request_page - 1) * request_items_per_page;
 
@@ -592,9 +592,9 @@
                                 disableAllStaff();
                             }
 
-                            if(page == 1)
+                            if(staff_page == 1)
                                 disablePreviousStaff();
-                            else if(page == data)
+                            else if(staff_page == data)
                                 disableNextStaff();
                         }
 
