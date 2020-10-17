@@ -9,6 +9,7 @@ use App\EducationHistory;
 use App\Department;
 use App\Role;
 use App\EmploymentHistory;
+use App\StaffCategory;
 
 class HomeController extends Controller
 {
@@ -67,6 +68,8 @@ class HomeController extends Controller
 
         $departments = Department::all();
 
+        $categories = StaffCategory::all();
+
         $roles = Role::all();
 
         if($staff !== null){
@@ -109,6 +112,7 @@ class HomeController extends Controller
                 'projects' => $projects,
                 'roles' => $roles,
                 'skills' => $staff_skills,
+                'categories' => $categories,
                 'areas' => $staff_areas,
                 'all_staffs' =>$all_staffs,
                 'users' =>$users,
@@ -137,6 +141,10 @@ class HomeController extends Controller
 
             $department = '';
 
+            //$departments = '';
+
+            //$categories = '';
+
             return view('home',[
                 'employment_histories' => '',
                 'education_histories'=>'',
@@ -145,6 +153,7 @@ class HomeController extends Controller
                 'departments' => $departments,
                 'roles' => $roles,
                 'skills' => $staff_skills,
+                'categories' => $categories,
                 'areas' => $staff_areas,
                 'department' => $department,
                 'all_staffs' =>$all_staffs,

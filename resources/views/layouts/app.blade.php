@@ -91,6 +91,23 @@
             });
         }
 
+        function getCategory(id){
+
+            $.ajax({
+                type:'GET',
+                url: '/staff-categories/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success: function(data){
+                    
+                    document.getElementById('category_ondelete_id').setAttribute("value",data['id']);
+
+                    document.getElementById('edited_category_name').setAttribute("value",data['name']);
+                    document.getElementById('edited_category_id').setAttribute("value",data['id']);
+                    
+                }
+            });
+        }
+
         function getUser(id){
 
             $.ajax({
@@ -819,7 +836,34 @@
 
                     return false;
                 });
-                
+
+
+                $(document).on('click', '.category-btn-add', function(e)
+                {
+                    e.preventDefault();
+                    
+                    var controlForm = $('.category-controls form:first'),
+
+                    currentEntry = $(this).parents('.category-entry:first'),
+                  
+                    newEntry = $('#categorySave').before(currentEntry.clone());
+
+                    newEntry.find('input').val('');
+
+                    controlForm.find('.category-entry:not(:last) .category-btn-add')
+                        .removeClass('category-btn-add').addClass('category-btn-remove')
+                        .removeClass('btn-success').addClass('btn-danger')
+                        .html('<span class="mdi mdi-minus"></span>');
+                        
+                }).on('click', '.category-btn-remove', function(e)
+                {
+                    $(this).parents('.category-entry:first').remove();
+
+                    e.preventDefault();
+
+                    return false;
+                });
+
 
                 $('#search').on('keyup',function(){
 
