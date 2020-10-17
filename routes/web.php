@@ -53,6 +53,10 @@ Route::group(['prefix'=>'staff-categories'],function($router){
 Route::group(['prefix'=>'departments'],function($router){
    
     $router->get('/','DepartmentController@index');
+    $router->post('/','DepartmentController@create')->name('departments.add');
+    $router->post('update','DepartmentController@update')->name('departments.update');
+    $router->post('delete','DepartmentController@delete')->name('departments.delete');
+    $router->get('/{id}','DepartmentController@getDepartment');
     
 });
 

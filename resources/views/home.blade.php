@@ -11,6 +11,8 @@
                 @if(Auth::user()->is_admin)
                     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#allStaffs" role="tab">All staffs</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#requests" role="tab">Activation Requests</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#departments" role="tab">Departments</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#categories" role="tab">Account Types</a>
                 @else
                     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#personal" role="tab">Personal details</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#biography" role="tab">Biography</a>
@@ -490,6 +492,189 @@
                                 </div>
                             </div>
                         </div> -->
+                    </div>
+
+                    <div class="tab-pane" id="departments" role="tabpanel">
+                    
+                        <p>
+                            <span class="mr-3">Click Add button to add department</span>
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DepartmentModal">
+                                ADD
+                            </button>
+                        </p>
+                    
+                        <div class="modal fade" id="DepartmentModal" tabindex="-1" role="dialog" aria-labelledby="DepartmentModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <!-- <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12"> -->
+                                                <div class="card">
+
+                                                    <div class="card-header">{{ __('Department') }}</div>
+
+                                                    <div class="card-body">
+                                                        <div class="control-group" id="department-fields">
+                                                            <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                            <div class="department-controls"> 
+
+                                                            <form method="POST" action="{{ route('departments.add') }}">
+                                                                @csrf
+
+                                                                <div class="department-entry input-group col-xs-3 mt-2">
+                                                                    <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-success department-btn-add" type="button">
+                                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                                            <i class="mdi mdi-plus-thick" aria-hidden="true"></i>
+                                                                        </button>
+                                                                    </span>
+                                                                </div>
+
+                                                                <div class="form-group row mt-5" id="departmentSave">
+                                                                    <div class="col-md-6 offset-md-5">
+                                                                        <button type="submit" class="btn btn-primary">
+                                                                            {{ __('Save') }}
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                                <br>
+                                                                <small>Press <i class="mdi mdi-plus-thick" aria-hidden="true"></i> to add another form field</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <!-- </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade" id="departmentEditModal" tabindex="-1" role="dialog" aria-labelledby="departmentEditModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <!-- <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12"> -->
+                                                <div class="card">
+
+                                                    <div class="card-header">{{ __('Edit Department') }}</div>
+
+                                                    <div class="card-body">
+                                                        <form method="POST" action="{{ route('departments.update') }}">
+                                                            @csrf
+
+                                                            <input type="hidden" id="edited_department_id" name="edited_department_id">
+
+                                                            <div class="form-group row">
+                                                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                                                                <div class="col-md-6">
+                                                                    <input id="edited_department_name" type="text" class="form-control @error('edited_department_name') is-invalid @enderror" name="edited_department_name" value="{{ old('edited_department_name') }}" required autocomplete="edited_department_name" autofocus>
+
+                                                                    @error('edited_department_name')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row mb-0">
+                                                                <div class="col-md-6 offset-md-5">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        {{ __('Save') }}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            <!-- </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal" id="departmentDeleteModal" tabindex="-1" role="dialog" aria-labelledby="departmentDeleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="card">
+                                        <div class="card-header">{{__('Are you sure you want to delete this record?') }}</div>
+                                        <div class="card-body">
+                                            <form method="POST" action="{{ route('departments.delete') }}">
+                                                @csrf
+
+                                                <input type="hidden" id="department_ondelete_id" name="department_ondelete_id">
+
+                                                <div class="form-group">
+                                                    <div class="pull-right">
+
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                            {{ __('No') }}
+                                                        </button>
+
+                                                        <button type="submit" class="btn btn-primary">
+                                                            {{ __('Yes') }}
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                    <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Name</th>
+                                    <th colspan="2" style="background:rgba(16,124,229,0.7); color:white"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @if($departments != '')
+                                    @foreach($departments as $department)
+                                        <tr>
+                                        <td>{{ $department->name}}</td>
+                                        <td>
+                                            <button 
+                                                type="button"
+                                                data-toggle="modal"
+                                                data-target = "#departmentEditModal"
+                                                onclick="getDepartment({{ $department->id}})"
+                                                class="btn btn-sm btn-success ml-5">
+                                                <i class="fa fa-pencil" aria-hidden="true">&nbsp;Edit</i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button 
+
+                                            type="button" 
+                                            data-toggle="modal"
+                                            data-target = "#departmentDeleteModal"
+                                            onclick="getDepartment({{ $department->id}})"
+                                            class="btn  btn-sm btn-danger ml-5">
+                                            <i class="fa fa-trash" aria-hidden="true">&nbsp;Delete</i>
+                                            </button>
+                                        </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 @endif
 

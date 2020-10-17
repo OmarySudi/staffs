@@ -74,6 +74,23 @@
             });
         }
 
+        function getDepartment(id){
+
+            $.ajax({
+                type:'GET',
+                url: '/departments/'+id,
+                data:'_token = <?php echo csrf_token() ?>',
+                success: function(data){
+                    
+                    document.getElementById('department_ondelete_id').setAttribute("value",data['id']);
+
+                    document.getElementById('edited_department_name').setAttribute("value",data['name']);
+                    document.getElementById('edited_department_id').setAttribute("value",data['id']);
+                    
+                }
+            });
+        }
+
         function getUser(id){
 
             $.ajax({
@@ -774,6 +791,35 @@
 
                     return false;
                 });
+
+
+                $(document).on('click', '.department-btn-add', function(e)
+                {
+                    e.preventDefault();
+
+                    var controlForm = $('.department-controls form:first'),
+                    currentEntry = $(this).parents('.department-entry:first'),
+                    //newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                    //newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                   
+                    newEntry = $('#departmentSave').before(currentEntry.clone());
+
+                    newEntry.find('input').val('');
+
+                    controlForm.find('.department-entry:not(:last) .department-btn-add')
+                        .removeClass('department-btn-add').addClass('department-btn-remove')
+                        .removeClass('btn-success').addClass('btn-danger')
+                        .html('<span class="mdi mdi-minus"></span>');
+                        
+                }).on('click', '.department-btn-remove', function(e)
+                {
+                    $(this).parents('.department-entry:first').remove();
+
+                    e.preventDefault();
+
+                    return false;
+                });
+                
 
                 $('#search').on('keyup',function(){
 
