@@ -640,7 +640,7 @@
                                 <thead>
                                     <tr>
                                     <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Name</th>
-                                    <th colspan="2" style="background:rgba(16,124,229,0.7); color:white"></th>
+                                    <th colspan="2" style="background:rgba(16,124,229,0.7); color:white">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -824,7 +824,7 @@
                                 <thead>
                                     <tr>
                                     <th scope="col" style="background:rgba(16,124,229,0.7); color:white">Name</th>
-                                    <th colspan="2" style="background:rgba(16,124,229,0.7); color:white"></th>
+                                    <th colspan="2" style="background:rgba(16,124,229,0.7); color:white">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
