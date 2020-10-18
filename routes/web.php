@@ -60,7 +60,10 @@ Route::group(['prefix'=>'departments'],function($router){
     $router->post('/','DepartmentController@create')->name('departments.add');
     $router->post('update','DepartmentController@update')->name('departments.update');
     $router->post('delete','DepartmentController@delete')->name('departments.delete');
+    $router->get('get-total-pages','DepartmentController@getTotalPages');
+    $router->get('get-page','DepartmentController@getPage');
     $router->get('/{id}','DepartmentController@getDepartment');
+   
     
 });
 

@@ -9,7 +9,7 @@ use App\User;
 class UserController extends Controller
 {
     //
-    private $page_limit = 20;
+    private $page_limit = 15;
 
     public function verifyUser(Request $request){
 

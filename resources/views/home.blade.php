@@ -636,6 +636,17 @@
 
                         <div class="table-responsive">
 
+                            <!-- <center>
+                                <div class="input-group mb-3" style="width:50%; height: 30px">
+                                    <input type="text" class="form-control" style="height:35px" id="department-search" name="search" placeholder="Search by name" arial-label="Search by department name" aria-describedby="basic-addon4">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon4">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </center> -->
+
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
@@ -643,7 +654,7 @@
                                     <th colspan="2" style="background:rgba(16,124,229,0.7); color:white">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="DepartmentTableBody">
                                 @if($departments != '')
                                     @foreach($departments as $department)
                                         <tr>
@@ -673,6 +684,12 @@
                                     @endforeach
                                 @endif
                                 </tbody>
+                                <tr >
+                                    <td style="border-right-style:hidden;"></td>
+                                    <td style="border-right-style:hidden;"></td>
+                                    <td align="right" style="border-right-style:hidden;"><a href="#" id="department-previous" class="page-links">Previous</a> | <a href="#" id="department-next" class="page-links">Next</a></td>
+                                </tr>
+
                             </table>
                         </div>
                     </div>

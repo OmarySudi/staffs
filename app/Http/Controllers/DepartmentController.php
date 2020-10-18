@@ -9,6 +9,9 @@ use App\Department;
 class DepartmentController extends Controller
 {
     //
+
+    private $page_limit = 15;
+
     public function index(){
 
         $departments = Department::all();
@@ -118,5 +121,58 @@ class DepartmentController extends Controller
             return redirect()->route('home');
         }
 
+    }
+
+    public function getTotalPages(){
+
+        $departments = DB::table('departments')
+                    ->select('departments.*')
+                    ->get();
+
+        $total_pages = (int) ceil($departments->count()/$this->page_limit);
+
+        return response($total_pages);
+    }
+
+    public function getPage(Request $request){
+
+        $output = "";
+
+        $departments = DB::table('departments')
+            ->select('departments.*')
+            ->offset($request->page_offset)
+            ->limit($this->page_limit)
+            ->get();
+
+        foreach($departments as $key => $department){
+
+                $output.=
+                '<tr>'.
+                 '<td>'.$department->name.'</td>'. 
+                    '<td>
+                        <button 
+                            type="button" 
+                            data-toggle="modal"
+                            data-target = "#departmentEditModal"
+                            onclick="getDepartment('.$department->id.')";
+                            class="btn  btn-sm btn-success ml-5">
+                            <i class="fa fa-check" aria-hidden="true">&nbsp;Edit</i>
+                        </button>
+
+                    </td>'.
+                    '<td>
+                        <button 
+                            type="button" 
+                            data-toggle="modal"
+                            data-target = "#departmentDeleteModal"
+                            onclick="getDepartment('.$department->id.')";
+                            class="btn  btn-sm btn-danger ml-5">
+                            <i class="fa fa-check" aria-hidden="true">&nbsp;Delete</i>
+                        </button>
+                    </td>'.
+                '</tr>';
+            }
+
+        return Response($output);
     }
 }

@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $page_limit = 20;
+        $page_limit = 15;
 
         $user = auth()->user();
 
@@ -65,8 +65,10 @@ class HomeController extends Controller
         //     }
         // }
       
-
-        $departments = Department::all();
+        $departments = DB::table('departments')
+                    ->select('departments.*')
+                    ->limit($page_limit)
+                    ->get();
 
         $categories = StaffCategory::all();
 

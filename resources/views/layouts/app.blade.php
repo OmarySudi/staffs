@@ -15,7 +15,6 @@
     <!--Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -37,14 +36,19 @@
         var offset = (page - 1) * items_per_page;
 
         var staff_page_count;
-        var staff_items_per_page = 20;
+        var staff_items_per_page = 15;
         var staff_page=1;
         var staff_offset = (staff_page - 1) * staff_items_per_page;
 
         var request_page_count;
-        var request_items_per_page = 20;
+        var request_items_per_page = 15;
         var request_page = 1;
         var request_offset = (request_page - 1) * request_items_per_page;
+
+        var department_page_count;
+        var department_items_per_page = 15;
+        var department_page = 1;
+        var department_offset = (department_page - 1) * department_items_per_page;
 
         function getArea(id){
 
@@ -399,6 +403,40 @@
 
                 //****************************//
 
+
+                 //controlling next and previous buttons for departments table
+                 function disableAllDepartment(){
+
+                    $('#department-previous').addClass('disable-link');
+                    $('#department-previous').removeClass('enable-link');
+
+                    $('#department-next').addClass('disable-link');
+                    $('#department-next').removeClass('enable-link');
+                    }
+
+                    function disablePreviousDepartment(){
+
+                    $('#department-previous').addClass('disable-link');
+                    $('#department-previous').removeClass('enable-link');
+                    }
+
+                    function disableNextDepartment(){
+                    $('#department-next').addClass('disable-link');
+                    $('#department-next').removeClass('enable-link');
+                    }
+
+                    function enablePreviousDepartment(){
+                    $('#department-previous').addClass('enable-link');
+                    $('#department-previous').removeClass('disable-link');
+                    }
+
+                    function enableNextDepartment(){
+                    $('#department-next').addClass('enable-link');
+                    $('#department-next').removeClass('disable-link');
+                    }
+
+                    //****************************//
+
                 function fetchPageData(offset){
 
                     $.ajax({
@@ -443,6 +481,22 @@
                         success:function(data) {
 
                             $('#RequestTableBody').html(data);
+
+                        }
+                    });
+
+                }
+
+                function fetchDepartmentPageData(offset){
+
+                    $.ajax({
+
+                        url: '/departments/get-page',
+                        type: "GET",
+                        data: { page_offset: offset},
+                        success:function(data) {
+
+                            $('#DepartmentTableBody').html(data);
 
                         }
                     });
@@ -659,6 +713,35 @@
                             else if(request_page == data)
                                 disableNextRequest();
                         }
+
+                    });
+                }
+
+
+                function getDepartmentTotalPages(){
+
+                    $.ajax({
+
+                    url: '/departments/get-total-pages',
+
+                    type: "GET",
+
+                    dataType: "json",
+
+                    success:function(data) {
+
+                        department_page_count = data;
+
+                        if(data == 0 || data == 1){
+
+                            disableAllDepartment();
+                        }
+
+                        if(department_page == 1)
+                            disablePreviousDepartment();
+                        else if(department_page == data)
+                            disableNextDepartment();
+                    }
 
                     });
                 }
@@ -1003,6 +1086,38 @@
                 });
 
 
+                $('#department-previous').on('click',function(){
+
+                    department_page-=1;
+
+                    enableNextDepartment();
+
+                    if(department_page == 1)
+                        disablePreviousDepartment();
+
+                    let offset = (department_page - 1) * department_items_per_page;
+
+                    fetchDepartmentPageData(offset);
+
+                });
+
+                $('#department-next').on('click',function(){
+
+                    department_page+=1;
+
+                    if(department_page > 1)
+                        enablePreviousDepartment();
+
+                    if(department_page == department_page_count)
+                        disableNextDepartment();
+
+                    let offset = (department_page - 1) * department_items_per_page;
+
+                    fetchDepartmentPageData(offset);
+
+                });
+
+
                 $('#account_type').on('change',function(){
 
                     if($(this).val().localeCompare("Academician") == 0)
@@ -1038,6 +1153,8 @@
                getTotalPages();
 
                getRequestTotalPages();
+
+               getDepartmentTotalPages();
 
                getStaffTotalPages();
 
