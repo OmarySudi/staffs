@@ -905,7 +905,7 @@
                     newEntry = $('#departmentSave').before(currentEntry.clone());
 
                     newEntry.find('input').val('');
-
+                    
                     controlForm.find('.department-entry:not(:last) .department-btn-add')
                         .removeClass('department-btn-add').addClass('department-btn-remove')
                         .removeClass('btn-success').addClass('btn-danger')
