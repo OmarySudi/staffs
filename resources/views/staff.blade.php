@@ -9,21 +9,7 @@
                 <div class="staff-left-column">
                  
                     <h3>{{ $staff->full_name }}</h3>
-
                     
-                     <!-- @foreach($roles as $role)
-                        @if($loop->last)
-                            <h4 class="role">{{ $role->name}}</h4>
-                        @else
-                            <h4 class="role">{{ $role->name}} ,</h4>
-                        @endif
-                     @endforeach
-                    
-                     @if($department !== '')
-
-                        <h4> Faculty: {{ $department[0]->name }}</h4> 
-                    @endif-->
-
                      <h4>{{ $staff->job_title}} </h4>
 
                      <div id="tabbed-content">
