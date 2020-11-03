@@ -29,6 +29,7 @@ Route::group(['prefix'=>'staffs'],function($router){
     $router->post('add-education-history','StaffController@addEducationHistory')->name('staffs.add-education-history');
     $router->post('add-job-details','StaffController@addJobDetails')->name('staffs.add-job-details');
     $router->post('add-areas','StaffController@addAreasOfResearch')->name('staffs.add-areas');
+    $router->post('add-accounts','StaffController@addAccounts')->name('staffs.add-accounts');
     $router->post('add-skills','StaffController@addSkills')->name('staffs.add-skills');
     $router->get('/get-total-pages','StaffController@getTotalPages');
     $router->get('/get-page','StaffController@getPage');

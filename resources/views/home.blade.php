@@ -30,6 +30,7 @@
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#skills" role="tab">Skills</a>
                         
                     @endif
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#accounts" role="tab">Other Accounts</a>
                 @endif
                
             </div>
@@ -121,6 +122,14 @@
                                                                     <option value="Mrs">Mrs</option>
                                                                 @endif
 
+                                                                @if($staff->name_prefix != 'Miss')
+                                                                    <option value="Miss">Miss</option>
+                                                                @endif
+
+                                                                @if($staff->name_prefix != 'Ms')
+                                                                    <option value="Ms">Ms</option>
+                                                                @endif
+
                                                                 @if($staff->name_prefix != 'Prof')
                                                                     <option value="Prof">Prof</option>
                                                                 @endif
@@ -132,6 +141,8 @@
                                                             @else
                                                                 <option value="Mr">Mr</option>
                                                                 <option value="Mrs">Mrs</option>
+                                                                <option value="Miss">Miss</option>
+                                                                <option value="Ms">Ms</option>
                                                                 <option value="Prof">Prof</option>
                                                                 <option value="Dr">Dr</option>
                                                             @endif
@@ -257,22 +268,6 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label text-md-right" for="linkedin">LinkedIn account(If you have)</label>
-
-                                    <div class="col-md-6">
-                                        <input id="linkedin" type="text" class="form-control" value="@if($staff != '' && $staff->linkedin != null) {{ $staff->linkedin}} @else {{ old('linkedin') }}@endif" name="linkedin" required autocomplete="linkedin">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label text-md-right" for="scholar">Google scholar account(If you have)</label>
-
-                                    <div class="col-md-6">
-                                        <input id="scholar" type="text" class="form-control" value="@if($staff != '' && $staff->scholar != null) {{ $staff->scholar}} @else {{ old('scholar') }}@endif" name="scholar" required autocomplete="scholar">
-                                    </div>
-                                </div>
-                               
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
@@ -309,6 +304,66 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-6 offset-md-5">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Save') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="accounts" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">{{ __('Other Accounts') }}</div>
+
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('staffs.add-accounts') }}">
+                                @csrf
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="linkedin">LinkedIn account(If you have)</label>
+
+                                    <div class="col-md-6">
+                                        <input id="linkedin" type="text" class="form-control" value="@if($staff != '' && $staff->linkedin != null) {{ $staff->linkedin}} @else {{ old('linkedin') }}@endif" name="linkedin" autocomplete="linkedin">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="scholar">Google scholar account(If you have)</label>
+
+                                    <div class="col-md-6">
+                                        <input id="scholar" type="text" class="form-control" value="@if($staff != '' && $staff->scholar != null) {{ $staff->scholar}} @else {{ old('scholar') }}@endif" name="scholar" autocomplete="scholar">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="gate">ResearchGate account(If you have)</label>
+
+                                    <div class="col-md-6">
+                                        <input id="gate" type="text" class="form-control" value="@if($staff != '' && $staff->gate != null) {{ $staff->gate}} @else {{ old('gate') }}@endif" name="gate" autocomplete="gate">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="academia">Academia account(If you have)</label>
+
+                                    <div class="col-md-6">
+                                        <input id="academia" type="text" class="form-control" value="@if($staff != '' && $staff->academia != null) {{ $staff->academia}} @else {{ old('academia') }}@endif" name="academia" autocomplete="academia">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="twitter">Twitter account(If you have)</label>
+
+                                    <div class="col-md-6">
+                                        <input id="twitter" type="text" class="form-control" value="@if($staff != '' && $staff->twitter != null) {{ $staff->twitter}} @else {{ old('twitter') }}@endif" name="twitter" autocomplete="twitter">
                                     </div>
                                 </div>
 

@@ -44,11 +44,7 @@ class StaffController extends Controller
 
             $checkedStaff->name_prefix = $request->name_prefix;
 
-            if($request->has('linkedin'))
-                $checkedStaff->linkedin = $request->linkedin;
-
-            if($request->has('scholar'))
-                $checkedStaff->scholar = $request->scholar;
+           
 
             if($request->has('picture')){
 
@@ -90,11 +86,7 @@ class StaffController extends Controller
             $staff->department_id = $request->department_name;
             $staff->name_prefix = $request->name_prefix;
 
-            if($request->has('linkedin'))
-                $staff->linkedin = $request->linkedin;
-
-            if($request->has('scholar'))
-                $staff->scholar = $request->scholar;
+           
 
             if($request->has('picture')){
 
@@ -276,6 +268,51 @@ class StaffController extends Controller
 
             $request->session()->flash('message.level', 'danger');
             $request->session()->flash('message.content', 'You need to send at least one field, please try again');
+    
+            return redirect()->route('home');
+        }
+    }
+
+    public function addAccounts(Request $request){
+
+        $staff = Staff::where('email',$request->user()->email)->first();
+
+        if($staff != null){
+
+            if($request->has('linkedin'))
+                $staff->linkedin = $request->linkedin;
+
+            if($request->has('scholar'))
+                $staff->scholar = $request->scholar;
+
+            if($request->has('gate'))
+                $staff->gate = $request->gate;
+
+            if($request->has('academia'))
+                $staff->academia = $request->academia;
+
+            if($request->has('twitter'))
+                $staff->twitter = $request->twitter;
+
+            if($staff->save()){
+
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Accounts have been added successfully');
+
+                return redirect()->route('home');
+            }else {
+
+                $request->session()->flash('message.level', 'danger');
+                $request->session()->flash('message.content', 'There is a problem , please try again');
+        
+                return redirect()->route('home');
+
+            }
+
+        } else {
+
+            $request->session()->flash('message.level', 'danger');
+            $request->session()->flash('message.content', 'You need to fill personal details first');
     
             return redirect()->route('home');
         }

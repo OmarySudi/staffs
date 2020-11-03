@@ -239,8 +239,32 @@
                         <i class="ai ai-google-scholar-square ai-2x mr-2"></i>
                     </a>
                     @endif
+
+                    @if($staff->twitter !== null)
+                    <a href="{{ $staff->twitter }}" target="_blank">
+                        <i class="fa fa-twitter-square fa-2x mr-2"></i>
+                    </a>
+                    @endif
                     
                     </p>
+
+
+                    <p class="mt-4">
+
+                    @if($staff->academia !== null)
+                    <a href="{{ $staff->academia }}" target="_blank">
+                        <i class="ai ai-academia-square ai-2x mr-2"></i>
+                    </a>
+                    @endif
+
+                    @if($staff->gate !== null)
+                    <a href="{{ $staff->gate}}" target="_blank"> 
+                        <i class="ai ai-researchgate-square ai-2x mr-2" aria-hidden="true"></i>
+                    </a>
+                    @endif
+                    
+                    </p>
+
                 </div>
             
         </div>
