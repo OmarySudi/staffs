@@ -85,6 +85,78 @@
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}</label>
 
                                     <div class="col-md-6">
+
+                                        <!-- <div class="row">
+                                            <div class="col-3">
+                                                <select id="account_type" name="account_type" class="form-control @error('account_type') is-invalid @enderror">
+                                                    <option>--- Select Account Type ---</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-9">
+                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="@if($staff != '') {{ $staff->full_name}} @else {{ old('name')}}@endif" required autocomplete="name" autofocus>
+
+                                                @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div> -->
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <select id="name_prefix" name="name_prefix" class="form-control @error('name_prefix') is-invalid @enderror">
+
+                                                            @if($staff != '')
+
+                                                                <option value="{{ $staff->name_prefix }}">{{ $staff->name_prefix }}</option>
+
+                                                                @if($staff->name_prefix != 'Mr')
+                                                                    <option value="Mr">Mr</option>
+                                                                @endif
+
+                                                                @if($staff->name_prefix != 'Mrs')
+                                                                    <option value="Mrs">Mrs</option>
+                                                                @endif
+
+                                                                @if($staff->name_prefix != 'Prof')
+                                                                    <option value="Prof">Prof</option>
+                                                                @endif
+
+                                                                @if($staff->name_prefix != 'Dr')
+                                                                    <option value="Dr">Dr</option>
+                                                                @endif
+
+                                                            @else
+                                                                <option value="Mr">Mr</option>
+                                                                <option value="Mrs">Mrs</option>
+                                                                <option value="Prof">Prof</option>
+                                                                <option value="Dr">Dr</option>
+                                                            @endif
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <input id="name" type="text" style="height:50px" class="form-control @error('name') is-invalid @enderror" name="name" value="@if($staff != '') {{ $staff->full_name}} @else {{ old('name')}}@endif" required autocomplete="name" autofocus>
+
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                       
+                                    </div>
+
+                                    <!-- <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <select id="account_type" name="account_type" class="form-control @error('account_type') is-invalid @enderror">
+                                                        <option>--- Select Account Type ---</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="@if($staff != '') {{ $staff->full_name}} @else {{ old('name')}}@endif" required autocomplete="name" autofocus>
 
                                         @error('name')
@@ -92,7 +164,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="form-group row">
@@ -182,6 +254,22 @@
                                             </div>
 
                                         @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="linkedin">LinkedIn account(If you have)</label>
+
+                                    <div class="col-md-6">
+                                        <input id="linkedin" type="text" class="form-control" value="@if($staff != '' && $staff->linkedin != null) {{ $staff->linkedin}} @else {{ old('linkedin') }}@endif" name="linkedin" required autocomplete="linkedin">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right" for="scholar">Google scholar account(If you have)</label>
+
+                                    <div class="col-md-6">
+                                        <input id="scholar" type="text" class="form-control" value="@if($staff != '' && $staff->scholar != null) {{ $staff->scholar}} @else {{ old('scholar') }}@endif" name="scholar" required autocomplete="scholar">
                                     </div>
                                 </div>
                                

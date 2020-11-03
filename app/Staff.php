@@ -11,6 +11,7 @@ class Staff extends Model
         'name', 
         'number',
         'address',
+        'name_prefix'
     ];
 
     protected $table = 'staffs';

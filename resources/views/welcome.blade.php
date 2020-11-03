@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div style="width: 9rem;">
-                                            <h5 class="font-weight-bold">{{ $staff->full_name}}</h5>
+                                            <h6 class="font-weight-bold">{{ $staff->name_prefix}}. {{ $staff->full_name}}</h6>
                                             <h6 style="margin-top:-1">{{ $staff->job_title}}</h6>
                                         </div>
                                     </div>

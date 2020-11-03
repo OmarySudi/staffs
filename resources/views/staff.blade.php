@@ -8,7 +8,7 @@
             <!-- <div class="row"> -->
                 <div class="staff-left-column">
                  
-                    <h3>{{ $staff->full_name }}</h3>
+                    <h3>{{ $staff->name_prefix }}. {{ $staff->full_name }}</h3>
                     
                      <h4>{{ $staff->job_title}} </h4>
 
@@ -21,7 +21,7 @@
                                     <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
                                 </li>
                             @elseif($staff->staff_category == 'Administrative')
-                                <li class="nav-item" role="presentation" style="width: 30%">
+                                <li class="nav-item" role="presentation" style="width: 20%">
                                     <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
                                 </li>
                             @else
@@ -44,10 +44,13 @@
                                     <a class="nav-link" id="pills-projects-tab" data-toggle="pill" href="#pills-projects" role="tab" aria-controls="pills-projects" aria-selected="false">Projects</a>
                                 </li>
                             @elseif($staff->staff_category == 'Administrative')
-                                <li class="nav-item" role="presentation" style="width: 30%">
+                                <li class="nav-item" role="presentation" style="width: 25%">
                                     <a class="nav-link" id="pills-projects-tab" data-toggle="pill" href="#pills-projects" role="tab" aria-controls="pills-projects" aria-selected="false">Projects</a>
                                 </li>
-                                <li class="nav-item" role="presentation" style="width: 30%">
+                                <li class="nav-item" role="presentation" style="width: 25%">
+                                    <a class="nav-link" id="pills-publications-tab" data-toggle="pill" href="#pills-publications" role="tab" aria-controls="pills-publications" aria-selected="false">Publications</a>
+                                </li>
+                                <li class="nav-item" role="presentation" style="width: 25%">
                                     <a class="nav-link" id="pills-skills-tab" data-toggle="pill" href="#pills-skills" role="tab" aria-controls="pills-skills" aria-selected="false">Skills</a>
                                 </li>
                             @endif
@@ -221,6 +224,25 @@
                     <p>{{ $staff->mobile_number}}</p>
 
                     <p>{{ $staff->address }}</p>
+
+                   
+
+                    <p class="mt-4">
+
+                    @if($staff->linkedin !== null)
+                    <a href="{{ $staff->linkedin}}" target="_blank"> 
+                        <i class="fa fa-linkedin-square fa-2x mr-2" aria-hidden="true"></i>
+                    </a>
+                    @endif
+                    
+
+                    @if($staff->scholar !== null)
+                    <a href="{{ $staff->scholar }}" target="_blank">
+                        <i class="ai ai-google-scholar-square ai-2x mr-2"></i>
+                    </a>
+                    @endif
+                    
+                    </p>
                 </div>
             
         </div>

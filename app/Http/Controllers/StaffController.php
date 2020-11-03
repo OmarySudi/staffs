@@ -26,7 +26,8 @@ class StaffController extends Controller
             'address' => 'required',
             'number' => 'required',
             'job_title' => 'required',
-            'department_name' => 'required'
+            'department_name' => 'required',
+            'name_prefix' => 'required'
         ]);
 
         $signed_user = auth()->user();
@@ -40,6 +41,14 @@ class StaffController extends Controller
             $checkedStaff->mobile_number = $request->number;
             $checkedStaff->job_title = $request->job_title;
             $checkedStaff->department_id = $request->department_name;
+
+            $checkedStaff->name_prefix = $request->name_prefix;
+
+            if($request->has('linkedin'))
+                $checkedStaff->linkedin = $request->linkedin;
+
+            if($request->has('scholar'))
+                $checkedStaff->scholar = $request->scholar;
 
             if($request->has('picture')){
 
@@ -79,7 +88,13 @@ class StaffController extends Controller
             $staff->mobile_number = $request->number;
             $staff->job_title = $request->job_title;
             $staff->department_id = $request->department_name;
+            $staff->name_prefix = $request->name_prefix;
 
+            if($request->has('linkedin'))
+                $staff->linkedin = $request->linkedin;
+
+            if($request->has('scholar'))
+                $staff->scholar = $request->scholar;
 
             if($request->has('picture')){
 
