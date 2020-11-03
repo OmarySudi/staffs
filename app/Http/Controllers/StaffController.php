@@ -11,6 +11,7 @@ use App\CourseStaff;
 use App\AreaOfResearch;
 use App\Skill;
 use App\Course;
+use App\User;
 
 class StaffController extends Controller
 {
@@ -601,11 +602,15 @@ class StaffController extends Controller
 
     public function deleteStaff(Request $request){
 
-        $staff =Staff::where('id',$request->staff_ondelete_id)->first();
+        $staff = Staff::where('id',$request->staff_ondelete_id)->first();
 
-        if($staff !== null){
+        $user = User::where('email',$staff->email)->first();
 
-            if(DB::table('staffs')->where('id',$request->staff_ondelete_id)->delete()){
+        if($staff !== null && $user !== null){
+
+            if(DB::table('staffs')->where('id',$request->staff_ondelete_id)->delete() 
+                && DB::table('users')->where('email',$user->email)->delete())
+            {
 
                 $request->session()->flash('message.level', 'success');
                 $request->session()->flash('message.content', 'Record has been deleted');
