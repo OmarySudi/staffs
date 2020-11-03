@@ -71,8 +71,11 @@
 
 .header{
 
-    background: blue;
+    /* background: blue; */
+    background-image: url("/img/duce.jpg");
+    background-repeat: no-repeat, repeat;
     color: white;
+    height:135px;
     font-size: 1.2em;
     font-weight: 600;
 }
