@@ -25,7 +25,7 @@
 
                     @elseif(Auth::user()->account_type == 'Administrative')
 
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a>
+                        <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a> -->
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#skills" role="tab">Skills</a>
                         

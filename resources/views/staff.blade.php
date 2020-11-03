@@ -21,7 +21,7 @@
                                     <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
                                 </li>
                             @elseif($staff->staff_category == 'Administrative')
-                                <li class="nav-item" role="presentation" style="width: 20%">
+                                <li class="nav-item" role="presentation" style="width: 30%">
                                     <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
                                 </li>
                             @else
@@ -44,13 +44,11 @@
                                     <a class="nav-link" id="pills-projects-tab" data-toggle="pill" href="#pills-projects" role="tab" aria-controls="pills-projects" aria-selected="false">Projects</a>
                                 </li>
                             @elseif($staff->staff_category == 'Administrative')
-                                <li class="nav-item" role="presentation" style="width: 25%">
+                                <li class="nav-item" role="presentation" style="width: 30%">
                                     <a class="nav-link" id="pills-projects-tab" data-toggle="pill" href="#pills-projects" role="tab" aria-controls="pills-projects" aria-selected="false">Projects</a>
                                 </li>
-                                <li class="nav-item" role="presentation" style="width: 25%">
-                                    <a class="nav-link" id="pills-publications-tab" data-toggle="pill" href="#pills-publications" role="tab" aria-controls="pills-publications" aria-selected="false">Publications</a>
-                                </li>
-                                <li class="nav-item" role="presentation" style="width: 25%">
+                              
+                                <li class="nav-item" role="presentation" style="width: 30%">
                                     <a class="nav-link" id="pills-skills-tab" data-toggle="pill" href="#pills-skills" role="tab" aria-controls="pills-skills" aria-selected="false">Skills</a>
                                 </li>
                             @endif
