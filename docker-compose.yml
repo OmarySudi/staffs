@@ -1,0 +1,56 @@
+version: "3.2"
+services:
+  app:
+    build:
+      args:
+        user: sudi
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: staffs
+    container_name: staffs-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - staffs
+
+  db:
+    image: mysql:5.7
+    container_name: staffs-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql/my-settings.cnf:/etc/mysql/my.cnf
+      - dbdata:/var/lib/mysql/
+    networks:
+      - staffs
+
+  nginx:
+    image: nginx:alpine
+    container_name: staffs-nginx
+    restart: unless-stopped
+    ports:
+      - 8020:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - staffs
+
+networks:
+  staffs:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+
