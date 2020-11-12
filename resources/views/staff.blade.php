@@ -52,18 +52,6 @@
                                     <a class="nav-link" id="pills-skills-tab" data-toggle="pill" href="#pills-skills" role="tab" aria-controls="pills-skills" aria-selected="false">Skills</a>
                                 </li>
                             @endif
-
-                            <!-- @foreach($roles as $role)
-                                @if($role->name == 'Lecturer') -->
-                            <!-- <li class="nav-item" role="presentation" style="width: 30%">
-                                <a class="nav-link" id="pills-courses-tab" data-toggle="pill" href="#pills-courses" role="tab" aria-controls="pills-courses" aria-selected="false">Courses</a>
-                            </li> -->
-                                    <!-- @break
-                                @endif
-                            @endforeach -->
-                            <!-- <li class="nav-item" role="presentation" style="width: 30%">
-                                <a  class="nav-link" id="pills-background-tab" data-toggle="pill" href="#pills-background" role="tab" aria-controls="pills-background" aria-selected="false">Background</a>
-                            </li> -->
                         </ul>
                         <div class="tab-content staff-dir" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
@@ -140,30 +128,7 @@
                                 @endforeach
                               
                             </div>
-                            <!-- <div class="tab-pane fade" id="pills-background" role="tabpanel" aria-labelledby="pills-background-tab">
-                                
-                                <h2>Education History</h2>
-
-                                <ul>
-                                    @foreach($education as $history)
-                                    
-                                        <li class="mt-3">
-                                            <span style="font-weight:bold">{{ $history->award_acronym }}. {{ $history->course }} </span>{{ $history->university}} , {{ $history->year}}
-                                        </li>
-                                    @endforeach
-                                </ul>
-
-
-                                <h2>Employment History</h2>
-                                   
-                                    <ul>
-                                        <li class="mt-3">
-                                            @foreach($employment as $history)
-                                                {{ $history->position }} at {{ $history->place }} from {{ $history->start_year}}-{{ $history->end_year}}
-                                            @endforeach
-                                        </li>
-                                    </ul>
-                            </div> -->
+                           
                             <div class="tab-pane fade" id="pills-skills" role="tabpanel" aria-labelledby="pills-skills-tab">
                                 <h2>Skills</h2>
 
