@@ -28,7 +28,7 @@ class AddFieldVerifiedInUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropDown('verified');
+            $table->dropColumn('verified');
         });
     }
 }
