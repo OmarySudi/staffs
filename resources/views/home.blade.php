@@ -25,7 +25,7 @@
 
                     @elseif(Auth::user()->account_type == 'Administrative')
 
-                        <!-- <a class="list-group-item list-group-item-action" data-toggle="list" href="#publication"  role="tab" id="educationTab">Publications</a> -->
+                        
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#project" role="tab">Projects</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#skills" role="tab">Skills</a>
                         
@@ -66,44 +66,12 @@
                                 @csrf
 
                                 
-                                <!-- <div class="form-group row">
-                                    <label class="col-md-4 col-form-label text-md-right" for="type">Account type</label>
-
-                                    <div class="col-md-6">
-                                        <select id="account_type" name="account_type" class="form-control @error('account_type') is-invalid @enderror">
-                                           <option>--- Select Account Type ---</option>
-                                        </select>
-
-                                        @error('account_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div> -->
+                                
                               
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}</label>
 
                                     <div class="col-md-6">
-
-                                        <!-- <div class="row">
-                                            <div class="col-3">
-                                                <select id="account_type" name="account_type" class="form-control @error('account_type') is-invalid @enderror">
-                                                    <option>--- Select Account Type ---</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-9">
-                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="@if($staff != '') {{ $staff->full_name}} @else {{ old('name')}}@endif" required autocomplete="name" autofocus>
-
-                                                @error('name')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div> -->
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -160,22 +128,7 @@
                                        
                                     </div>
 
-                                    <!-- <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <select id="account_type" name="account_type" class="form-control @error('account_type') is-invalid @enderror">
-                                                        <option>--- Select Account Type ---</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="@if($staff != '') {{ $staff->full_name}} @else {{ old('name')}}@endif" required autocomplete="name" autofocus>
-
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div> -->
+                                    
                                 </div>
 
                                 <div class="form-group row">
@@ -226,9 +179,7 @@
                                     <div class="col-md-6">
                                         <select id="department_name" name="department_name" class="form-control @error('department_name') is-invalid @enderror" required>
                                         <option value="">--- Select Department ---</option>
-                                            <!-- @foreach($departments as $department)
-                                                <option value="{{$department->id}}">{{ $department->name }}</option>
-                                            @endforeach -->
+                                           
                                         </select>
 
                                         @error('department_name')
@@ -471,26 +422,7 @@
                             </table>
                         </div>
                     
-                        <!-- <div class="card">
-                            <div class="card-header">{{ __('Staffs') }}</div>
-
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Full Name</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div> -->
+                        
                     </div>
 
                     <div class="modal" id="RequestDenyModal" tabindex="-1" role="dialog" aria-labelledby="RequestDenyModalLabel" aria-hidden="true">
@@ -594,15 +526,7 @@
                                                 <i class="fa fa-check" aria-hidden="true">&nbsp;Verify</i>
                                             </button>
 
-                                            <!-- <button 
-
-                                                type="button" 
-                                                data-toggle="modal"
-                                                data-target = "#RequestDenyModal"
-                                                onclick="getStaff({{ $staff->id}})";
-                                                class="btn  btn-sm btn-danger ml-5">
-                                                <i class="fa fa-trash" aria-hidden="true">&nbsp;Deny</i>
-                                            </button> -->
+                                            
                                         </td> 
                                     </tr>
                                    @endforeach
@@ -615,26 +539,7 @@
                             </table>
                         </div>
                     
-                        <!-- <div class="card">
-                            <div class="card-header">{{ __('Staffs') }}</div>
-
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Full Name</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div> -->
+                       
                     </div>
 
                     <div class="tab-pane" id="departments" role="tabpanel">
@@ -650,16 +555,14 @@
                         <div class="modal fade" id="DepartmentModal" tabindex="-1" role="dialog" aria-labelledby="DepartmentModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <!-- <div class="container">
-                                        <div class="row justify-content-center">
-                                            <div class="col-12"> -->
+                                   
                                                 <div class="card">
 
                                                     <div class="card-header">{{ __('Department') }}</div>
 
                                                     <div class="card-body">
                                                         <div class="control-group" id="department-fields">
-                                                            <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                            
                                                             <div class="department-controls"> 
 
                                                             <form method="POST" action="{{ route('departments.add') }}">
@@ -689,9 +592,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <!-- </div>
-                                        </div>
-                                    </div> -->
+                                            
                                 </div>
                             </div>
                         </div>
@@ -700,9 +601,7 @@
                         <div class="modal fade" id="departmentEditModal" tabindex="-1" role="dialog" aria-labelledby="departmentEditModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <!-- <div class="container">
-                                        <div class="row justify-content-center">
-                                            <div class="col-12"> -->
+                                   
                                                 <div class="card">
 
                                                     <div class="card-header">{{ __('Edit Department') }}</div>
@@ -737,9 +636,7 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                            <!-- </div>
-                                        </div>
-                                    </div> -->
+                                            
                                 </div>
                             </div>
                         </div>
@@ -779,17 +676,7 @@
 
                         <div class="table-responsive">
 
-                            <!-- <center>
-                                <div class="input-group mb-3" style="width:50%; height: 30px">
-                                    <input type="text" class="form-control" style="height:35px" id="department-search" name="search" placeholder="Search by name" arial-label="Search by department name" aria-describedby="basic-addon4">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon4">
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </center> -->
-
+                            
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
@@ -851,16 +738,14 @@
                         <div class="modal fade" id="CategoryModal" tabindex="-1" role="dialog" aria-labelledby="CategoryModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <!-- <div class="container">
-                                        <div class="row justify-content-center">
-                                            <div class="col-12"> -->
+                                   
                                                 <div class="card">
 
                                                     <div class="card-header">{{ __('Account Type') }}</div>
 
                                                     <div class="card-body">
                                                         <div class="control-group" id="category-fields">
-                                                            <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                           
                                                             <div class="category-controls"> 
 
                                                             <form method="POST" action="{{ route('categories.add') }}">
@@ -890,9 +775,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <!-- </div>
-                                        </div>
-                                    </div> -->
+                                            
                                 </div>
                             </div>
                         </div>
@@ -901,9 +784,7 @@
                         <div class="modal fade" id="categoryEditModal" tabindex="-1" role="dialog" aria-labelledby="categoryEditModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <!-- <div class="container">
-                                        <div class="row justify-content-center">
-                                            <div class="col-12"> -->
+                                   
                                                 <div class="card">
 
                                                     <div class="card-header">{{ __('Edit Account Type') }}</div>
@@ -938,9 +819,7 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                            <!-- </div>
-                                        </div>
-                                    </div> -->
+                                            
                                 </div>
                             </div>
                         </div>
@@ -1036,16 +915,14 @@
                     <div class="modal fade" id="AreaOfResearchModal" tabindex="-1" role="dialog" aria-labelledby="AreaOfResearchModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <!-- <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12"> -->
+                                
                                             <div class="card">
 
                                                 <div class="card-header">{{ __('Areas of research') }}</div>
 
                                                 <div class="card-body">
                                                     <div class="control-group" id="fields">
-                                                        <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                       
                                                         <div class="controls"> 
 
                                                         <form method="POST" action="{{ route('staffs.add-areas') }}">
@@ -1075,9 +952,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <!-- </div>
-                                    </div>
-                                </div> -->
+                                        
                             </div>
                         </div>
                     </div>
@@ -1086,9 +961,7 @@
                     <div class="modal fade" id="areaEditModal" tabindex="-1" role="dialog" aria-labelledby="areaEditModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <!-- <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12"> -->
+                                
                                             <div class="card">
 
                                                 <div class="card-header">{{ __('Edit Areas') }}</div>
@@ -1123,9 +996,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        <!-- </div>
-                                    </div>
-                                </div> -->
+                                        
                             </div>
                         </div>
                     </div>
@@ -1208,57 +1079,7 @@
 
                 <div class="tab-pane" id="skills" role="tabpanel">
                     
-                   
-                    <!-- <div class="card">
-
-                        @if($staff != '')
-                            <div class="card-header">@if($staff->skills == ''){{ __('Add Skills') }} @else {{ __('Update skills') }}@endif</div>
-                        @else
-                            <div class="card-header">{{ __('Add Skills') }}</div>
-                        @endif
-
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('staffs.add-skills') }}">
-                                @csrf
-
-                                <div class="form-group row">
-                                   
-                                    <div class="col-sm-12">
-
-                                        <div class="form-group">
-                                            <textarea 
-                                                rows="3" id="skills-textarea" 
-                                                class="form-control @error('skills') is-invalid @enderror" 
-                                                name="skills" 
-                                                value="{{ old('skills') }}" 
-                                                placeholder="first skill,second skill, third skill"
-                                                required 
-                                                autocomplete="skills" 
-                                                autofocus
-                                            >
-                                                @if($staff != '') {{ $staff->skills }} @endif
-                                            </textarea>
-                                        </div>
-
-                                        @error('skills')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-5">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ __('Save') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div> -->
-
+                
                     <p>
                         <span class="mr-3">Click Add button to add Skills</span>
 
@@ -1270,16 +1091,14 @@
                     <div class="modal fade" id="SkillsModal" tabindex="-1" role="dialog" aria-labelledby="SkillsModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <!-- <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12"> -->
+                                
                                             <div class="card">
 
                                                 <div class="card-header">{{ __('Skills') }}</div>
 
                                                 <div class="card-body">
                                                     <div class="control-group" id="skill-fields">
-                                                        <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                        
                                                         <div class="skill-controls"> 
 
                                                         <form method="POST" action="{{ route('staffs.add-skills') }}">
@@ -1308,9 +1127,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <!-- </div>
-                                    </div>
-                                </div> -->
+                                        
                             </div>
                         </div>
                     </div>
@@ -1318,9 +1135,7 @@
                     <div class="modal fade" id="skillEditModal" tabindex="-1" role="dialog" aria-labelledby="skillEditModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <!-- <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12"> -->
+                                
                                             <div class="card">
 
                                                 <div class="card-header">{{ __('Edit Skills') }}</div>
@@ -1355,9 +1170,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        <!-- </div>
-                                    </div>
-                                </div> -->
+                                        
                             </div>
                         </div>
                     </div>
@@ -1437,511 +1250,6 @@
                         </table>
                     </div>
                 </div>
-
-                <!-- <div class="tab-pane" id="education" role="tabpanel">
-
-                    <p>
-                        <span class="mr-3">Click Add button to add another history to list</span>
-
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#educationHistoryModal">
-                            ADD
-                        </button>
-                    </p> -->
-
-                    <!-- Modal -->
-                    <!-- <div class="modal fade" id="educationHistoryModal" tabindex="-1" role="dialog" aria-labelledby="educationHistoryModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                               
-                                <div class="card">
-                                    <div class="card-header">{{_('Education history')}}</div>
-                                    <div class="card-body">
-                                        <form method="POST" action="{{ route('education.create') }}">
-                                            @csrf
-
-                                            <div class="form-group row">
-                                                <label for="college" class="col-md-4 col-form-label text-md-right">{{ __('College/University') }}</label>
-
-                                                <div class="col-md-6">
-                                                    <input id="college" type="text" class="form-control @error('college') is-invalid @enderror" name="college" value="{{ old('college') }}" required autocomplete="college" autofocus>
-
-                                                    @error('college')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label class="col-md-4 col-form-label text-md-right" for="award">Award</label>
-
-                                                <div class="col-md-6">
-                                                    <select id="award" name="award" class="form-control @error('award') is-invalid @enderror">
-                                                        <option selected value="Bachelor of Science Degree">Bachelor of Science Degree</option>
-                                                        <option value="Bachelor of Arts Degree">Bachelor of Arts Degree</option>
-                                                        <option value="Masters of Science Degree">Masters of Science Degree</option>
-                                                        <option value="Masters of Arts Degree">Masters of Arts Degree</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="faculty" class="col-md-4 col-form-label text-md-right">{{ __('Facult') }}</label>
-
-                                                <div class="col-md-6">
-                                                    <input id="faculty" type="text" class="form-control @error('faculty') is-invalid @enderror" name="faculty" value="{{ old('faculty') }}" required autocomplete="faculty" autofocus>
-
-                                                    @error('faculty')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('Year Completed') }}</label>
-
-                                                <div class="col-md-6">
-                                                    <input id="year" type="text" class="form-control @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" required autocomplete="year" autofocus>
-
-                                                    @error('year')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row mb-0">
-                                                <div class="col-md-6 offset-md-5">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        {{ __('Save') }}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="table-responsive">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                <th scope="col">University</th>
-                                <th scope="col">Course</th>
-                                <th scope="col">Completed Year</th>
-                                <th colspan="2"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @if($education_histories != '')
-                                @foreach($education_histories as $history)
-                                    <tr>
-                                    <td>{{ $history->university}}</td>
-                                    <td>{{ $history->course}}</td>
-                                    <td>{{ $history->year }}</td>
-                                    <td>
-                                        <button 
-                                            type="button"
-                                            data-toggle="modal"
-                                            data-target = "#educationEditModal"
-                                            onclick="getEducationHistory({{ $history->id}})"
-                                            class="btn btn-sm btn-success ml-5">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button 
-                                        type="button"
-                                        data-toggle="modal"
-                                        data-target = "#educationDeleteModal"
-                                        onclick="getEducationHistory({{ $history->id}})"
-                                        class="btn  btn-sm btn-danger ml-5">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-                       
-                    </div> -->
-
-                    <!-- <div class="modal" id="educationDeleteModal" tabindex="-1" role="dialog" aria-labelledby="educationDeleteModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="card">
-                                    <div class="card-header">{{__('Are you sure you want to delete this record?') }}</div>
-                                    <div class="card-body">
-                                        <form method="POST" action="{{ route('education.deleteHistory') }}">
-                                            @csrf
-
-                                            <input type="hidden" id="ondelete_id" name="ondelete_id">
-
-                                            <div class="form-group">
-                                                <div class="pull-right">
-
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
-                                                        {{ __('No') }}
-                                                    </button>
-
-                                                    <button type="submit" class="btn btn-primary">
-                                                        {{ __('Yes') }}
-                                                    </button>
-
-                                                </div>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="modal fade" id="educationEditModal" tabindex="-1" role="dialog" aria-labelledby="educationEditModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                               
-                                <div class="card">
-                                    <div class="card-header">{{_('Edit Education history')}}</div>
-                                    <div class="card-body">
-                                        <form method="POST" action="{{ route('education.update') }}">
-                                            @csrf
-
-                                            <input type="hidden" id="education_id" name="education_id">
-
-                                            <div class="form-group row">
-                                                <label for="college" class="col-md-4 col-form-label text-md-right">{{ __('College/University') }}</label>
-
-                                                <div class="col-md-6">
-                                                    <input id="editedcollege" type="text" class="form-control @error('college') is-invalid @enderror" name="college" value="{{ old('college') }}" required autocomplete="college" autofocus>
-
-                                                    @error('college')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label class="col-md-4 col-form-label text-md-right" for="award">Award</label>
-
-                                                <div class="col-md-6">
-                                                    <select id="editedaward" name="award" class="form-control @error('award') is-invalid @enderror">
-                                                        <option value="Bachelor of Science Degree">Bachelor of Science Degree</option>
-                                                        <option value="Bachelor of Arts Degree">Bachelor of Arts Degree</option>
-                                                        <option value="Masters of Science Degree">Masters of Science Degree</option>
-                                                        <option value="Masters of Arts Degree">Masters of Arts Degree</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="faculty" class="col-md-4 col-form-label text-md-right">{{ __('Facult') }}</label>
-
-                                                <div class="col-md-6">
-                                                    <input id="editedfaculty" type="text" class="form-control @error('faculty') is-invalid @enderror" name="faculty" value="{{ old('faculty') }}" required autocomplete="faculty" autofocus>
-
-                                                    @error('faculty')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('Year Completed') }}</label>
-
-                                                <div class="col-md-6">
-                                                    <input id="editedyear" type="text" class="form-control @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" required autocomplete="year" autofocus>
-
-                                                    @error('year')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row mb-0">
-                                                <div class="col-md-6 offset-md-5">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        {{ __('Save') }}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="modal" id="employmentDeleteModal" tabindex="-1" role="dialog" aria-labelledby="employmentDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="card">
-                                <div class="card-header">{{__('Are you sure you want to delete this record?') }}</div>
-                                <div class="card-body">
-                                    <form method="POST" action="{{ route('employment.deleteHistory') }}">
-                                        @csrf
-
-                                        <input type="hidden" id="employment_ondelete_id" name="employment_ondelete_id">
-
-                                        <div class="form-group">
-                                            <div class="pull-right">
-
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">
-                                                    {{ __('No') }}
-                                                </button>
-
-                                                <button type="submit" class="btn btn-primary">
-                                                    {{ __('Yes') }}
-                                                </button>
-
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="employmentEditModal" tabindex="-1" role="dialog" aria-labelledby="employmentEditModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            
-                            <div class="card">
-                                <div class="card-header">{{_('Edit Employment history')}}</div>
-                                <div class="card-body">
-                                    <form method="POST" action="{{ route('employment.update') }}">
-                                        @csrf
-
-                                        <input type="hidden" id="employment_id" name="employment_id">
-
-                                        <div class="form-group row">
-                                            <label for="college" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="editedposition" type="text" class="form-control @error('position') is-invalid @enderror" name="position" value="{{ old('position') }}" required autocomplete="position" autofocus>
-
-                                                @error('position')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="place" class="col-md-4 col-form-label text-md-right">{{ __('Place of Work') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="editedplace" type="text" class="form-control @error('place') is-invalid @enderror" name="place" value="{{ old('place') }}" required autocomplete="place" autofocus>
-
-                                                @error('place')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="start_year" class="col-md-4 col-form-label text-md-right">{{ __('Start Year') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="editedstartyear" type="text" class="form-control @error('start_year') is-invalid @enderror" name="start_year" value="{{ old('start_year') }}" required autocomplete="start_year" autofocus>
-
-                                                @error('start_year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="end_year" class="col-md-4 col-form-label text-md-right">{{ __('End Year') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="editedendyear" type="text" class="form-control @error('end_year') is-invalid @enderror" name="end_year" value="{{ old('end_year') }}" required autocomplete="end_year" autofocus>
-
-                                                @error('end_year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row mb-0">
-                                            <div class="col-md-6 offset-md-5">
-                                                <button type="submit" class="btn btn-primary">
-                                                    {{ __('Save') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane" id="emplyoment" role="tabpanel">
-                
-                    <p>
-                        <span class="mr-3">Click Add button to add employment to list</span>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employmentHistoryModal">
-                           ADD
-                        </button>
-                    </p>
-
-                    <div class="modal fade" id="employmentHistoryModal" tabindex="-1" role="dialog" aria-labelledby="employmentHistoryModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="card">
-                                <div class="card-header">{{_('Employment history')}}</div>
-                                <div class="card-body">
-                                    <form method="POST" action="{{ route('employment.create') }}">
-                                        @csrf
-
-                                        <div class="form-group row">
-                                            <label for="position" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="position" type="text" class="form-control @error('position') is-invalid @enderror" name="position" value="{{ old('position') }}" required autocomplete="position" autofocus>
-
-                                                @error('position')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                        <label for="place" class="col-md-4 col-form-label text-md-right">{{ __('Place of Work') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="place" type="text" class="form-control @error('place') is-invalid @enderror" name="place" value="{{ old('place') }}" required autocomplete="place" autofocus>
-
-                                                @error('place')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="start_year" class="col-md-4 col-form-label text-md-right">{{ __('Start Year') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="start_year" type="text" class="form-control @error('start_year') is-invalid @enderror" name="start_year" value="{{ old('start_year') }}" required autocomplete="start_year" autofocus>
-
-                                                @error('start_year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="end_year" class="col-md-4 col-form-label text-md-right">{{ __('End Year') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="end_year" type="text" class="form-control @error('end_year') is-invalid @enderror" name="end_year" value="{{ old('end_year') }}" required autocomplete="end_year" autofocus>
-
-                                                @error('end_year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row mb-0">
-                                            <div class="col-md-6 offset-md-5">
-                                                <button type="submit" class="btn btn-primary">
-                                                    {{ __('Save') }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div class="table-responsive">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                <th scope="col">Position</th>
-                                <th scope="col">Place</th>
-                                <th scope="col">Start Year</th>
-                                <th scope="col">End Year</th>
-                                <th colspan="2"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @if($employment_histories != '')
-                                @foreach($employment_histories as $employment)
-                                    <tr>
-                                    <td>{{ $employment->position}}</td>
-                                    <td>{{ $employment->place}}</td>
-                                    <td>{{ $employment->start_year}}</td>
-                                    <td>{{ $employment->end_year}}</td>
-                                    <td>
-                                        <button 
-                                            type="button"
-                                            data-toggle="modal"
-                                            data-target = "#employmentEditModal"
-                                            onclick="getEmploymentHistory({{ $employment->id}})"
-                                            class="btn btn-sm btn-success ml-5">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button 
-
-                                        type="button" 
-                                        data-toggle="modal"
-                                        data-target = "#employmentDeleteModal"
-                                        onclick="getEmploymentHistory({{ $employment->id}})"
-                                        class="btn  btn-sm btn-danger ml-5">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-                       
-                    </div>
-                </div> -->
-
 
                 <div class="modal" id="projectDeleteModal" tabindex="-1" role="dialog" aria-labelledby="projectDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -2188,19 +1496,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- <div class="form-group row">
-                                            <label for="end_year" class="col-md-4 col-form-label text-md-right">{{ __('End Year') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="end_year" type="text" class="form-control @error('end_year') is-invalid @enderror" name="end_year" value="{{ old('end_year') }}" required autocomplete="end_year" autofocus>
-
-                                                @error('end_year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div> -->
+                                        
 
                                         <div class="form-group row mb-0">
                                             <div class="col-md-6 offset-md-5">
@@ -2527,13 +1823,7 @@
                                             <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
 
                                             <div class="col-md-6">
-                                                <!-- <input id="comference_year" required type="text" class="form-control @error('comference_year') is-invalid @enderror" name="comference_year" value="{{ old('comference_year') }}" autocomplete="comference_year" autofocus>
-
-                                                @error('comference_year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror -->
+                                                
                                                 <select id="comference_year" name="comference_year" class="form-control @error('comference_year') is-invalid @enderror">
                                                    
                                                     <?php 
@@ -2680,13 +1970,7 @@
                                             <label for="year" class="col-md-4 col-form-label text-md-right">{{ __('Year') }}</label>
 
                                             <div class="col-md-6">
-                                                <!-- <input id="year" type="text" class="form-control @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" autocomplete="year" autofocus>
-
-                                                @error('year')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror -->
+                                                
                                                 <select id="year" name="year" class="form-control @error('year') is-invalid @enderror">
                                                     <option value="1950" selected>1950</option>
 
@@ -2856,56 +2140,6 @@
                     </div>
                     
                   
-                    
-                    <!-- <div class="table-responsive">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                <th scope="col">Position</th>
-                                <th scope="col">Place</th>
-                                <th scope="col">Start Year</th>
-                                <th scope="col">End Year</th>
-                                <th colspan="2"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @if($employment_histories != '')
-                                @foreach($employment_histories as $employment)
-                                    <tr>
-                                    <td>{{ $employment->position}}</td>
-                                    <td>{{ $employment->place}}</td>
-                                    <td>{{ $employment->start_year}}</td>
-                                    <td>{{ $employment->end_year}}</td>
-                                    <td>
-                                        <button 
-                                            type="button"
-                                            data-toggle="modal"
-                                            data-target = "#employmentEditModal"
-                                            onclick="getEmploymentHistory({{ $employment->id}})"
-                                            class="btn btn-sm btn-success ml-5">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button 
-
-                                        type="button" 
-                                        data-toggle="modal"
-                                        data-target = "#employmentDeleteModal"
-                                        onclick="getEmploymentHistory({{ $employment->id}})"
-                                        class="btn  btn-sm btn-danger ml-5">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-                       
-                    </div> -->
-
                 </div>
 
                 <div class="tab-pane" id="attachments" role="tabpanel">
@@ -2968,16 +2202,14 @@
                     <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="courseModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <!-- <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12"> -->
+                                
                                             <div class="card">
 
                                                 <div class="card-header">{{ __('Current courses') }}</div>
 
                                                 <div class="card-body">
                                                     <div class="control-group" id="course-fields">
-                                                        <!-- <label class="control-label" for="field1">Nice Multiple Form Fields</label> -->
+                                                       
                                                         <div class="course-controls"> 
 
                                                         <form method="POST" action="{{ route('staffs.add-job-details') }}">
@@ -3006,9 +2238,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <!-- </div>
-                                    </div>
-                                </div> -->
+                                        
                             </div>
                         </div>
                     </div>
@@ -3016,9 +2246,7 @@
                     <div class="modal fade" id="courseEditModal" tabindex="-1" role="dialog" aria-labelledby="courseEditModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <!-- <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12"> -->
+                                
                                             <div class="card">
 
                                                 <div class="card-header">{{ __('Edit Courses') }}</div>
@@ -3053,9 +2281,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        <!-- </div>
-                                    </div>
-                                </div> -->
+                                        
                             </div>
                         </div>
                     </div>
