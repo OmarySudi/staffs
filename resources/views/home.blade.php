@@ -1597,7 +1597,7 @@
                         <div class="modal-content">
                             
                             <div class="card">
-                                <div class="card-header">{{_('Edit Publication')}}</div>
+                                <div class="card-header">{{__('Edit Publication')}}</div>
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('publication.update-journal') }}">
                                         @csrf
@@ -1687,7 +1687,7 @@
                         <div class="modal-content">
                             
                             <div class="card">
-                                <div class="card-header">{{_('Edit Publication')}}</div>
+                                <div class="card-header">{{__('Edit Publication')}}</div>
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('publication.update-book') }}">
                                         @csrf
@@ -1783,7 +1783,7 @@
                         <div class="modal-content">
                             
                             <div class="card">
-                                <div class="card-header">{{_('Edit Publication')}}</div>
+                                <div class="card-header">{{__('Edit Publication')}}</div>
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('publication.update-comference') }}">
                                         @csrf
@@ -1885,7 +1885,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="card">
-                                <div class="card-header">{{_('Publication')}}</div>
+                                <div class="card-header">{{__('Publication')}}</div>
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('publication.create') }}">
                                         @csrf
@@ -2144,7 +2144,7 @@
 
                 <div class="tab-pane" id="attachments" role="tabpanel">
                     <div class="card">
-                        <div class="card-header">{{ __ ('Attachments')}}</div>
+                        <div class="card-header">{{ __('Attachments')}}</div>
                         <div class="card-body">
                         <form method="POST" action="{{ route('staffs.add-cv') }}" enctype="multipart/form-data">
                             @csrf
