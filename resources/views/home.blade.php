@@ -1288,7 +1288,7 @@
                         <div class="modal-content">
                             
                             <div class="card">
-                                <div class="card-header">{{_('Edit Project')}}</div>
+                                <div class="card-header">{{__('Edit Project')}}</div>
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('project.update') }}">
                                         @csrf
