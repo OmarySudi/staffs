@@ -8,27 +8,7 @@
 
         <div class="container">
 
-            <!-- <center>
-                <div class="input-group mb-3" style="width:50%; height: 50px">
-                    <input type="text" class="form-control" style="height:50px" id="search" name="search" placeholder="Search by staff name" arial-label="Search by staff name" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="basic-addon2">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                </div>
-            </center> -->
-        
            
-             <!-- <div class="row">
-
-                <div class="col-12 align-self-end mb-2">
-
-                    <div style="float:right">
-                        <a href="#" id="previous" class="page-links">Previous</a><span> | </span><a href="#" class="page-links" id="next">Next</a>
-                    </div>
-                </div>
-            </div> -->
             <div class="row mb-4 mt-2" >
                 <div class="col-12">
                     <h1 class="page-title">Staff Profiles</h1>
