@@ -15,44 +15,48 @@
                      <div id="tabbed-content">
 
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-
+                          
                             @if($staff->staff_category == 'Academician')
-                                <li class="nav-item" role="presentation" style="width: 20%">
+                                <li class="nav-item" role="presentation" >
                                     <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
                                 </li>
                             @elseif($staff->staff_category == 'Administrative')
-                                <li class="nav-item" role="presentation" style="width: 30%">
+                                <li class="nav-item" role="presentation">
                                     <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
                                 </li>
                             @else
-                                <li class="nav-item" role="presentation" style="width: 100%">
+                                <li class="nav-item" role="presentation" >
                                     <a class="nav-link active" id="pills-about-tab" data-toggle="pill" href="#pills-about" role="tab" aria-controls="pills-about" aria-selected="true">About</a>
                                 </li>
                             @endif
 
                             @if($staff->staff_category == 'Academician')
-                                <li class="nav-item" role="presentation" style="width: 15%">
+                                <li class="nav-item" role="presentation" >
                                     <a class="nav-link" id="pills-courses-tab" data-toggle="pill" href="#pills-courses" role="tab" aria-controls="pills-courses" aria-selected="false">Courses</a>
                                 </li>
-                                <li class="nav-item" role="presentation" style="width: 20%">
+                                <li class="nav-item" role="presentation" >
                                     <a class="nav-link" id="pills-publications-tab" data-toggle="pill" href="#pills-publications" role="tab" aria-controls="pills-publications" aria-selected="false">Publications</a>
                                 </li>
-                                <li class="nav-item" role="presentation" style="width: 20%">
+                                <li class="nav-item" role="presentation" >
                                     <a class="nav-link" id="pills-areas-tab" data-toggle="pill" href="#pills-areas" role="tab" aria-controls="pills-areas" aria-selected="false">Areas</a>
                                 </li>
-                                <li class="nav-item" role="presentation" style="width: 20%">
+                                <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="pills-projects-tab" data-toggle="pill" href="#pills-projects" role="tab" aria-controls="pills-projects" aria-selected="false">Projects</a>
                                 </li>
                             @elseif($staff->staff_category == 'Administrative')
-                                <li class="nav-item" role="presentation" style="width: 30%">
+                                <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="pills-projects-tab" data-toggle="pill" href="#pills-projects" role="tab" aria-controls="pills-projects" aria-selected="false">Projects</a>
                                 </li>
                               
-                                <li class="nav-item" role="presentation" style="width: 30%">
+                                <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="pills-skills-tab" data-toggle="pill" href="#pills-skills" role="tab" aria-controls="pills-skills" aria-selected="false">Skills</a>
                                 </li>
                             @endif
+
+
+
                         </ul>
+            
                         <div class="tab-content staff-dir" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
                                

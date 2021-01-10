@@ -67,7 +67,7 @@
                         <div class="row" id="staffs-row">
 
                             @foreach($staffs as $staff)
-                                <div style="width: 11em;" class="mr-1 mb-4">
+                                <div style="width: 11em;" class="staff">
                                     <div class="row">
                                         <div class="card staff-card" style="width: 9rem;">
                                             <a href="{{ route('staffs.staff-info',['id' => $staff->id])}}">
