@@ -123,7 +123,7 @@
 
 .header{
 
-    background:#3d2dcf;
+    background:#225dcd;
     background-image: url("/img/duceedited.jpg");
     background-repeat: no-repeat,repeat;
     color: white;
@@ -145,17 +145,17 @@ body{
 }
 
 .btn-type{
-    background: #3d2dcf;
+    background: #225dcd;
     font-weight: bold;
     font-size:1.3em;
 }
 
 .btn {
-    background-color: #3d2dcf;
+    background-color: #225dcd;
 }
 
 .card-header{
-    background: #3d2dcf;
+    background: #225dcd;
     color:white;
     font-weight:bold;
     font-size:1.4em;
