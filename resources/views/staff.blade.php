@@ -147,7 +147,7 @@
                                 
                                 @foreach($projects as $project)
                                     <div class="card">
-                                        <div class="card-body mb-2">
+                                        <div class="card-body mb-4">
                                             <div class="row">
                                                 <ul style="list-style-type:none">
                                                     <li><h5><span class="font-weight-bold">Project title:</span> {{ $project->title}}</h5></li>
@@ -158,7 +158,10 @@
                                             </div>
 
                                             <div class="row mt-2">
-                                              <h5><span class="font-weight-bold">Link: </span> <a style="color:red" href="{{$project->link}}" target="_blank">{{ $project->link}}</a><h5> 
+                                              <div class="col-12">
+                                                <h5><span class="font-weight-bold">Link: </span> <a style="color:red" href="{{$project->link}}" target="_blank">{{ $project->link}}</a><h5> 
+                                              </div>
+                                              
                                             </div>
                                         </div>
                                     </div>
