@@ -3,7 +3,10 @@
     color: black;
 }
 
-.staff{ margin-right: 6px }
+.staff{ 
+    margin-right: 6px;
+    margin-bottom: 3px;
+}
 
 
 .staff-left-column h3{
