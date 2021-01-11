@@ -9,14 +9,11 @@
     margin-bottom: 20px;
 }
 
-
-.staff{ 
-    margin-right: 6px;
-    margin-bottom: 20px;
-}
-
 .card-img-top{
-
+    .staff{ 
+        margin-right: 6px;
+        margin-bottom: 20px;
+    }
     width: 70%;
 }
 
@@ -311,7 +308,7 @@ body{
     }
 
     .search-bar{
-        
+
         width:50%;
     }
 
