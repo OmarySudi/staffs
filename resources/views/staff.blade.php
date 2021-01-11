@@ -79,7 +79,7 @@
     
                                 @foreach($publications as $publication)
                                     <div class="card">
-                                        <div class="card-body mb-2">
+                                        <div class="card-body mb-4">
                                             <div class="row">
                                                 @switch($publication->category)
                                                     @case("Journal Article")
@@ -120,7 +120,10 @@
                                             </div>
 
                                             <div class="row mt-2">
-                                              <h5><span class="font-weight-bold">Link: </span> <a style="color:red" href="{{$publication->link}}" target="_blank">{{ $publication->link}}</a><h5> 
+                                              <div class="col-12">
+                                                <h5><span class="font-weight-bold">Link: </span> <a style="color:red" href="{{$publication->link}}" target="_blank">{{ $publication->link}}</a><h5> 
+                                              </div>
+                                              
                                             </div>
 
                                             <div class="mt-3" style="float:right">
