@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Staffs') }}</title>
+    <title >{{ config('app.name', 'Staffs') }}</title>
 
     <!-- Jquery -->
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
@@ -1289,10 +1289,10 @@
     <div id="app">
         <nav class="navbar header navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}" style="color:white; font-size:1.2em">
+                <a class="navbar-brand project-title mt-2" href="{{ url('/') }}" style="color:white; font-size:1.2em">
                     {{ config('app.name', 'Staffs') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler mt-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -1305,6 +1305,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}" style="color:white">{{ __('Login') }}</a>

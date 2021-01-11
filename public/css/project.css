@@ -7,7 +7,10 @@
     margin-bottom: 20px;
     margin-left: 2.0em;
    }
-   
+
+.project-title{
+    margin-left:4em;
+}
 
 .card-img-top{
     
@@ -120,7 +123,9 @@
 
 .header{
 
-    background: blue;
+    background:#3d2dcf;
+    background-image: url("/img/duceedited.jpg");
+    background-repeat: no-repeat,repeat;
     color: white;
     height:125px;
     font-size: 1.0em;
@@ -140,13 +145,17 @@ body{
 }
 
 .btn-type{
-    background: blue;
+    background: #3d2dcf;
     font-weight: bold;
     font-size:1.3em;
 }
 
+.btn {
+    background-color: #3d2dcf;
+}
+
 .card-header{
-    background: rgba(16,124,229,0.7);
+    background: #3d2dcf;
     color:white;
     font-weight:bold;
     font-size:1.4em;
@@ -233,7 +242,7 @@ body{
     /* For desktop:*/
     .header{
 
-        background: blue; 
+        background: #225dcd; 
         background-image: url("/img/duce.jpg");
         background-repeat: no-repeat, repeat;
         color: white;
@@ -307,6 +316,10 @@ body{
     .search-bar{
 
         width:50%;
+    }
+
+    .project-title{
+        margin-left:0px;
     }
 
     
