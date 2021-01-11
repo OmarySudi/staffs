@@ -1287,7 +1287,7 @@
     </script>
 
     <div id="app">
-        <nav class="navbar header navbar-expand-md navbar-light shadow-sm">
+        <nav class="navbar nav-header navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand project-title mt-2" href="{{ url('/') }}" style="color:white; font-size:1.2em">
                     {{ config('app.name', 'Staffs') }}

@@ -121,7 +121,7 @@
     cursor: pointer !important;
 }
 
-.header{
+.nav-header{
 
     background:#225dcd;
     background-image: url("/img/duceedited.jpg");
@@ -240,7 +240,7 @@ body{
 
   @media only screen and (min-width: 769px) {
     /* For desktop:*/
-    .header{
+    .nav-header{
 
         background: #225dcd; 
         background-image: url("/img/duce.jpg");
