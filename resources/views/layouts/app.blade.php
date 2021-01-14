@@ -1290,7 +1290,7 @@
         <nav class="navbar nav-header navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand project-title mt-2" href="{{ url('/') }}" style="color:white; font-size:1.2em">
-                    {{ config('app.name', 'Staffs') }}
+                    {{ config('app.name', 'Staff') }}
                 </a>
                 <button class="navbar-toggler mt-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
