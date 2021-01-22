@@ -40,19 +40,35 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // protected function attemptLogin(Request $request)
+    // {
+    //     return \Auth::attempt(
+    //         $this->credentials($request) + ["verified" => true],
+    //         $request->filled('remember')
+    //     );
+    // }
+
     protected function attemptLogin(Request $request)
     {
         return \Auth::attempt(
-            $this->credentials($request) + ["verified" => true],
             $request->filled('remember')
         );
     }
 
-    protected function sendFailedLoginResponse(Request $request)
+    // protected function sendFailedLoginResponse(Request $request)
+    // {
+    //     throw ValidationException::withMessages([
+    //         $this->username() => [trans('Authentication failed or Account not activated by administrator')],
+    //     ]);
+    // }
+
+     protected function sendFailedLoginResponse(Request $request)
     {
         throw ValidationException::withMessages([
-            $this->username() => [trans('Authentication failed or Account not activated by administrator')],
+            $this->username() => [trans('Authentication failed, Make sure you enter correct email and password')],
         ]);
     }
+
+
 
 }
